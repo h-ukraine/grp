@@ -502,6 +502,7 @@ bc.onmessage = function (ev) {
                     if (recs.length == 0) {
                         var f = 456;
                     } else {
+
                         lastDevicesObject = cmdobj;
 
                         var _force = false;
