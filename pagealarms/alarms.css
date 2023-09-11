@@ -1,4 +1,4 @@
-@import url("../css/_root.css");
+@import url("../css/root.css");
 @media screen and (min-height: 210px) and (max-width: 800px) {
   :root {
     --cell-commonlineheight: 22px;
