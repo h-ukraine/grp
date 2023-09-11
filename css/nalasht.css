@@ -1,4 +1,29 @@
-/* nalasht css */
+/* @import url("css/myscreen.css"); */
+
+
+/* url("css/style.css") */
+
+
+/* Налаштування  CSS*/
+
+
+/* .swtab {} */
+
+
+/* // */
+
+
+/* // */
+
+
+/* Use new css features display-mode */
+
+
+/* @media all and (display-mode: fullscreen) {
+            .content {
+                padding: 0px;
+            }
+        } */
 
 .leftpan-switch {
     --h: 30px;
@@ -44,18 +69,16 @@
 }
 
 .nalasht {
-    --display: none;
-    display: var(--display);
-    margin-left: -101vw;
     --dark: rgba(19, 17, 20, 0.89);
-    --ukraine: linear-gradient( to bottom, rgba(0, 0, 255, 0.952), rgba(235, 235, 0, 0.892));
+    --ukraine: linear-gradient(to bottom, rgba(0, 0, 255, 0.952), rgba(235, 235, 0, 0.892));
     --back: rgba(19, 17, 20, 0.89);
-    --loc-opacity: 1.0;
+    --loc-opacity: 0.0;
+    --nalwidth: 98vw;
     opacity: var(--loc-opacity);
     /* display: none; */
     position: absolute;
     top: 0.5vh;
-    width: 98vw;
+    width: var(--nalwidth);
     /* margin-left: -101vw; */
     height: 98vh;
     transition-property: margin-left, opacity;
@@ -65,12 +88,14 @@
     /* background: rgba(19, 17, 20, 0.89); */
     background: var(--back);
     overflow-x: hidden;
+    overflow-y: hidden;
 }
 
-@media only screen and (max-height:400px) {
+@media only screen and (max-height: 400px) {
     .nalasht {
         /* height: 92vh; */
         height: calc(var(--map-height) - 10px);
+        /* width: 98%; */
     }
 }
 
@@ -87,7 +112,7 @@
 
 .flexcont {
     margin-top: 0vh;
-    /* background: rgb(250, 251, 189); */
+    /* background: rgb(41, 41, 23); */
 }
 
 .flexcont .subheader {
@@ -97,6 +122,7 @@
     font-weight: 400;
     color: rgb(245, 231, 171);
     letter-spacing: 0.3em;
+    /* border: 1px solid blue; */
 }
 
 @media only screen and (orientation: landscape) {
@@ -106,14 +132,15 @@
         width: 98vw;
         flex-wrap: wrap;
         justify-content: space-evenly;
-        overflow-y: wrap;
+        /* overflow-y: wrap; */
         /* background: seagreen; */
+        margin-top: 0px;
     }
     .flexcont div {
         letter-spacing: normal;
         font-style: normal;
         --sz: 80px;
-        width: calc(var(--sz) * 1.2);
+        /* width: calc(var(--sz) * 1.2); */
         min-width: 40vw;
         width: 15vw;
         font-size: 18px;
@@ -122,6 +149,32 @@
         padding-top: 10px;
         /* margin: 12px; */
         color: white;
+    }
+    #tabcontainer {
+        margin-top: 0px;
+        /* background: red; */
+        height: calc(88vh - 100px);
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+    #tabcontainer div {
+        margin-top: 0px;
+        /* background: red; */
+        min-width: auto;
+        width: 94%;
+        /* max-wid
+              th: 90%; */
+    }
+    #menucontainer {
+        margin-top: 0px;
+        /* border: 1px solid red; */
+    }
+    #menucontainer div {
+        margin-top: 0px;
+        /* background: rgb(58, 58, 58); */
+        /* min-width: auto; */
+        width: 80%;
+        /* background: blue; */
     }
 }
 
@@ -133,23 +186,48 @@
         flex-wrap: wrap;
         justify-content: space-evenly;
         /* background: rgba(20, 8, 44, 0.89); */
+        /* overflow-y: hidden; */
     }
     .flexcont div {
         --sz: 40px;
         margin-left: 1vw;
         margin-right: 1vw;
         font-size: 18px;
-        line-height: 30px;
+        line-height: 20px;
         text-align: left;
         padding-top: 10px;
         margin: 15px;
         color: white;
     }
+    #tabcontainer {
+        margin-top: 0px;
+        /* background: green; */
+        height: calc(72vh - 170px);
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+    #tabcontainer div {
+        margin-top: 0px;
+        /* background: red; */
+        min-width: auto;
+        width: 94%;
+        /* max-width: 90%; */
+    }
+    #menucontainer {
+        margin-top: 0px;
+        /* border: 1px solid red; */
+    }
+    #menucontainer div {
+        margin-top: 0px;
+        /* background: rgb(58, 58, 58); */
+        min-width: auto;
+        width: 94%;
+    }
 }
 
 @media only screen and (min-height: 250px) {
     .flexcont {
-        margin-top: 5vh;
+        margin-top: 1vh;
     }
     /* .hh3 {
               margin-top: 10px;
@@ -163,31 +241,55 @@
           }
       } */
 
-@media only screen and (min-height: 500px) {
+@media only screen and (min-height: 660px) {
     .flexcont div {
         /* margin-top: 10vh; */
-        margin: 14px;
+        margin: 4px;
+    }
+}
+
+@media only screen and (min-height: 680px) {
+    .flexcont div {
+        /* margin-top: 10vh; */
+        margin: 8px;
+    }
+}
+
+@media only screen and (min-width: 680px) {
+    .nalasht {
+        --nalwidth: 98vw;
+    }
+}
+
+@media only screen and (min-width: 800px) {
+    .nalasht {
+        --nalwidth: 99.1vw;
     }
 }
 
 
-/*  + style... */
+/* --------------------*/
 
 .fheader {
+    display: flex;
+    visibility: hidden;
+    /* display: none; */
     margin-top: 10px;
     margin-left: auto;
     margin-right: auto;
     width: 90%;
-    display: flex;
+
     justify-content: space-between;
     font-size: 20px;
     color: rgb(245, 231, 171);
     font-style: oblique;
     user-select: none;
+    /* background: red; */
 }
 
 .fheader .f1 {
     font-size: 20px;
+    cursor: pointer;
 }
 
 .f2span {
