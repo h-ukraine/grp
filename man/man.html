@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Адмін</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="../css/_nalasht.css">
+    <link rel="stylesheet" href="../css/_root.css">
+    <link rel="stylesheet" href="../man/man.css">
+    <script src="../tquery/LINQ.js" type="text/javascript"></script>
+    <script src="grprows.js" type="text/javascript" async></script>
+    <script src="man.js" type="text/javascript"></script>
+    <script src="../mylib/compmin.js" type="text/javascript" defer></script>
+    <link rel="stylesheet" href="../mylib/mystyles.css">
+    <script src="manusers.js" type="text/javascript" defer></script>
+    <script src="devinside.js" type="text/javascript" defer></script>
+    <script src="devices.js" type="text/javascript" defer></script>
+
+    <script>
+        const CmdType = {
+            None: 0,
+            SomeText: 1,
+            GetLastSkzData: 2,
+            GetDevices: 3,
+            SaveLatLng: 4,
+            Login: 5,
+            LoginAnswer: 6,
+            Refresh: 7,
+            GetNodeData: 8,
+            GetLastGrpData: 9,
+            GetNodeParams: 10,
+            GetUserParams: 11,
+            GetDataArchive: 12,
+            GetUsers: 13
+        }
+
+        function dispose(evt) {
+            window.close();
+        }
+
+        function deepEqual(obj1, obj2) {
+            var q1 = JSON.stringify(obj1);
+            var q2 = JSON.stringify(obj2);
+            var res = (q1 === q2);
+
+            return res;
+
+            // return JSON.stringify(obj1) === JSON.stringify(obj2);
+        }
+        function getelemProp(elem, prop) {
+            var item = document.querySelector(elem);
+            var itemStyles = getComputedStyle(item, null);
+
+            // var bbb = root.style.getPropertyValue(prop);
+            return itemStyles.getPropertyValue(prop);
+        }
+
+        function setelemProp(elem, prop, val) {
+            var item = document.querySelector(elem);
+            item.style.setProperty(prop, val);
+        }
+    </script>
+</head>
+
+<body>
+    <div class='admin ispage' accesskey='ispage'>
+        <fpath class=pathdiv>path=</fpath>
+        <!-- <h6>Адміністрування</h6> -->
+
+        <div class='abutton hoverdiv' onclick='choose(event)' accesskey='users'> Користувачі</div>
+        <div class='abutton hoverdiv' onclick='choose(event)' accesskey='devices'> Прилади</div>
+        <!-- <div class=abutton onclick='choose(event)'> Параметри приладів</div> -->
+        <div class=' goback' onclick='dispose(event)'> - Завершити</div>
+    </div>
+
+
+    <div class='users ispage'>
+        <fpath class=pathdiv>path=</fpath>
+        <!-- <h6>Користувачі</h6> -->
+
+        <!-- <div id=usertable class='container_u'> [Контейнер: користувачів]</div> -->
+        <!-- <div id=usertable class='container_tab'> </div> -->
+        <form id=usertable> </form>
+
+        <!-- <h6 class='hoverdiv'>Вибір об'єктів для: <span id=loginname style="padding-left:10px;color:rgb(122, 211, 81);">? </span> </h6> -->
+        <!-- <div class='container_u hoverdiv' onclick='choose(event)' accesskey='devices'> --таблиця--    </div> -->
+        <div class='displayflex' style='margin-top:10px; '>
+            <div id=usave class='goback bordered hidden' onclick="onsave_users()"> Зберегти</div>
+            <div id=udel class='goback bordered hidden' onclick="finallydel()"> Видалити</div>
+        </div>
+        <!-- <div class=goback onclick='returntoprev(event)'>✔ &#10004 Повернутись </div> -->
+        <div class=goback id='back_from_users' onclick='returntoprev(event)'>✔ Повернутись </div>
+    </div>
+
+
+    <div class='devices ispage'>
+        <!-- <form style='display:flex;'> -->
+        <fpath class=pathdiv>path=</fpath>
+        <!-- <h6>-666-</h6> -->
+        <div id=user-container></div>
+        <form class=head1>
+
+            <label for="dev-select" style='font-size:0.8em; line-height:24px;'>Вузли : </label>
+
+            <select name="userdevs" id="dev-select" class="myselect" onchange="mySelectHandler(this)">
+                <option value=""> Доступні користувачу</option>
+                <option value=" dog"> Недоступні користувачу</option>
+                <option value="cat"> Доступні (всі в базі) </option>
+                <!-- <option value="hamster">Hamster</option>
+                <option value="parrot">Parrot</option>
+                <option value="spider">Spider</option>
+                <option value="goldfish">Goldfish</option> -->
+            </select>
+
+            <div id=directdevice class=directdev>Активні (всі в базі)</div>
+
+            <label id='amount' style='padding-left:10px;'>...</label>
+
+
+            <!-- <input type='checkbox' name="rrrr" text="hhhhhh">
+            <label class=ggg>усі, що є в базі</label>
+
+            <input type='checkbox' name="rrrr" text="hhhhhh">
+            <label class=ggg>тільки недоступні</label> -->
+
+            <!-- <input type='checkbox' name="rrrr" text="hhhhhh">
+            <label class=ggg>без даних</label> -->
+
+
+        </form>
+        <form class=head1>
+
+            <!-- <b class=bb>Фільтри : ...</b> -->
+            <!-- <label class=ggg> ... </label> -->
+
+            <!-- <input type='checkbox' name="rrrr" text="hhhhhh"> -->
+            <!-- <label class=ggg>по районах</label> -->
+
+            <!-- <input type='checkbox' name="rrrr" text="hhhhhh"> -->
+            <!-- <label class=ggg>активні</label> -->
+
+            <!-- <input type='checkbox' name="rrrr" text="hhhhhh"> -->
+            <!-- <label class=ggg>без даних</label> -->
+
+
+        </form>
+
+        <!-- </form> -->
+
+        <!-- <div style='display:flex; justify-content: space-evenly; min-width:90%;background: none; '> -->
+        <!-- <div class=goback> Зберегти</div> -->
+
+        <!-- </div> -->
+
+
+
+        <form class=container_d></form>
+        <div class=goback> Зберегти </div>
+        <div class=goback onclick='returntoprev(event) '> - Повернутись</div>
+    </div>
+
+
+    <div class='parameters ispage'>
+        <fpath class=pathdiv>path=</fpath>
+        <h6>Параметри приладів</h6>
+
+        <div class=abutton> aaa</div>
+        <div class=abutton> bbb</div>
+        <div class=abutton> ccc</div>
+        <div class=goback> Зберегти</div>
+        <div class=goback onclick='returntoprev(event) '> - Повернутись</div>
+    </div>
+
+    <div class='plusdevice subpage1 ispage'>
+        <fpath class=pathdiv>path=</fpath>
+        <h6>Додавання нового приладу</h6>
+
+        <div class=abutton> par1:</div>
+        <div class=abutton> par2:</div>
+        <div class=abutton> par3:</div>
+        <div class=abutton> + </div>
+
+        <div class=goback> Зберегти</div>
+        <div class=goback onclick='returntoprev(event) '> - Повернутись</div>
+    </div>
+
+
+    <div class='devinside subpage1 ispage'>
+        <fpath class=pathdiv>path=</fpath>
+        <!-- <form style='display:flex;'> -->
+        <h6>Параметри приладу</h6>
+        <div class=abutton> par1:</div>
+        <div class=abutton> par2:</div>
+        <div class=abutton> par3:</div>
+        <div class=abutton> .....</div>
+        <div class=goback> Зберегти</div>
+        <form class=head1>
+
+            <!-- <input type='checkbox' name="rrrr" text="hhhhhh">
+            <label class=ggg>по районах</label>
+
+            <input type='checkbox' name="rrrr" text="hhhhhh">
+            <label class=ggg>активні</label>
+
+            <input type='checkbox' name="rrrr" text="hhhhhh">
+            <label class=ggg>без даних</label> -->
+
+
+        </form>
+        <!-- </form> -->
+
+        <!-- <div style='display:flex; justify-content: space-evenly; min-width:90%;background: none; '> -->
+        <!-- <div class=goback> Зберегти</div> -->
+
+        <!-- </div> -->
+
+
+
+        <form class=container_c></form>
+        <!-- <div class=goback onclick='todevices(event) '> - Повернутись</div> -->
+        <div class=goback onclick='returntoprev(event) '> - Повернутись</div>
+    </div>
+
+
+
+</body>
+
+</html>

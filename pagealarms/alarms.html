@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <title> Дані СКЗ</title>
+    <!-- <link rel="icon" href="data:;base64,="> -->
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="../css/nalasht.css">
+    <link rel="stylesheet" href="../pagealarms/alarms.css">
+    <script src="../mylib/compmin.js" type="text/javascript" defer></script>
+    <script src="./alarms.js" type="text/javascript" defer></script>
+    <script src="../mylib/naltheme.js" type="text/javascript" defer></script>
+
+</head>
+
+<body>
+    <p class='header' style='height: 15px;'></p>
+    <div class=acontainer>
+
+        <div id=a1>a1 </div>
+        <!-- <div id=a2></div> -->
+        <!-- <div id=a4>a4</div> -->
+    </div>
+
+    <!-- <div id=paramcont class=paramcont> -->
+    <!-- <div id=paramlabel class=paramlabel>Параметри</div> -->
+    <!-- <div id=htable class=h-table></div> -->
+    <!-- </div>  -->
+    <div style='display:flex; margin-left: 1vw;margin-right: 1vw; margin-top: 8px;'>
+        <div id=ftable class=aln1></div>
+        <div id=atable class=aln1></div>
+        <div id=btable class=aln1></div>
+    </div>
+
+
+    <div id='anim' class=nalasht>
+        <div class=fheader>
+            <div class=f1>Налаштування</div>
+            <div class=f2>Тема:
+                <span class=f2span onclick="fliptheme(event)"> Темна</span>
+            </div>
+        </div>
+        <!-- <h3 class=hh3> Меню</h3> -->
+        <!-- <div class='leftpan-switch' onclick="leftpanClick(event) "> -->
+        <!-- <b style='padding-left: 40px;'>LeftTab</b> </div> -->
+        <!-- <div class='leftpan-switch' onclick="FsClick(event) "> <b style='padding-left: 40px;'>FullScr</b> </div> -->
+        <!-- <div>hhhhh</div> -->
+        <div class=flexcont>
+            <div> <span class=subheader>Меню:</span>
+                <div class='swtab' onclick="openPageUniversal(event)"> Карта</div>
+                <div class='swtab' onclick="openPageUniversal(event)"> Дані СКЗ</div>
+            </div>
+
+            <div id=tabcontainer>
+                <span id=mytabs class="subheader f2span" onclick="fliptabsnodes(event)">Доступні СКЗ:</span>
+                <div class=' swtab '> дані оновлюються...</div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+</body>
+
+</html>

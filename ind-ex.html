@@ -1,0 +1,716 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <title>Oріoн • Дозор-С</title>
+    <link rel="icon" href="data:,">
+    <!-- <meta name="description" content="A minimalist layout for Login pages. Built with Pico CSS."> -->
+    <!-- <link rel="shortcut icon" href="https://picocss.com/favicon.ico"> -->
+    <!-- <link rel="canonical" href="https://picocss.com/examples/sign-in/"> -->
+
+    <!-- <link rel="import" href="component.html"> -->
+
+    <!-- CSS only -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
+
+    <!-- Pico.css -->
+    <!-- <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css"> -->
+    <!-- <link rel="stylesheet" href="css/picomin.css"> -->
+
+
+    <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" integrity="sha512-07I2e+7D8p6he1SIM+1twR5TIrhUQn9+I6yjqD53JQjFiMf8EtC93ty0/5vJTZGF8aAocvHYNEDJajGdNx1IsQ==" crossorigin="" /> -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.css" integrity="sha512-07I2e+7D8p6he1SIM+1twR5TIrhUQn9+I6yjqD53JQjFiMf8EtC93ty0/5vJTZGF8aAocvHYNEDJajGdNx1IsQ==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    /> -->
+    <!-- <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js" integrity="sha512-WXoSHqw/t26DszhdMhOXOkI7qCiv5QWXhH9R7CgvgZMHz1ImlkVQ3uNsiQKu5wwbbxtPzFXd1hK4tzno2VqhpA==" crossorigin=""></script> -->
+    <!-- <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js"></script> -->
+
+    <!-- <script src="http://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script> -->
+    <script src="http://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+    <!-- <script src="leaflet/leaflet.js"></script> -->
+
+    <!-- <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/" ></script> -->
+
+
+
+    <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css"> -->
+
+
+
+
+    <link rel="stylesheet" href="css/local_leaflet.css" type="text/css" />
+    <!-- <script src="./js/local_leaflet-src.js" type="text/javascript"></script> -->
+
+    <!-- Добавляем  MarkerClusters -->
+    <link rel="stylesheet" href="./Leaflet.markercluster-1.4.1/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="./Leaflet.markercluster-1.4.1/dist/MarkerCluster.Default.css" />
+
+    <!-- <script src="/Leaflet.markercluster-1.4.1/example/realworld.388.js"></script> -->
+    <!-- <script src="js/mycodeforrealworld.js"></script> -->
+
+
+    <!-- <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js"></script> -->
+    <!-- <script src="./js/local_leaflet-src.js" type="text/javascript"></script> -->
+    <!-- <script src="./Leaflet.markercluster-1.4.1/dist/leaflet.markercluster-src.js" type="text/javascript"></script> -->
+
+    <!-- <link rel="stylesheet" href="../Leaflet.markercluster-1.4.1/example/myscreen.css" /> -->
+    <!-- <link rel="stylesheet" href="./Leaflet.markercluster-1.4.1/example/myscreen.css" /> -->
+
+
+
+
+
+
+    <!-- Custom styles for this example -->
+    <!-- <link rel="stylesheet" href="css/myscreen.css" /> -->
+    <!-- <link rel="stylesheet" href="css/custom.css"> -->
+    <link rel="stylesheet" href="mylib/mystyles.css">
+
+    <link rel="stylesheet" href="css/conta.css">
+
+
+
+
+    <!-- <script src="./js/local_leaflet-src.js" type="text/javascript"></script> -->
+    <script src="./Leaflet.markercluster-1.4.1/dist/leaflet.markercluster-src.js" type="text/javascript"></script>
+
+
+    <!-- Not need  -->
+    <!--<link rel=" stylesheet" href="css/leaf.css" type="text/css" /> -->
+    <!-- <script src="js/leaf.js" type="text/javascript"></script> -->
+    <!-- <script src="js/leaf222.js" type="text/javascript"></script> -->
+    <!-- Not need  -->
+
+
+    <!-- JavaScript -->
+
+    <!-- <script src="js/minimal-theme-switcher.js" type="text/javascript"></script>
+    <script src="js/orionmap.js"></script>
+    <script src="mylib/comp.js" type="text/javascript"></script>
+    <script src="js/setstyle.js"></script>
+    <script src="js/commandproc.js"></script>
+    <script src="js/getbin.js"></script>
+    <script src="js/websock.js"></script>
+    <script src="js/mouse.js"></script>
+    <script src="js/main.js"></script> -->
+
+    <script>
+        // var req = new XMLHttpRequest();
+        // req.open('GET', document.location, false);
+        // req.send(null);
+        // var headers = req.getAllResponseHeaders().toLowerCase();
+        // // alert(headers);
+        // // перебрать все заголовки
+        // for (let [key, value] of headers) {
+        //     // alert(`${key} = ${value}`);
+        //     console.log(key + ':' + value);
+        // }
+
+        var canReload = true;
+        var realReload = window.reload;
+
+
+        var ref = window.location.href;
+        var ref_params = window.location.search;
+
+        window.location.reload = () => {
+
+            var e = 77;
+
+        }
+
+        window.reload = function() {
+            if (canReload) {
+                realReload();
+            }
+        }
+
+
+
+        let DEBUG = false;
+        let docLoaded = false;
+
+        document.addEventListener("DOMContentLoaded", () => {
+            docLoaded = true;
+        });
+
+
+        var array_f = [
+            "js/minimal-theme-switcher.js",
+            "js/orionmap.js",
+            "mylib/comp.js",
+            "js/setstyle.js",
+            "js/commandproc.js",
+            "js/getbin.js",
+            // "js/websock.js",
+
+            "js/mouse.js",
+            "js/main.js"
+        ];
+        let tarchangingEnabled = true;
+
+        // document.body.style.visibility = 'hidden';
+
+        function loadScript(src, callback) {
+            var head = document.getElementsByTagName('head')[0],
+                script = document.createElement('script');
+            done = false;
+            script.setAttribute('src', src);
+            script.setAttribute('type', 'text/javascript');
+            script.setAttribute('charset', 'utf-8');
+            script.onload = script.onreadstatechange = function() {
+                if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete')) {
+                    done = true;
+                    script.onload = script.onreadystatechange = null;
+                    if (callback) {
+                        callback();
+                    }
+                }
+            }
+            head.insertBefore(script, head.firstChild);
+        }
+
+
+        let all_loaded = false;
+        let reqcnt = 0;
+        let loadcnt = 0;
+
+        function set_all_loaded(lev) {
+            all_loaded = lev;
+        }
+
+
+        var i = 1;
+        var delta = 300;
+
+        // function firther() {
+        ewr = setInterval(() => {
+            if (reqcnt == loadcnt) {
+                if (reqcnt < array_f.length) {
+                    // loadScript(array_f[reqcnt], null);
+                    loadScript(array_f[reqcnt], () => loadcnt++);
+                }
+                reqcnt++;
+                if (reqcnt >= array_f.length)
+                    clearInterval(ewr);
+            }
+        }, 30);
+
+        // firther();
+    </script>
+
+
+
+</head>
+
+<body>
+    <div id=myloader class='myloader'>MY LOADER</div>
+    <!-- Nav -->
+    <nav class="upper-container">
+        <!-- <nav class="container-fluid"> -->
+        <!-- <li><a href="./" class="contrast" onclick="event.preventDefault()"><strong>• Україна •</strong></a></li> -->
+        <ul>
+            <!-- <li><a href="./" class="contrast" onclick="event.preventDefault()"> • Україна • </a></li> -->
+            <li><a href="./" class="contrast" onclick="event.preventDefault()"> • V0.1  </a></li>
+        </ul>
+        <ul id=ori style='white-space: nowrap;'>
+            <!-- <li><a href="./" class="contrast" onclick="event.preventDefault()"><strong>Brand</strong></a></li> -->
+            <!-- <li> <a href="https://orion.com.ua" class="secondary">Оріон</a> м.Харків </li> -->
+        </ul>
+
+        <ul id=tm300>
+
+        </ul>
+
+        <ul>
+            <!-- <li><a href="#" class="contrast" data-theme-switcher="auto">Авто</a></li> -->
+            <li><a href="#" class="contrast" data-theme-switcher="light">Світла</a></li>
+            <li><a href="#" class="contrast" data-theme-switcher="dark">Темна</a></li>
+        </ul>
+    </nav>
+
+
+    <!-- Main -->
+    <main id=mainmain class="container">
+        <!-- <main id=mainmain> -->
+        <!-- <div class="bbb">BBB</div> -->
+        <div id="maindiv" class="maindiv">
+            <article class="grid">
+
+                <div>
+                    <hgroup>
+                        <h1>ДОЗОР-С</h1>
+                        <!-- <h2>A minimalist layout for Login pages</h2> -->
+                        <h2>система контролю та відображення стану об'єктів</h2>
+
+                    </hgroup>
+                    <!-- <button class='secondary'>Button</button> -->
+                    <form>
+
+                        <!-- <div class="conta">Все як на долоні... -->
+                        <!-- <input type="text" name="login" placeholder="Login" aria-label="Login" autocomplete="nickname" required>
+                        <input type="password" name="password" placeholder="Password" aria-label="Password" autocomplete="current-password" required> -->
+                        <input type="text" name="login" placeholder="Логін" aria-label="Login" autocomplete="nickname" required>
+                        <input type="password" name="password" placeholder="Пароль" aria-label="Password" autocomplete="current-password" required>
+                        <fieldset>
+                            <label for="remember">
+                                    <input type="checkbox" role="switch" id="remember" name="remember">Запам'ятати користувача
+                            </label>
+                        </fieldset>
+                        <!-- <button type="submit" class="contrast" onclick="event.preventDefault()">Login</button> -->
+                        <button id='subm' type="submit" class="contrast" onclick="event.preventDefault()">Увійти</button>
+                        <!-- <bu id='subm' type="text">Увій_ти -->
+
+                    </form>
+                </div>
+
+                <div></div>
+            </article>
+
+
+            <div class="doloni"> • Все як на долоні... </div>
+            <!-- <div class="conta2"> • Все як на долоні... </div> -->
+
+        </div>
+
+
+
+        <my-page class="mypage1" style='display: none; text-align: center;'>
+
+            <nav class=nav-fluid>
+                <!-- <input type="contrast" name="login" placeholder="Логін" aria-label="Login" autocomplete="nickname" required> -->
+                <!-- <a href="#" role="button">Link</a> -->
+                <div class="simplebutton" onclick="setmode(-111)">
+                    < < </div>
+
+                        <!-- <h5>• SecondPage • Alarm Sygnals •</h5> -->
+                        <!-- <div>
+                            <h5>• Аварії •</h5>
+                        </div> -->
+                        <!-- <select class="myselect" onchange="mySelectFunction( 'msel')" id=msel>     -->
+                        <label for="firstsel"></label>
+                        <select id=firstsel class="myselect" onchange="mySelectHandler(this)">    
+                            <option>• Аутентифікація </option>
+                            <option>• Головна </option>
+                            <option>• Аварії </option>  
+                            <option>• Прилади </option>
+                            <option>• Карта </option>
+                            <option>• Параметри </option>
+                            <option>• Адміністрування </option>
+                        </select>
+                        <div class="simplebutton" onclick="setmode(111)">
+                            > > </div>
+            </nav>
+
+            <!-- <hr> -->
+            <my-subpage class=subpage1>
+                <!-- <div style="display: flex;"> -->
+                <div class=pagecontainer>
+
+                    <!-- <form> -->
+                    <div>
+                        <fieldset class="leftfield" id=leftpanel>
+                            <legend class=leg0> |||</legend>
+
+                            <label for="small1">
+                                <input type="radio"  id="radio1" onclick='setmode(1);' name="size3" value="small" checked> Головна
+                            </label>
+
+                            <label for="medium1">
+                                <input type="radio" id="radio2" onclick='setmode(2);' name="size3" value="medium">
+                                Аварії
+                            </label>
+
+                            <label for="large1">
+                                <input type="radio" id="radio3" onclick='setmode(3);' name="size3" value="large">
+                                Прилади
+                            </label>
+
+                            <label for="large3">
+                                <input type="radio" id="radio4" onclick='setmode(4);'  name="size3" value="large">
+                                    Карта
+                                   </label>
+                            <label for="large2">
+                                    <input type="radio" id="radio5" onclick='setmode(5);'  name="size3" value="large">
+                                        Параметри
+                                </label>
+                            <label for="large2" style='display:none;'>
+                                    <input  type="radio" id="radio6" onclick='setmode(6);'  name="size3" value="large">
+                                    Адміністрування
+                                </label>
+
+                        </fieldset>
+                    </div>
+
+                    <!-- </form>s -->
+
+
+
+                    <!-- <form style="display: flex; overflow-x: auto; overflow-y: auto; text-align: right;"> -->
+                    <!-- <embed src="formcontainer1.html" type=""> -->
+                    <!-- <embed src="formcontainer1.html"> -->
+                    <!-- <object id=obj1 data="formcontainer1.html"></object> -->
+
+
+                    <form class='formcontainer1'>
+
+
+                        <figure style="overflow-x: hidden; min-width: 45px;">
+                            <table id=table0 role="grid" class="table0">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <!-- <th scope="col">Heading</th> -->
+
+                                        <!-- <th>Heading</th> -->
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <!-- <th scope="row">1</th> -->
+                                        <td>1</td>
+                                        <!-- <td>Cell</td> -->
+
+                                    </tr>
+                                    <tr>
+                                        <!-- <th scope="row">2</th> -->
+                                        <td>2</td>
+                                        <!-- <td>Cell</td> -->
+
+                                    </tr>
+                                    <tr>
+                                        <!-- <th scope="row">3</th> -->
+                                        <td>3</td>
+                                        <!-- <td>Cell</td> -->
+
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                    </tr>
+                                    <tr class="khameleonrow">
+                                        <td>6</td>
+                                    </tr>
+                                    <tr class="khameleonrow">
+                                        <td>7</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </figure>
+
+
+
+                        <figure>
+                            <table id='some-table' role="grid" class="table1">
+                                <thead>
+                                    <tr>
+                                        <!-- <th scope="col">#</th> -->
+                                        <th scope="col">Heading</th>
+                                        <th scope="col">Heading</th>
+                                        <th scope="col">Heading</th>
+                                        <th scope="col">Heading</th>
+                                        <th scope="col">Heading</th>
+                                        <th scope="col">Heading</th>
+                                        <th>Heading</th>
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <!-- <th scope="row">1</th> -->
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+                                    </tr>
+                                    <tr>
+                                        <!-- <th scope="row">2</th> -->
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+                                    </tr>
+                                    <tr>
+                                        <!-- <th scope="row">3</th> -->
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+                                    </tr>
+                                    <tr>
+                                        <!-- <th scope="row">4</th> -->
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+                                    </tr>
+                                    <tr>
+                                        <!-- <th scope="row">4</th> -->
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+                                    </tr>
+                                    <tr class="khameleonrow">
+                                        <!-- <th scope="row">4</th> -->
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+
+                                    </tr>
+                                    <tr id=kham class="khameleonrow">
+                                        <!-- <th scope="row">4</th> -->
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </figure>
+
+
+                        <!-- <div class="inpcontainer">
+                      <input type="range" id="margin" min="10" max="200" value="110" class="verticalfirst">
+                  </div> -->
+                        <figure id=vslcont class="vertslidercontainer">
+                            <div id=sliderbase class=vertslider></div>
+                            <div id=sliderint class=filledslider></div>
+                            <div id=slider class=vertslider2></div>
+                        </figure>
+                    </form>
+
+
+
+
+
+
+                    <form class='formcontainer2'>
+                        <!-- <h6>Аварії у точках вимірювання</h6> -->
+                    </form>
+
+
+
+                    <form class='formcontainer3'>
+                        <my-flexheader style='display: flex; justify-content: space-between;'>
+                            <!-- <h7>Поточні дані</h7> -->
+                            <div class=f3head>
+                                <div id=zap> запит:</div>
+                                <div id=vid style='margin-left:40px; '>відгук:</div>
+                            </div>
+                            <div>(Діагностика: для відладки ПО плати СКЗ)</div>
+                            <!-- <div>sss</div> -->
+
+                        </my-flexheader>
+                        <!-- <div> Formcontainer3</div> -->
+                        <div id=table3 style="display: flex;">
+                            <!-- <div> -->
+                            <div>
+                                <!-- <div id="map" style='width: 500px;height: 500px; '></div> -->
+                            </div>
+                            <div id=tablmap></div>
+                        </div>
+                    </form>
+
+                    <div class='formcontainer8'>
+                        <!-- <h6>Formcontainer4</h2> -->
+                        <div>
+                            <div id=headcontainer>
+
+                                <!-- <div id=orion> ТОВ <br>Оріон</div> -->
+                                <!-- <div id=grp>Карта ГРП України</div> -->
+
+
+                            </div>
+                            <div id=secondcont>
+                                <div id=leftpan>
+                                    <div id=orionf class='city' onclick="fly( 'orionf ')">Оріон</div>
+                                    <div id=kharkiv class='city' onclick="fly( 'kharkiv ')">Харків</div>
+                                    <div id=odesa class='city' onclick="fly( 'odesa ')">Одеса</div>
+                                    <div id=cherkasy class='city' onclick="fly( 'cherkasy ')">Черкаси</div>
+                                    <div id=poltava class='city' onclick="fly( 'poltava ')">Полтава</div>
+                                </div>
+
+                                <div id=lmap>
+                                    <!-- <div id=footer style='width: 50px; '>
+                                    <div id=city0> Харків</div>
+                                    <div id=city0> Одеса</div>
+                                </div> -->
+                                    <div id="mapid"></div>
+                                    <!-- <button> hhhh</button> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form class='formcontainer4'>
+                        <div class='my_upcontrol'>
+                            <div class=poshukw style='width:180px;'> Пошук!
+                                <!-- <input type="text" name="my_login" placeholder="Пошук" aria-label="my_Login" autocomplete="nickname" required class='poshukw '> -->
+                                <!-- <input type="ggg" name="my_login" placeholder="Пошук" aria-label="my_Login" autocomplete="nickname" class='poshukw '> -->
+                            </div>
+                            <div class=alldivcentered> O-</div>
+                            <!-- <input type="checkbox" name="login" placeholder="Пошук" aria-label="Login" autocomplete="nickname" required class='chkb '> -->
+                            <!-- <div class=alldiv onclick='on_on() '> A</div> -->
+                            <div class=alldivcentered onclick='toMaxZoom()'>Z</div>
+                            <!-- <div class=alldivcentered onclick='toggle_bdv() '> C</div> -->
+                            <!-- <div class=alldivcentered onclick='toggle_flextable() '> D</div> -->
+                            <div class=alldivcentered onclick='toggle_footer() '> E</div>
+
+                        </div>
+                        <!-- <form class='formcontainer4 '>Мапа розміщення пристроїв -->
+                        <div id=some_additional style="display:block; background: rgba(54, 190, 18, 0.671);">
+                            <!-- <div class="arrow-box"></div> -->
+
+
+                            <div class='container_0'>
+                                <!-- <div> Container1 -->
+
+                                <div id="map"></div>
+                                <!-- </div> -->
+                            </div>
+                            <!-- <span>Mouse over a cluster to see the bounds of its children and click a cluster to zoom to those bounds</span> -->
+
+                            <div class=flexfooter>
+                                <div style='display:flex; '>
+                                    <div id=_textbox class='textclass'>Підтверджені аварії</div>
+                                    <div id=_textbox1 class='textclass1'>Загальна кількість пристроїв </div>
+                                    <div id=_textbox2 class='textclass2'>Останні 2 записи у базі даних по блоках:</div>
+                                </div>
+                                <div style='display:flex; '>
+                                    <div id=textbox class='textclass'></div>
+                                    <div id=textbox1 class='textclass1'></div>
+                                    <div id=textbox2 class='textclass2'></div>
+                                </div>
+                            </div>
+                            <div class=flextable>
+                                <div id=fl_table1 class='textclass2'></div>
+                            </div>
+
+                        </div>
+                    </form>
+
+
+                    <form class='formcontainer5'>
+                        <h6>Formcontainer5</h2>
+                    </form>
+
+                    <form class='formcontainer6'>
+                        <h6>Formcontainer6</h2>
+                    </form>
+
+
+
+                </div>
+                <!-- <form>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">@</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username">
+                </div>
+
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Your Email">
+                    <div class="input-group-append">
+                        <span class="input-group-text">@example.com</span>
+                    </div>
+                </div>
+            </form> -->
+                <!-- <div id=info class=infobottom>simply info </div> -->
+            </my-subpage>
+
+            <my-subpage class="subpage2">
+                <h1>Page 2</h1>
+            </my-subpage>
+
+
+            <my-subpage class="subpage3" style='display: none; text-align: center; '>
+                <h1>Page 3</h1>
+            </my-subpage>
+
+            <my-subpage class="subpage_old4" style='display: none; text-align: center; '>
+                <h1>Page 4</h1>
+            </my-subpage>
+
+            <my-subpage class="subpage5" style='display: none; text-align: center; '>
+                <h1>Page 5</h1>
+            </my-subpage>
+
+            <my-subpage class="subpage6" style='display: none; text-align: center; '>
+                <h1>Page 6</h1>
+            </my-subpage>
+
+            <my-subpage class="subpage4" style='display: none; text-align: center; '>
+                <h1>It is Map</h1>
+            </my-subpage>
+
+        </my-page>
+
+
+
+        <!-- <div class='leftright '> -->
+        <!-- <div>
+                < < </div>
+                    <div> > > </div> -->
+        <!-- </div> -->
+
+    </main>
+
+    <!-- <div class="mypage" style='display: none; '> My Page -->
+
+
+    <!-- ./ Main -->
+
+    <!-- Footer -->
+    <div id=endfooter class="footer-container">
+        <!-- <footer id=endfooter class="container-fluid"> -->
+        <!-- <small>Built with <a href="https://picocss.com" class="secondary">Pico</a> • <a href="https://github.com/picocss/examples/tree/master/sign-in/" class="secondary">Source code</a></small> -->
+        <!-- <small>  • ТОВ   <a href="https://orion.com.ua" class="secondary">Оріон</a> м.Харків • <a href="https://github.com/picocss/examples/tree/master/sign-in/" class="secondary">Source code</a></small> -->
+        <small> ®  • ТОВ   <a href="https://orion.com.ua" class="secondary">Оріон</a> м.Харків • </small>
+    </div>
+    <!-- ./ Footer -->
+
+    <!-- Minimal theme switcher -->
+
+    <script>
+        if (document.documentElement.clientHeight < 798) {
+            var div = document.getElementById('endfooter');
+            // if (div)
+            //     div.style.marginTop = '-15px ';
+        }
+    </script>
+
+</body>
+
+</html>

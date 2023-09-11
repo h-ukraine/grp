@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Leaflet debug page</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js"></script>
+
+
+
+    <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" integrity="sha512-07I2e+7D8p6he1SIM+1twR5TIrhUQn9+I6yjqD53JQjFiMf8EtC93ty0/5vJTZGF8aAocvHYNEDJajGdNx1IsQ==" crossorigin="" /> -->
+    <!-- <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js" integrity="sha512-WXoSHqw/t26DszhdMhOXOkI7qCiv5QWXhH9R7CgvgZMHz1ImlkVQ3uNsiQKu5wwbbxtPzFXd1hK4tzno2VqhpA==" crossorigin=""></script> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="myscreen.css" />
+
+    <link rel="stylesheet" href="../dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="../dist/MarkerCluster.Default.css" />
+    <script src="../dist/leaflet.markercluster-src.js"></script>
+    <script src="realworld.388.js"></script>
+
+</head>
+
+<body>
+    <!-- <div class="arrow-box"></div> -->
+    <div class='container0'>Мапа розміщення пристроїв
+        <!-- <div> Container1 -->
+        <div class='upcontrol'>
+            <input type="text" name="login" placeholder="Пошук" aria-label="Login" autocomplete="nickname" required class='poshuk'>
+            <div> O-</div>
+            <!-- <input type="checkbox" name="login" placeholder="Пошук" aria-label="Login" autocomplete="nickname" required class='chkb'> -->
+            <div onclick='on_on()'> A</div>
+            <div> B</div>
+            <div> C</div>
+            <div> D</div>
+            <div> E</div>
+
+        </div>
+        <div id="map" style='height:600px;'></div>
+        <!-- </div> -->
+    </div>
+    <!-- <span>Mouse over a cluster to see the bounds of its children and click a cluster to zoom to those bounds</span> -->
+
+    <div class=flexfooter>
+        <div style='display:flex;'>
+            <div id=_textbox class='textclass'>Підтверджені аварії</div>
+            <div id=_textbox1 class='textclass1'>Загальна кількість пристроїв </div>
+            <div id=_textbox2 class='textclass'>Додаткова інформація</div>
+        </div>
+        <div style='display:flex;'>
+            <div id=textbox class='textclass'></div>
+            <div id=textbox1 class='textclass1'></div>
+            <div id=textbox2 class='textclass'></div>
+        </div>
+    </div>
+
+
+
+
+    <script type="text/javascript">
+        //
+
+
+        function getRandom(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        function log(txt) {
+            if (div = document.getElementById('textbox')) {
+                var mySplits = div.innerText.split("\n");
+
+                if (mySplits.length >= 10) {
+                    var n = div.innerText.indexOf('\n');
+
+                    // var n2 = div.innerText.substr(n + 1, div.innerText.length).indexOf('\n');
+                    // var sss = div.innerText.substring(0, n + 1);
+                    // var sss2 = div.innerText.substr(n2 + 1, div.innerText.length);
+                    var sss = div.innerText.substr(n + 1, div.innerText.length);
+                    div.innerText = sss + txt + "\n";
+
+
+                } else
+                    div.innerText = div.innerText + txt + "\n";
+
+                div.scrollIntoView({
+                    block: "end"
+                });
+
+            }
+
+
+        }
+
+        var on_cnt = 1;
+
+        function on_on(evt) {
+            log('on_on ' + '    ' + on_cnt++);
+
+        }
+
+        function printstat(once = false) {
+
+
+            if (div = document.getElementById('textbox1')) {
+                var alm = markers.getLayers().length;
+                var ack = markers3.getLayers().length;
+
+                var nrm = markers2.getLayers().length;
+                var msg = (alm + ack + nrm) + ', в тому числі:\n';
+                msg += '------------------------------------------------\n';
+                msg += (alm > 99 ? "" : alm > 10 ? " " : "  ") + alm.toString() + ' - аварійні\n';
+                msg += ack.toString().padStart(4, ' ') + " - підтверджені аварії\n";
+                msg += nrm.toString().padStart(4, ' ') + ' - у нормі';
+                div.innerText = msg
+
+            }
+            // if (once)
+            //     if (tb = document.getElementById('textbox')) {
+            //         tb.innerText = 'Подтвержденные аварии:\n'
+
+            //     }
+
+        }
+
+        ////////
+        var LeafIcon = L.Icon.extend({
+            options: {
+                iconSize: [38, 95],
+                shadowSize: [50, 64],
+                iconAnchor: [22, 94],
+                shadowAnchor: [4, 62],
+                popupAnchor: [-3, -76]
+                    // myparam: 0
+            }
+        });
+
+        var _cpuIcon = L.Icon.extend({
+            options: {
+                iconSize: [45, 45],
+                shadowSize: [50, 64],
+                // iconAnchor: [22, 94],
+                iconAnchor: [20, 45],
+                shadowAnchor: [4, 62],
+                popupAnchor: [-3, -76],
+
+
+            }
+        });
+
+        var greenIcon = new LeafIcon({
+            iconUrl: 'http://leafletjs.com/examples/custom-icons/leaf-green.png',
+            shadowUrl: 'http://leafletjs.com/examples/custom-icons/leaf-shadow.png'
+        });
+
+        var redIcon = new LeafIcon({
+            iconUrl: 'http://leafletjs.com/examples/custom-icons/leaf-red.png',
+            shadowUrl: 'http://leafletjs.com/examples/custom-icons/leaf-shadow.png',
+            myparam: 0
+
+        });
+
+        var cpuIcon = new _cpuIcon({
+            // iconUrl: './processor-64x64.png'
+            // iconUrl: './TFT_128.png',
+            iconUrl: './prapor2.png',
+            opacity: '0.5',
+            className: 'halfopacity',
+
+        });
+        var alarmIcon = new _cpuIcon({
+            // iconUrl: './processor-64x64.png'
+            iconUrl: './alarm2.png',
+            opacity: '0.5',
+            className: 'halfopacity',
+            myparam: 0
+        });
+
+        ///////
+        var tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 18,
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Points &copy 2012 LINZ'
+            }),
+            latlng = L.latLng(50.0, 30.42);
+
+        var map = L.map('map', {
+            center: latlng,
+            zoom: 6,
+            layers: [tiles]
+        });
+
+        //Create panes for each of the sets of markers
+        var pane1 = map.createPane('mark1');
+        var pane2 = map.createPane('mark2');
+        var pane3 = map.createPane('mark3');
+
+        // L.marker([51.5, -0.09], {
+        //     icon: greenIcon
+        // }).addTo(map);
+
+
+        // var markers = L.markerClusterGroup();
+        var markers = L.markerClusterGroup({
+            disableClusteringAtZoom: 11,
+
+            iconCreateFunction: function(cluster) {
+                // return new L.DivIcon({
+                //     html: '<div><span>' + cluster.getChildCount() + '</span></div>',
+                //     className: 'myalarm',
+                //     iconSize: new L.Point(40, 40)
+                // });
+                return L.divIcon({
+                    html: '<b>' + cluster.getChildCount() + '</b>',
+                    iconSize: new L.Point(40, 40),
+                    className: 'myalarm',
+
+                });
+            },
+        });
+
+
+        // var markers2 = L.markerClusterGroup();
+        var markers2 = L.markerClusterGroup({
+            disableClusteringAtZoom: 11,
+            iconCreateFunction: function(cluster) {
+                return new L.DivIcon({
+                    html: '<div><span>' + cluster.getChildCount() + '</span></div>',
+                    // className: 'mynormal',
+                    className: 'mynormal',
+                    iconSize: new L.Point(40, 40)
+                });
+
+            }
+        });
+
+        var markers3 = L.markerClusterGroup({
+            disableClusteringAtZoom: 11,
+            iconCreateFunction: function(cluster) {
+                return L.divIcon({
+                    html: '<b>' + cluster.getChildCount() + '</b>',
+                    iconSize: new L.Point(40, 40),
+                    className: 'acked',
+                });
+            }
+        });
+
+        // for (var i = 0; i < addressPoints.length; i++) {
+        for (var i = 0; i < 500; i++) {
+            // var a = addressPoints[i];
+            // var title = a[2];
+            // var marker = L.marker(new L.LatLng(a[0], a[1]), {
+            //     title: title,
+
+            // });
+            // marker.bindPopup(title);
+
+
+
+            if (i < 100) {
+                var lat = getRandom(24.0, 30.0);
+                var lng = getRandom(48.4, 51.5);
+                var title = 'SKZ_' + i.toString();
+                var marker0 = L.marker(new L.LatLng(lng, lat), {
+                    title: title,
+                    // icon: redIcon,
+                    icon: i < 50 ? cpuIcon : i < 70 ? redIcon : alarmIcon,
+                    pane: 'mark2'
+
+                });
+                // marker0.bindPopup(title);
+                // var mark1=L.marker([51.5, -0.09]).bindPopup(L.popup({maxWidth:500}).setContent("I am a standalone popup.")).addTo(map);
+
+                // marker0.bindPopup("<div style='background:red;'>Hello world!</div><br />I am a popup.", {
+                marker0.bindPopup(title + ' - карточка объекта' + "<br/><input type='text' name='login' placeholder='Пошук' aria-label='Login' autocomplete='nickname'required class='poshuk'>" +
+                    "<br/>I am a popup. <div onclick='on_on()' style='background:yellow; border: 1px solid navy; user-select: none;'>Кнопка просмотра объекта </div>", {
+                        maxWidth: 500,
+                    });
+                marker0.on("dblclick", (event) => { //FIXME "dblclick" =>"click" works
+
+                    // this.toggleSelectedEgg(e);
+                    var myMarker = event.target;
+                    if (event.target.options.icon.options.myparam == 0) {
+                        // console.log("doubleclick: " + event.target.options.title + " - авария подтверждена!");
+                        var dt = new Date; //.toString();
+                        const formatDate = d => [
+                            d.getFullYear(),
+                            (d.getMonth() + 1).toString().padStart(2, '0'),
+                            d.getDate().toString().padStart(2, '0'),
+                        ].join('-');
+
+                        const formatTime = d => [
+                            d.getHours().toString().padStart(2, '0'),
+                            d.getMinutes().toString().padStart(2, '0'),
+                            d.getSeconds().toString().padStart(2, '0')
+                        ].join(':');
+
+                        const formatDateTime = d => {
+                            return formatDate(d) + ' ' + formatTime(d);
+
+                        }
+
+                        // log("dblclick:  " + event.target.options.title + " - авария подтверждена  | user1");
+                        // log(dt.toJSON().slice(0, 39).replace('T', ' ') + " : " + event.target.options.title + " - авария подтверждена  | user1");
+                        // log(formatDate(dt) + ' ' + formatTime(dt) + " : " + event.target.options.title + " - авария подтверждена  | user1");
+                        log(formatDateTime(dt) + "  ... " + event.target.options.title + " - подтв./user1");
+                        // myMarker.options.opacity *= 0.7;
+                        // markers.removeLayer(event.target);
+
+                        myMarker.options.icon = new _cpuIcon({
+                            // iconUrl: './processor-64x64.png'
+                            iconUrl: './alarmgrey2.png',
+                            // iconUrl: './prapor2.png',
+                            opacity: '0.5',
+                            className: 'halfopacity',
+                            myparam: 1
+                        });
+
+                        // map.removeLayer(event.target);
+                        var tr = markers.hasLayer(event.target);
+                        var tr3 = markers3.hasLayer(event.target);
+                        if (tr) {
+                            markers.removeLayer(event.target);
+                            // markers3.removeLayer(event.target);
+                            // map.addLayer(myMarker);
+                            markers3.addLayer(myMarker);
+                        }
+
+
+
+
+
+                        // map.addLayer(myMarker);
+                        // map.removeLayer(markers3);
+                        // markers3.addLayer(myMarker);
+                        // map.addLayer(markers3);
+                    }
+
+                    // myMarker.options.icon.options.iconUrl = './prapor2.png';
+                    // myMarker.options.icon.options.iconSize = [45, 45];
+                    // myMarker.options.icon.options.iconAnchor = [8, 45];
+                    myMarker.refreshIconOptions(null, true);
+
+
+
+                    printstat();
+
+                });
+                if (i < 95)
+                    markers.addLayer(marker0);
+                else
+                    markers3.addLayer(marker0);
+            } else {
+                var lat = getRandom(30.2, 37.0);
+                var lng = getRandom(46.7, 50.2);
+                var title = 'SKZ_' + i.toString();
+                var marker0 = L.marker(new L.LatLng(lng, lat), {
+                    title: title,
+                    icon: greenIcon,
+                });
+                marker0.bindPopup(title);
+                markers2.addLayer(marker0);
+
+
+            }
+        }
+
+
+
+        map.addLayer(markers);
+        map.addLayer(markers2);
+        map.addLayer(markers3);
+
+
+
+        // setInterval(() => {
+        //     var mrk = markers;
+        //     if (map.hasLayer(mrk))
+        //         map.removeLayer(mrk);
+        //     else
+        //         map.addLayer(mrk);
+        // }, 1000);
+
+
+        printstat(true);
+
+        // pane2.style.display = 'none';
+
+        var t = 567;
+        t++;
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>myProba</title>
+
+    <!-- <link href="dist/css/datepicker.min.css" rel="stylesheet" type="text/css">
+    <script src="dist/js/datepicker.min.js"></script> -->
+
+    <link rel="stylesheet" href="dtsel-master/dtsel.css" />
+    <link rel="stylesheet" href="css/dt.css" />
+    <script src="dtsel-master/dtsel.js"></script>
+
+</head>
+
+<body>
+    <!-- <input type='text' class="datepicker-here" data-position="right top" /> -->
+    <div id=pickers>
+
+        <input id=dtpk1 name="dateTimePicker" class="dtclass" />
+        <input id=dtpk2 name="dateTimePicker2" class="dtclass" />
+    </div>
+    <div id=selcontainer>
+
+
+
+    </div>
+
+
+    <script>
+        // instance = new dtsel.DTS('input[name="dateTimePicker"]');
+        // instance = new dtsel.DTS('input[name="dateTimePicker"]');
+        // instance = new dtsel.DTS('input[name="dateTimePicker"]', {
+        //     dateFormat: "yyyy-mm-dd",
+        //     timeFormat: "HH:MM:SS"
+        // });
+
+        let instance = new dtsel.DTS('input[name="dateTimePicker"]', {
+            // dateFormat: "yyyy-mm-dd",
+            showTime: true
+
+        });
+        let instance2 = new dtsel.DTS('input[name="dateTimePicker2"]', {
+            showTime: true,
+            // showDate: false,
+            direction: 'TOP'
+        });
+
+        instance.onselectstart = () => {
+                return false;
+            } //  //make unselectable!!
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,178 @@
+@media screen and (min-height: 210px) and (max-width: 800px) {
+  :root {
+    --cell-commonlineheight: 22px;
+  }
+}
+@media screen and (min-height: 220px) and (max-width: 800px) {
+  :root {
+    --cell-commonlineheight: 23px;
+  }
+}
+@media screen and (min-height: 260px) and (max-width: 800px) {
+  :root {
+    --cell-commonlineheight: 26px;
+  }
+}
+@media screen and (min-height: 365px) {
+  :root {
+    --cell-commonlineheight: 28px;
+  }
+}
+@media screen and (min-height: 400px) {
+  :root {
+    --cell-commonlineheight: 32px;
+  }
+}
+@media screen and (min-height: 435px) {
+  :root {
+    --cell-commonlineheight: 36px;
+  }
+}
+@media screen and (min-height: 450px) and (min-width: 350px) {
+  :root {
+    --cell-commonlineheight: 20px;
+  }
+}
+@media screen and (min-height: 550px) and (min-width: 370px) {
+  :root {
+    --cell-commonlineheight: 26px;
+  }
+}
+@media screen and (min-height: 590px) and (min-width: 370px) {
+  :root {
+    --cell-commonlineheight: 28px;
+  }
+}
+@media screen and (min-height: 700px) and (min-width: 370px) {
+  :root {
+    --cell-commonlineheight: 32px;
+  }
+}
+@media screen and (min-height: 900px) and (min-width: 370px) {
+  :root {
+    --cell-commonlineheight: 40px;
+  }
+}
+.myroot {
+  --common-background: linear-gradient(rgb(22, 19, 31), rgb(42, 35, 47));
+  --cell-normalbackground: white;
+  --cell-alarmbackground: rgb(240, 70, 30);
+  --cell-alarmcolor: red;
+  --cell-normalcolor: green;
+}
+
+html,
+body {
+  /* text-align: center; */
+  /* background: rgb(14, 14, 20); */
+  /* background: rgb(255, 255, 255); */
+  /* background: rgb(55, 49, 65); */
+  /* background: linear-gradient(rgb(55, 45, 63), rgb(27, 12, 63)); */
+  background: var(--common-background);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: rgb(194, 188, 188);
+  font: 12px/1.2 "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.paramcont {
+  display: flex;
+  margin-left: 1vw;
+  margin-right: 1vw;
+}
+
+.aln1 {
+  /* text-align: left; */
+  /* background: rgb(53, 49, 49); */
+  /* color: darkorange; */
+  /* width: 95vw; */
+  position: relative;
+  /* margin-left: 1vw; */
+  /* margin-right: 1vw; */
+  /* font-size: 46px; */
+}
+
+.h-table {
+  margin-left: 0.1vw;
+  margin-right: 0.1vw;
+  min-height: 26px;
+  width: 100%;
+}
+
+.header {
+  font-size: 16px;
+  line-height: 22px;
+  height: 22px;
+  color: rgb(223, 210, 185);
+  text-align: center;
+  margin-top: 5px;
+  padding: 1px;
+}
+
+.row {
+  color: rgb(8, 220, 223);
+  display: grid;
+  grid-row-gap: var(--grid-spacing-vertical);
+}
+
+.row .gridsquare {
+  font-size: 16px;
+  line-height: var(--cell-commonlineheight);
+}
+
+.tmpgridsquare, .tmpdatacell {
+  font-size: 16px;
+  line-height: var(--cell-commonlineheight);
+  color: var(--cell-headcolor);
+  min-width: var(--cell-minwidth);
+  white-space: nowrap;
+  text-align: var(--cell-textalign);
+  border-bottom: 1px solid black;
+  border-radius: 10px 10px 0px 0px;
+}
+
+.tmpdatacell {
+  color: var(--cell-datacolor);
+  font-weight: 700;
+  font-size: 18px;
+  border-radius: 0px 0px 0px 0px;
+}
+
+.acontainer {
+  display: block;
+  /* justify-content: left; */
+  /* justify-content: space-between; */
+  margin-left: 1vw;
+  margin-right: 1vw;
+  margin-top: -6px;
+}
+.acontainer div {
+  background: "red";
+  color: rgba(8, 253, 253, 0.822);
+  padding-left: 3px;
+  min-width: 20px;
+  font-size: 20px;
+  /* background: crimson; */
+}
+
+.mysel {
+  /* height: 15px; */
+  padding-right: 30px;
+  margin: 0px;
+  padding-left: 5px;
+  font-size: 18px;
+  line-height: 30px;
+  height: 30px;
+  color: gainsboro;
+  background-color: var(--tbl-background1);
+}
+
+.mysel:hover {
+  background: rgba(132, 132, 165, 0.459);
+  color: whitesmoke;
+}
+
+.seloption {
+  background: rgba(69, 85, 68, 0.479);
+  color: rgb(0, 12, 4);
+}

@@ -1,0 +1,464 @@
+<!-- Main -->
+<main id=mainmain class="container">
+
+    <div id="maindiv" class="maindiv">
+        <article class="grid">
+
+            <div>
+                <hgroup>
+                    <h1>ДОЗОР-С</h1>
+                    <!-- <h2>A minimalist layout for Login pages</h2> -->
+                    <h2>система контролю та відображення стану об'єктів</h2>
+
+                </hgroup>
+                <!-- <button class='secondary'>Button</button> -->
+                <form>
+
+                    <!-- <div class="conta">Все як на долоні... -->
+                    <!-- <input type="text" name="login" placeholder="Login" aria-label="Login" autocomplete="nickname" required>
+                        <input type="password" name="password" placeholder="Password" aria-label="Password" autocomplete="current-password" required> -->
+                    <input type="text" name="login" placeholder="Логін" aria-label="Login" autocomplete="nickname" required>
+                    <input type="password" name="password" placeholder="Пароль" aria-label="Password" autocomplete="current-password" required>
+                    <fieldset>
+                        <label for="remember">
+                                    <input type="checkbox" role="switch" id="remember" name="remember">Запам'ятати користувача
+                            </label>
+                    </fieldset>
+                    <!-- <button type="submit" class="contrast" onclick="event.preventDefault()">Login</button> -->
+                    <button id='subm' type="submit" class="contrast" onclick="event.preventDefault()">Увійти</button>
+                    <!-- <bu id='subm' type="text">Увій_ти -->
+
+                </form>
+            </div>
+
+            <div></div>
+        </article>
+
+
+        <div class="doloni"> • Все як на долоні... </div>
+        <!-- <div class="conta2"> • Все як на долоні... </div> -->
+
+    </div>
+
+
+
+    <my-page class="mypage1" style='display: none; text-align: center; border:1px solid white;'>
+
+        <!-- <nav class=nav-fluid> -->
+        <div>
+            <!-- <input type="contrast" name="login" placeholder="Логін" aria-label="Login" autocomplete="nickname" required> -->
+            <!-- <a href="#" role="button">Link</a> -->
+            <!-- <div class="simplebutton" onclick="setmode(-111)">
+                    < < </div> -->
+
+            <!-- <h5>• SecondPage • Alarm Sygnals •</h5> -->
+            <!-- <div>
+                            <h5>• Аварії •</h5>
+                        </div> -->
+            <!-- <select class="myselect" onchange="mySelectFunction( 'msel')" id=msel>     -->
+            <label for="firstsel"></label>
+            <select id=firstsel class="myselect" onchange="mySelectHandler(this)">    
+                            <option>• Аутентифікація </option>
+                            <option>• Головна1 </option>
+                            <option>• Аварії </option>  
+                            <option>• Прилади </option>
+                            <option>• Карта </option>
+                            <option>• Параметри </option>
+                            <option>• Адміністрування </option>
+                        </select>
+            <!-- <div class="simplebutton" onclick="setmode(111)">
+                            > > </div> -->
+        </div>
+        <!-- </nav> -->
+
+        <!-- <hr> -->
+        <my-subpage class=subpage1>
+            <!-- <div style="display: flex;"> -->
+            <div class=pagecontainer>
+
+                <!-- <form> -->
+                <!-- <div>
+                        <fieldset class="leftfield" id=leftpanel>
+                            <legend class=leg0> |||</legend>
+
+                            <label for="small1">
+                                <input type="radio"  id="radio1" onclick='setmode(1);' name="size3" value="small" checked> Головна0
+                            </label>
+
+                            <label for="medium1">
+                                <input type="radio" id="radio2" onclick='setmode(2);' name="size3" value="medium">
+                                Аварії
+                            </label>
+
+                            <label for="large1">
+                                <input type="radio" id="radio3" onclick='setmode(3);' name="size3" value="large">
+                                Прилади
+                            </label>
+
+                            <label for="large3">
+                                <input type="radio" id="radio4" onclick='setmode(4);'  name="size3" value="large">
+                                    Карта
+                                   </label>
+                            <label for="large2">
+                                    <input type="radio" id="radio5" onclick='setmode(5);'  name="size3" value="large">
+                                        Параметри
+                                </label>
+                            <label for="large2" style='display:none;'>
+                                    <input  type="radio" id="radio6" onclick='setmode(6);'  name="size3" value="large">
+                                    Адміністрування
+                                </label>
+
+                        </fieldset>
+                    </div> -->
+
+                <!-- </form>s -->
+
+
+
+
+
+
+                <form class='formcontainer1'>
+
+
+                    <figure style="overflow-x: hidden; min-width: 45px;">
+                        <table id=table0 role="grid" class="table0">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <!-- <th scope="col">Heading</th> -->
+
+                                    <!-- <th>Heading</th> -->
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <!-- <th scope="row">1</th> -->
+                                    <td>1</td>
+                                    <!-- <td>Cell</td> -->
+
+                                </tr>
+                                <tr>
+                                    <!-- <th scope="row">2</th> -->
+                                    <td>2</td>
+                                    <!-- <td>Cell</td> -->
+
+                                </tr>
+                                <tr>
+                                    <!-- <th scope="row">3</th> -->
+                                    <td>3</td>
+                                    <!-- <td>Cell</td> -->
+
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                </tr>
+                                <tr class="khameleonrow">
+                                    <td>6</td>
+                                </tr>
+                                <tr class="khameleonrow">
+                                    <td>7</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </figure>
+
+
+
+                    <figure>
+                        <table id='some-table' role="grid" class="table1">
+                            <thead>
+                                <tr>
+                                    <!-- <th scope="col">#</th> -->
+                                    <th scope="col">Heading</th>
+                                    <th scope="col">Heading</th>
+                                    <th scope="col">Heading</th>
+                                    <th scope="col">Heading</th>
+                                    <th scope="col">Heading</th>
+                                    <th scope="col">Heading</th>
+                                    <th>Heading</th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <!-- <th scope="row">1</th> -->
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                </tr>
+                                <tr>
+                                    <!-- <th scope="row">2</th> -->
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                </tr>
+                                <tr>
+                                    <!-- <th scope="row">3</th> -->
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                </tr>
+                                <tr>
+                                    <!-- <th scope="row">4</th> -->
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                </tr>
+                                <tr>
+                                    <!-- <th scope="row">4</th> -->
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                </tr>
+                                <tr class="khameleonrow">
+                                    <!-- <th scope="row">4</th> -->
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+
+                                </tr>
+                                <tr id=kham class="khameleonrow">
+                                    <!-- <th scope="row">4</th> -->
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </figure>
+
+
+
+                    <figure id=vslcont class="vertslidercontainer">
+                        <div id=sliderbase class=vertslider></div>
+                        <div id=sliderint class=filledslider></div>
+                        <div id=slider class=vertslider2></div>
+                    </figure>
+                </form>
+
+
+
+
+
+
+                <form class='formcontainer2'>
+                    <!-- <h6>Аварії у точках вимірювання</h6> -->
+                </form>
+
+
+
+                <form class='formcontainer3'>
+                    <my-flexheader style='display: flex; justify-content: space-between;'>
+                        <!-- <h7>Поточні дані</h7> -->
+                        <div class=f3head>
+                            <div id=zap> запит:</div>
+                            <div id=vid style='margin-left:40px; '>відгук:</div>
+                        </div>
+                        <div>(Діагностика: для відладки ПО плати СКЗ)</div>
+                        <!-- <div>sss</div> -->
+
+                    </my-flexheader>
+                    <!-- <div> Formcontainer3</div> -->
+                    <div id=table3 style="display: flex;">
+                        <!-- <div> -->
+                        <div>
+                            <!-- <div id="map" style='width: 500px;height: 500px; '></div> -->
+                        </div>
+                        <div id=tablmap></div>
+                    </div>
+                </form>
+
+                <div class='formcontainer8'>
+                    <!-- <h6>Formcontainer4</h2> -->
+                    <div>
+                        <div id=headcontainer>
+
+                            <!-- <div id=orion> ТОВ <br>Оріон</div> -->
+                            <!-- <div id=grp>Карта ГРП України</div> -->
+
+
+                        </div>
+                        <div id=secondcont>
+                            <div id=leftpan>
+                                <div id=orionf class='city' onclick="fly( 'orionf ')">Оріон</div>
+                                <div id=kharkiv class='city' onclick="fly( 'kharkiv ')">Харків</div>
+                                <div id=odesa class='city' onclick="fly( 'odesa ')">Одеса</div>
+                                <div id=cherkasy class='city' onclick="fly( 'cherkasy ')">Черкаси</div>
+                                <div id=poltava class='city' onclick="fly( 'poltava ')">Полтава</div>
+                            </div>
+
+                            <div id=lmap>
+                                <!-- <div id=footer style='width: 50px; '>
+                                    <div id=city0> Харків</div>
+                                    <div id=city0> Одеса</div>
+                                </div> -->
+                                <div id="mapid"></div>
+                                <!-- <button> hhhh</button> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <form class='formcontainer4_777'>
+                    <!-- <div class='my_upcontrol'>-->
+                    <!-- <div class=poshukw style='width:180px;'> Пошук! -->
+                    <!-- <input type="text" name="my_login" placeholder="Пошук" aria-label="my_Login" autocomplete="nickname" required class='poshukw '> -->
+                    <!-- <input type="ggg" name="my_login" placeholder="Пошук" aria-label="my_Login" autocomplete="nickname" class='poshukw '> -->
+
+            </div>
+            <!-- <div class=alldivcentered> O-</div> -->
+            <!-- <input type="checkbox" name="login" placeholder="Пошук" aria-label="Login" autocomplete="nickname" required class='chkb '> -->
+            <!-- <div class=alldiv onclick='on_on() '> A</div> -->
+            <!-- <div class=alldivcentered onclick='toMaxZoom()'>Z</div> -->
+            <!-- <div class=alldivcentered onclick='toggle_bdv() '> C</div> -->
+            <!-- <div class=alldivcentered onclick='toggle_flextable() '> D</div> -->
+            <!-- <div class=alldivcentered onclick='toggle_footer() '> E</div> -->
+
+            </div>
+            <!-- <form class='formcontainer4 '>Мапа розміщення пристроїв -->
+            <div id=some_additional style="display:block; background: rgba(47, 70, 41, 0.671);">
+                <!-- <div class="arrow-box"></div> -->
+
+
+                <div class='container_0' style='border:1px dashed red; border-radius: 50px;'>
+                    <!-- <div> Container1 -->
+
+                    <!-- <div id="map"></div> -->
+                    <!-- </div> -->
+                </div>
+                <!-- <span>Mouse over a cluster to see the bounds of its children and click a cluster to zoom to those bounds</span> -->
+
+                <!-- <div class=flexfooter>
+                                <div style='display:flex; '>
+                                    <div id=_textbox class='textclass'>Підтверджені аварії</div>
+                                    <div id=_textbox1 class='textclass1'>Загальна кількість пристроїв </div>
+                                    <div id=_textbox2 class='textclass2'>Останні 2 записи у базі даних по блоках:</div>
+                                </div>
+                                <div style='display:flex; '>
+                                    <div id=textbox class='textclass'></div>
+                                    <div id=textbox1 class='textclass1'></div>
+                                    <div id=textbox2 class='textclass2'></div>
+                                </div>
+                            </div>
+                            <div class=flextable>
+                                <div id=fl_table1 class='textclass2'></div>
+                            </div> -->
+
+            </div>
+            </form>
+
+
+            <form class='formcontainer5'>
+                <h6>Formcontainer5</h2>
+            </form>
+
+            <form class='formcontainer6'>
+                <h6>Formcontainer6</h2>
+            </form>
+
+
+
+            </div>
+            <!-- <form>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">@</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username">
+                </div>
+
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Your Email">
+                    <div class="input-group-append">
+                        <span class="input-group-text">@example.com</span>
+                    </div>
+                </div>
+            </form> -->
+            <!-- <div id=info class=infobottom>simply info </div> -->
+        </my-subpage>
+
+        <my-subpage class="subpage2">
+            <h1>Page 2</h1>
+        </my-subpage>
+
+
+        <my-subpage class="subpage3" style='display: none; text-align: center; '>
+            <h1>Page 3</h1>
+        </my-subpage>
+
+        <my-subpage class="subpage_old4" style='display: none; text-align: center; '>
+            <h1>Page 4</h1>
+        </my-subpage>
+
+        <my-subpage class="subpage5" style='display: none; text-align: center; '>
+            <h1>Page 5</h1>
+        </my-subpage>
+
+        <my-subpage class="subpage6" style='display: none; text-align: center; '>
+            <h1>Page 6</h1>
+        </my-subpage>
+
+        <my-subpage class="subpage4" style='display: none; text-align: center; '>
+            <h1>It is Map</h1>
+        </my-subpage>
+
+    </my-page>
+
+
+
+    <!-- <div class='leftright '> -->
+    <!-- <div>
+                < < </div>
+                    <div> > > </div> -->
+    <!-- </div> -->
+
+</main>
+
+
+<!-- Footer -->
+<div id=endfooter class="footer-container">
+    <!-- <footer id=endfooter class="container-fluid"> -->
+    <!-- <small>Built with <a href="https://picocss.com" class="secondary">Pico</a> • <a href="https://github.com/picocss/examples/tree/master/sign-in/" class="secondary">Source code</a></small> -->
+    <!-- <small>  • ТОВ   <a href="https://orion.com.ua" class="secondary">Оріон</a> м.Харків • <a href="https://github.com/picocss/examples/tree/master/sign-in/" class="secondary">Source code</a></small> -->
+    <small> ®  • ТОВ   <a href="https://orion.com.ua" class="secondary">Оріон</a> м.Харків • </small>
+</div>
+<!-- ./ Footer -->
+
+<!-- Minimal theme switcher -->

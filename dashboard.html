@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Головна • Дозор-С</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="./css/_nalasht.css">
+    <link rel="stylesheet" href="./css/_root.css">
+    <link rel="stylesheet" href="./css/dashboard.css">
+    <script src="./tquery/LINQ.js" type="text/javascript" defer></script>
+
+    <script src="js/grprows.js" type="text/javascript" defer></script>
+    <script src="js/dashboard.js" type="text/javascript" defer></script>
+    <script src="js/dashmain.js" type="text/javascript" defer></script>
+
+</head>
+
+<body>
+
+
+
+
+    <div id='anim' class=nalasht>
+        <div class=dashheader>
+            <!-- <div class=f1>Налаштування</div> -->
+            <div class=f1>Версія V0.8.3su</div>
+            <div class='dashlogotyp'> </div>
+            <div class=f2 style='display:none;'>Тема:
+                <span class=f2span onclick="fliptheme(event)"> Темна</span>
+            </div>
+
+            <div class='username'>
+                <div class=uimg></div>
+                <span></span>
+            </div>
+
+
+        </div>
+
+        <!-- <div class='username'>
+            <div class=uimg></div>
+            <span></span>
+        </div> -->
+
+        <!-- <h3 class=hh3> Меню</h3> -->
+        <!-- <div class='leftpan-switch' onclick="leftpanClick(event) "> -->
+        <!-- <b style='padding-left: 40px;'>LeftTab</b> </div> -->
+        <!-- <div class='leftpan-switch' onclick="FsClick(event) "> <b style='padding-left: 40px;'>FullScr</b> </div> -->
+        <!-- <div>hhhhh</div> -->
+        <div class=flexcont>
+            <div>
+                <!-- <b class=subheader>Меню:</b> -->
+                <div id=menucontainer>
+                    <div class='swtab' onclick="openPageUniversal(event)"> Профіль</div>
+                    <div class='swtab' onclick="openPageUniversal(event)"> Карта</div>
+                    <div class='swtab' onclick="openPageUniversal(event)"> Дані ГРП</div>
+                    <div class='swtab' onclick="openPageUniversal(event)"> Архів</div>
+                    <div class='swtab' onclick="openPageUniversal(event)"> Адміністрування</div>
+                    <!-- <div class='swtab' onclick="openPageUniversal(event)"> Очистити</div> -->
+                    <!-- <div class='swtab' onclick="openPageUniversal(event)"> Інструкція</div> -->
+                    <!-- <div class='swtab' onclick="event.preventDefault()"> Дані ГРП</div> -->
+                </div>
+            </div>
+
+
+            <div style='margin-left:4%; '>
+                <!-- <b id=mytabs class=" subheader f2span" onclick="fliptabsnodes(event)">Доступні ГРП:</b> -->
+                <!-- <b id=mytabs class=" subheader f2span" onclick="fliptabsnodes(event)">Статистика:</b> -->
+                <!-- <div id=nemocontainer class="noname"> -->
+                <div class=vidgetcontainer style='    margin-top: 20px;'>
+                    <p>ПРИСТРОЇ ТеГРП</p>
+
+                    <div id=devall class=vidget style='padding-top: 0px; '>
+                        <div style='text-align:right;'>0</div>
+                        <div class='vidget-border'></div>
+                        <div>загалом</div>
+                    </div>
+
+                    <div id=devavar class=vidget style='width:90%;'>
+                        <div style='text-align:right;'>0</div>
+                        <div class='vidget-border'></div>
+                        <div>аварійні</div>
+                    </div>
+
+                    <div id=devoffline class=vidget>
+                        <div style='text-align:right;'>0</div>
+                        <div class='vidget-border'></div>
+                        <div>оффлайн</div>
+                    </div>
+
+                </div>
+
+
+
+                <div class=vidgetcontainer style='margin-top: 35px;'>
+                    <p>ВУЗЛИ ТеГРП</p>
+
+                    <div class=vidget style='padding-top: 0px; '>
+                        <div style='text-align:left; min-width: 40%; white-space:nowrap; '>станом на</div>
+                        <!-- <div class='vidget-border'></div> -->
+                        <div id=vdgdate style='color:rgb(250, 250, 156);min-width: 55%; white-space:nowrap;'>10 чер 2022
+                            10:33
+                        </div>
+                    </div>
+
+                    <div class=vidget style='width:90%;'>
+                        <!-- <div style='text-align:right;'>5</div> -->
+                        <!-- <div class='vidget-border'></div> -->
+                        <div style='text-align:left; width:92%;; white-space:nowrap; '>аварійні параметри:</div>
+                    </div>
+
+                    <div class=vidget>
+                        <!-- <div style='text-align:right;'>2</div> -->
+                        <!-- <div class='vidget-border'></div> -->
+                        <div id=parnames style='width:92%;line-height: 22px;'>відсутні</div>
+                    </div>
+
+                </div>
+
+
+
+
+
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <script>
+        worker = new Worker("js/wsworker.js", { type: 'module' });
+        // setTimeout(() =>
+        // wrk2 = new Worker("js/wswrk2.js",{ type: 'module' });  //, 8000
+        // );
+
+        // --------------   nal theme ---------
+        function getelemProp(elem, prop) {
+            var item = document.querySelector(elem);
+            var itemStyles = getComputedStyle(item, null);
+
+            // var bbb = root.style.getPropertyValue(prop);
+            return itemStyles.getPropertyValue(prop);
+        }
+
+        function setelemProp(elem, prop, val) {
+            var item = document.querySelector(elem);
+            item.style.setProperty(prop, val);
+        }
+
+        function fliptheme(e) {
+            e.stopPropagation();
+
+            var name = '.nalasht';
+
+            var dark = getelemProp(name, '--dark');
+            var ukraine = getelemProp(name, '--ukraine');
+            var current = getelemProp(name, '--back');
+            if (current == dark) {
+                setelemProp(name, '--back', ukraine);
+                document.querySelector('.f2span').innerText = 'Україна';
+                localStorage.setItem('naltheme', '--ukraine');
+                setelemProp(':root', '--backforvidget', getelemProp(':root', '--back-ukr'));
+            } else {
+                setelemProp(name, '--back', dark);
+                document.querySelector('.f2span').innerText = 'Темна';
+                localStorage.setItem('naltheme', '--dark');
+                setelemProp(':root', '--backforvidget', getelemProp(':root', '--back-dark'));
+
+            }
+        }
+
+        function setnaltheme(theme) {
+            var item = document.querySelector('.nalasht');
+            var itemStyles = getComputedStyle(item, null);
+            var color = itemStyles.getPropertyValue(theme);
+
+            var ispan = document.querySelector('.f2span');
+
+            item.style.setProperty('--back', color);
+            if (theme.includes('--ukraine')) {
+                document.querySelector('.f2span').innerText = 'Україна';
+                setelemProp(':root', '--backforvidget', getelemProp(':root', '--back-ukr'));
+                // setelemProp('.vidgetcontainer', 'background', getelemProp(':root', '--back-ukr'));
+            } else {
+                document.querySelector('.f2span').innerText = 'Темна';
+                setelemProp(':root', '--backforvidget', getelemProp(':root', '--back-dark'));
+                // setelemProp('.vidgetcontainer', 'background', getelemProp(':root', '--back-dark'));
+            }
+        }
+
+        var naltheme = null;
+        try {
+            naltheme = localStorage.getItem('naltheme');
+
+        } finally {
+            if (naltheme) {
+                setnaltheme(naltheme);
+            }
+        }
+
+
+
+        // --------------   tabs/ nodes ---------
+        // function fliptabsnodes(e) {
+        //     e.stopPropagation();
+        //     return;
+
+
+        //     var div = e.currentTarget;
+
+        //     if (div.innerText.includes('Активні вкладки')) {
+        //         div.innerText = "Доступні ГРП:";
+        //         localStorage.setItem('tabsnodes', 'nodes');
+        //     } else {
+        //         div.innerText = 'Активні вкладки:';
+        //         localStorage.setItem('tabsnodes', 'tabs');
+        //     }
+
+        // }
+
+        function settabsnodes(text) {
+            var item = document.querySelector('#mytabs');
+            // var itemStyles = getComputedStyle(item, null);
+            // var color = itemStyles.getPropertyValue(text);
+
+            // item.innerText = text;
+            item.innerText = text == 'tabs' ? 'Активні вкладки:' : "Доступні ГРП:";
+        }
+        // var ispan = document.querySelector('.f2span');
+
+        // item.style.setProperty('tabsnodes', color);
+
+        var tabsnodes = null;
+        try {
+            tabsnodes = localStorage.getItem('tabsnodes');
+
+        } finally {
+            if (tabsnodes) {
+                settabsnodes(tabsnodes);
+            }
+        }
+
+
+
+
+
+
+        function nalasht_handler() {
+
+            // var nal = document.getElementById('anim');
+            var nal = document.querySelector('.nalasht');
+
+
+            var vvprop = getelemProp('.nalasht', 'display');
+
+            if (vvprop == 'none') {
+                setelemProp('.nalasht', 'display', 'block');
+                // nal.style.display ='';
+                setTimeout(() => {
+                    nal.style.opacity = 1;
+                    nal.style.marginLeft = '0px';
+                    // nal.style.width = '80%';
+                    // fullscreen3(nal);
+                }, 30);
+
+
+            } else {
+                // setelemProp('.nalasht','display','');
+                // nal.style.display ='';
+                // nal.style.marginLeft ='-101vw';
+                nal.style.opacity = 0;
+                nal.style.marginLeft = '-101vw';
+                setTimeout(() => {
+                    setelemProp('.nalasht', 'display', 'none');
+
+                }, 400);
+            }
+        }
+
+
+        setelemProp('.nalasht', 'display', 'none');
+        // setTimeout(() => {
+        //     nalasht_handler();
+        // }, 100);
+
+
+        //Налаштування...
+        var nal = document.getElementById('anim');
+        // nal.addEventListener('click', nalasht_handler);
+    </script>
+
+
+
+</body>
+
+</html>

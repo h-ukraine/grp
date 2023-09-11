@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>mySelect</title>
+
+    <!-- <link href="dist/css/datepicker.min.css" rel="stylesheet" type="text/css">
+    <script src="dist/js/datepicker.min.js"></script> -->
+
+    <!-- <link rel="stylesheet" href="dtsel-master/dtsel.css" /> -->
+    <link rel="stylesheet" href="css/custom_dropdn.css" />
+    <!-- <script src="dtsel-master/dtsel.js"></script> -->
+    <script src="js/dropdn.js"></script>
+    <script src="js/myselect.js"></script>
+    <script src="js/editables.js"></script>
+    <script src="js/setstyle.js"></script>
+    <script src="js/authenticate.js"></script>
+</head>
+
+<body>
+
+
+    <!-- HTML CSS JSResult Skip Results Iframe EDIT ON -->
+    <!-- <h2>Making HTML dropdowns not suck</h2> -->
+
+    <h2>Система збору та відображення даних ДОЗОР-С </h2>
+    <div id=mainheader>
+        <div id=myspan>
+            <!-- <span id=yyy class="custom-dropdown "> -->
+
+        </div>
+    </div>
+
+    <div id=mainpage>
+
+        <span class="color-picker"></span>
+
+        <br/><br/>
+
+        <span class="custom-dropdown big">
+    <select>    
+        <option>Sherlock Holmes</option>
+        <option>The Great Gatsby</option>  
+        <option>V for Vendetta</option>
+        <option>The Wolf of Wallstreet</option>
+        <option>Quantum of Solace</option>
+    </select>
+</span>
+
+        <!-- <label>
+  my Comment: -->
+        <span id=xxx class="custom-dropdown">
+    <select>
+      <option>ua</option>
+      <option>en</option>  
+      <option>ru</option>
+
+
+    </select>
+</span>
+        <!-- </label> -->
+
+        <span class="custom-dropdown small">
+    <select>
+        <option>Sherlock Holmes</option>
+        <option>The Great Gatsby</option>  
+        <option>V for Vendetta</option>
+        <option>The Wolf of Wallstreet</option>
+        <option>Quantum of Solace</option>
+    </select>
+</span>
+
+        <br/>
+
+        <span class="custom-dropdown big">
+    <select disabled>
+        <option>Sherlock Holmes</option>
+        <option>The Great Gatsby</option>  
+        <option>V for Vendetta</option>
+        <option>The Wolf of Wallstreet</option>
+        <option>Quantum of Solace</option>
+    </select>
+</span>
+
+        <span class="custom-dropdown">
+    <select disabled>
+        <option>Sherlock Holmes</option>
+        <option>The Great Gatsby</option>  
+        <option>V for Vendetta</option>
+        <option>The Wolf of Wallstreet</option>
+        <option>Quantum of Solace</option>
+    </select>
+</span>
+
+        <span class="custom-dropdown small">
+    <select disabled>
+        <option>Sherlock Holmes</option>
+        <option>The Great Gatsby</option>  
+        <option>V for Vendetta</option>
+        <option>The Wolf of Wallstreet</option>
+        <option>Quantum of Solace</option>
+    </select>
+</span>
+
+        <div id=mov> Визначаємо мову ...</div>
+        <!-- Resources1× 0.5× 0.25×Rerun -->
+
+    </div>
+
+
+
+    <div id=regform>
+        <!-- <div style=' display:flex;'> -->
+        <div id=regheader> </div>
+
+        <div id=zzz>
+            <!-- <span id=yyy> -->
+            <select>
+              <option>ua</option>
+              <option>en</option>  
+              <option>ru</option>
+             </select>
+            <!-- </span> -->
+        </div>
+        <!-- </div> -->
+
+        <div id=reglogin class='rlogin'>
+            <div id=login class='clogin'>Логін:</div>
+            <div id=logvalue class='cedit'>hospital</div>
+        </div>
+        <div id=regpassw class='rlogin'>
+            <div id=pass class='clogin'>Пароль:</div>
+            <div id=passvalue class='cedit'>******</div>
+        </div>
+        <div id=regmsg onclick='hideregmsg()'> Якесь повідомлення...</div>
+        <div id=regin class='backin' onclick='regin()'>Вхід</div>
+        <div id=regback class='backin' onclick="regcancel(false)">Скасувати</div>
+    </div>
+
+    <div id=youcannot>На жаль Ви не ідентифіковані, <br> але не журіться :) <br> Гарного дня !
+
+
+    </div>
+
+
+
+
+
+    <script>
+        (function() {
+            /*1*/
+            var customSelects = document.querySelectorAll(".custom-dropdown"); // __select");
+            /*2*/
+            for (var i = 0; i < customSelects.length; i++) {
+                if (customSelects[i].hasAttribute("disabled")) {
+                    customSelects[i].parentNode.className += " custom-dropdown--disabled";
+                }
+            }
+        })()
+    </script>
+
+</body>

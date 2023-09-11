@@ -1,0 +1,266 @@
+html,
+body {
+  /* text-align: center; */
+  /* background: rgb(14, 14, 20); */
+  /* background: rgb(55, 49, 65); */
+  /* background: linear-gradient(rgb(55, 45, 63), rgb(27, 12, 63)); */
+  background: var(--common-background);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: rgb(194, 188, 188);
+  font: 12px/1.2 "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+:root {
+  --backforvidget: var(--back-dark);
+  --back-dark: linear-gradient(to bottom, rgba(68, 68, 68, 0), rgba(145, 145, 145, 0.74));
+  --back-ukr: linear-gradient(to bottom, rgba(39, 38, 38, 0.9), rgba(99, 106, 212, 0.574));
+}
+
+.bordered {
+  border: 1px dotted grey;
+}
+
+.displayflex {
+  display: flex;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.hoverdiv, .admin .goback, .users .goback,
+.devices .goback,
+.parameters .goback,
+.devinside .goback,
+.plusdevice .goback {
+  cursor: pointer;
+  padding-left: 10px;
+  line-height: 50px;
+  border-radius: 3px;
+  font-style: oblique;
+  font-weight: 500;
+}
+
+.hoverdiv:hover, .admin .goback:hover, .users .goback:hover,
+.devices .goback:hover,
+.parameters .goback:hover,
+.devinside .goback:hover,
+.plusdevice .goback:hover {
+  background: rgb(80, 90, 100);
+  color: white;
+}
+
+.admin, .users,
+.devices,
+.parameters,
+.devinside,
+.plusdevice {
+  display: none;
+  margin: 5px;
+  font-size: 30px;
+  color: beige;
+}
+.admin h6, .users h6,
+.devices h6,
+.parameters h6,
+.devinside h6,
+.plusdevice h6 {
+  margin-top: 20px;
+  padding-left: 30px;
+  margin-bottom: 5px;
+}
+.admin .head1, .users .head1,
+.devices .head1,
+.parameters .head1,
+.devinside .head1,
+.plusdevice .head1 {
+  display: flex;
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+.admin .goback, .users .goback,
+.devices .goback,
+.parameters .goback,
+.devinside .goback,
+.plusdevice .goback {
+  min-width: 120px;
+  height: 50px;
+  font-size: 20px;
+  margin: 10px;
+  font-style: oblique;
+  padding-left: 10px;
+  line-height: 50px;
+  color: rgb(219, 219, 170);
+}
+
+.head1 {
+  width: 96vw;
+  margin: auto;
+}
+.head1 .bb {
+  font-size: 16px;
+  padding: 5px;
+  font-style: oblique;
+  margin-right: 10px;
+  color: rgb(112, 248, 94);
+}
+.head1 .ggg {
+  font-size: 16px;
+  padding: 4px;
+  padding-right: 8px;
+}
+
+.abutton {
+  max-width: 150px;
+  height: 50px;
+  font-size: 20px;
+  color: white;
+  margin: 10px;
+}
+
+.underscored, .container_d div {
+  border-bottom: 1px solid grey;
+  -o-border-image: linear-gradient(to right, rgba(41, 41, 47, 0.99), rgb(231, 231, 214));
+     border-image: linear-gradient(to right, rgba(41, 41, 47, 0.99), rgb(231, 231, 214));
+  border-image-slice: 1;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+}
+
+.noborder {
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  background: transparent;
+  border: none;
+}
+
+.users,
+.devices,
+.parameters,
+.devinside,
+.plusdevice {
+  display: none;
+}
+
+.container_d {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: left;
+  border: 1px dotted #1a1a2e;
+  width: 94vw;
+  margin: auto;
+  max-height: calc(90vh - 300px);
+  overflow-y: auto;
+}
+.container_d div {
+  font-size: 17px;
+  line-height: 36px;
+  margin: 3px;
+  color: #eeeeee;
+  border-radius: 0px;
+}
+.container_d .devclass, .container_d .devclassplus, .container_d .devclass_pc {
+  height: 38px;
+  min-width: 340px;
+  width: 150px;
+  font-size: 14px;
+  margin-top: 5px;
+}
+.container_d .devclass_pc {
+  min-width: 500px;
+  height: 40px;
+  margin-top: 5px;
+  background: none;
+}
+.container_d .devclassplus {
+  font-size: 18px;
+  line-height: 48px;
+  text-align: center;
+}
+
+.myselect {
+  position: relative;
+  font-family: Arial;
+  margin-left: 5px;
+  font-size: medium;
+  background: rgb(34, 29, 29);
+  color: bisque;
+  border: none;
+}
+.myselect option {
+  color: aquamarine;
+  border: none;
+}
+
+.directdev {
+  position: relative;
+  font-family: Arial;
+  margin-left: 5px;
+  font-size: medium;
+  color: bisque;
+  padding-top: 3px;
+  width: 170px;
+  padding-left: 10px;
+}
+
+.select-selected {
+  background-color: DodgerBlue;
+}
+
+/* Style the arrow inside the select element: */
+.select-selected:after {
+  display: inline-block;
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+
+.checkspan {
+  cursor: pointer;
+  width: 24px;
+  min-height: 30px;
+  font-size: 22px;
+  height: 30px;
+  padding-left: 4px;
+}
+
+.checkspan:hover {
+  background: grey;
+}
+
+.pathdiv, .container_u {
+  display: none;
+  visibility: hidden;
+  font-size: 20px;
+  color: rgb(255, 253, 133);
+}
+
+.container_u {
+  color: rgb(226, 231, 194);
+  margin-top: 10px;
+}
+
+.textcolor {
+  color: rgb(188, 201, 166);
+}
+
+.textcyan {
+  color: rgb(138, 235, 235);
+}
+
+.inp_legacy, .psw_legacy {
+  color: rgb(188, 201, 166);
+  margin-left: 5px;
+  font-size: 18px;
+  min-width: 40px;
+  font-style: oblique;
+}

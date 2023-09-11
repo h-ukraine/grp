@@ -1,0 +1,634 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+    <!-- <title>Oріoн • Дозор-С</title> -->
+    <title>Карта • Дозор-С</title>
+    <link rel="icon" href="data:,">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <script>
+        let _starttime = new Date().getTime();
+
+        function myperf() {
+            var t = new Date().getTime() - _starttime;
+            // var ss = t.getSeconds();
+            // var mm = t.getMilliseconds();
+            // return ' ' + ss + '.' + mm;
+            return (t / 1000).toFixed(3);
+        }
+        console.log('start:  ' + myperf()); //  performance.now());
+        let browserSendTime;
+        let browserSend_ms;
+        // setTimeout(() => {
+        // worker = new Worker("js/wsworker.js");
+        // }, 800);
+
+        function closeWindow() {
+            window.open('', '_parent', '');
+            window.close();
+        }
+    </script>
+
+    <style type="text/css">
+
+    </style>
+
+    <link rel="stylesheet" href="css/_nalasht.css" type="text/css" />
+    <link rel="stylesheet" href="css/local_leaflet.css" type="text/css" />
+    <script src="http://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+    <!-- <script src="leaflet/leaflet.js"></script> -->
+
+    <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css"> -->
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.js"></script> -->
+
+    <!-- <script src="./js/local_leaflet-src.js" type="text/javascript"></script> -->
+    <!-- <script src="./js/local_leaflet_1.0.3.js" type="text/javascript"></script> -->
+    <!-- <script src="http://onserver.site:49010/data/js/local_leaflet-src.js" type="text/javascript"></script> -->
+
+    <!-- Добавляем  MarkerClusters -->
+    <link rel="stylesheet" href="./Leaflet.markercluster-1.4.1/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="./Leaflet.markercluster-1.4.1/dist/MarkerCluster.Default.css" />
+
+    <!-- Custom styles for this example -->
+    <link rel="stylesheet" href="css/myscreen.css" />
+    <!-- <link rel="stylesheet" href="css/custom.css"> -->
+    <!-- <link rel="stylesheet" href="mylib/mystyles.css"> -->
+    <link rel="stylesheet" href="css/conta_new.css">
+
+    <!-- <script src="./js/local_leaflet-src.js" type="text/javascript"></script> -->
+    <!-- <script src="./Leaflet.markercluster-1.4.1/dist/leaflet.markercluster-src.js" type="text/javascript"></script> -->
+    <!-- <script src="./Leaflet.markercluster-1.4.1/dist/leaflet.markercluster.js" type="text/javascript"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/leaflet.markercluster.js"
+        type="text/javascript"></script>
+
+
+
+    <script src="js/nalasht.js" type="text/javascript" defer></script>
+    <script src="js/orionmap2.js" type="text/javascript" defer></script>
+    <!-- <script src="mylib/comp.js" defer type="text/javascript"></script> -->
+    <script src="js/setstyle.js" type="text/javascript" defer></script>
+    <script src="js/commandproc.js" type="text/javascript" defer></script>
+
+    <script id=scr0 src="js/main2.js" type="text/javascript" defer></script>
+
+
+    <script id=scr1>
+        var wwweee = 567;
+    </script>
+
+    <script>
+        function loadScript(src, callback) {
+            var head = document.getElementsByTagName('head')[0],
+                script = document.createElement('script');
+            done = false;
+            // script.setAttribute('src', src);
+            script.id = "sa1";
+            script.innerText = "var t555 = 5;\n";
+            script.setAttribute('type', 'text/javascript');
+            script.setAttribute('charset', 'utf-8');
+            script.onload = script.onreadstatechange = function () {
+                if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete')) {
+                    done = true;
+                    script.onload = script.onreadystatechange = null;
+                    if (callback) {
+                        callback();
+                    }
+                }
+            }
+            head.insertBefore(script, head.firstChild);
+        }
+
+
+
+
+
+
+
+
+        // loadScript(null, null);
+
+        // var dc = document.querySelector('#sa1');
+
+        // // dc.innerHTML = "var inserted_r1 = 567;";
+        // var txt = dc.outerText;
+        // dc.innerText += 'var inserted_r1 = 567;\n';
+
+        // var eee = t555; //inserted_r1;
+
+
+        let DEBUG = false;
+        let docLoaded = false;
+
+        let isWsOpened = false;
+
+        // document.addEventListener("DOMContentLoaded", () => {
+        window.onload = function () {
+
+
+
+            // var bbb = document.querySelector('#scr0');
+            // var bbbsrc = bbb.src;
+
+            // // var leaflet_js = localStorage.getItem()
+
+
+
+
+
+            // worker = new Worker("js/wsworker.js");
+
+            docLoaded = true;
+
+            if (true) {
+                // if (location.search.includes('map=force')) {
+                var nal = document.getElementById('anim');
+                // nal.style.display = 'none';
+
+                nal.style.marginTop = '-2000px';
+                nalasht_handler();
+                // var cls = document.querySelector('.nalasht')
+                setTimeout(() => {
+                    // nalasht_handler();
+                    var nal = document.getElementById('anim');
+                    // nal.style.opacity = 0;
+                    setTimeout(() => nal.style.marginTop = '0px', 500);
+                }, 500);
+
+                // if (div = document.getElementById('anim')) {
+                //     // div.style.display = 'none';
+                //     div.style.marginLeft = '-101vw';
+                // }
+                // }
+
+            }
+
+
+            console.log('DOM loaded:  ' + myperf()); //            new Date().getMilliseconds().toFixed(2));
+
+            onready();
+            console.log("  #_onready passed:  " + myperf()); //+ new Date().getMilliseconds().toFixed(2));
+
+            if (bc) {
+                var tmp = localStorage.getItem('tmppw');
+                var obj;
+                if (tmp)
+                    obj = isJSON(tmp) ? JSON.parse(tmp) : undefined;
+                if (!obj)
+                    console.log("[index2]: obj tmppw undefined " + myperf());
+                else {
+                    console.log("[index2]: obj tmppw sent!!! " + myperf());
+                    bc.postMessage(new Object({
+                        type: 'totalid',
+                        totalid: obj.totalid
+                    }));
+
+                }
+            }
+
+            // devchk.checkdevices();
+            // setInterval(() => {
+            // setTimeout(() => {
+            // askSkzData();
+            // devchk.checkdevices();
+            // }, 100);
+
+
+            //
+            // askSkzData();
+            // askGrpData();
+            //
+
+
+            // setTimeout(() =>
+            //     devchk.checkdevices(devchk.skzrecs, 1)
+            //     , 2000);
+
+            // devchk.checkdevices();
+
+            var tmt = 150;
+            if (navigator.userAgent.includes('Mobile'))
+                tmt = 200;
+
+            if (true) {
+                var zzz = setInterval(() => {
+                    // if (devchk.answDevices.length == 0)
+                    //     askSkzData();
+                    if (isWsOpened) {
+                        // devchk.checkdevices();
+
+
+                        var tmp = localStorage.getItem('tmppw');
+                        var sert = '';
+                        if (isJSON(tmp)) {
+                            sert = JSON.parse(tmp);
+                        }
+                        bc.postMessage(new Object({
+                            type: 'wsopenack',
+                            totalid: sert.totalid ? sert.totalid : -1
+                        }));
+
+
+                        if (devchk.skzrecs.length == 0) {
+                            console.log('ask');
+                            askGrpData();
+                            askSkzData();
+
+
+                        }
+                        if (devchk.answDevices.length == 0) {
+                            var cmdobj = {
+                                ObjectType: CmdType.GetDevices,
+                                devnumbers: [],
+                                sertif: sert.sertif
+                            }
+
+                            // sendCmd(cmdobj);
+                            cmdobj.type = "_wsocket";
+                            cmdobj.caller = "main";
+                            browserSendTime = new Date();
+                            browserSend_ms = performance.now(); //    new Date().getTime();
+                            bc.postMessage(cmdobj);
+                        }
+
+
+
+
+
+                        if ((devchk.answDevices.length > 0) &&
+                            (devchk.skzrecs.length > 0)) {
+                            clearInterval(zzz);
+                            console.log('------clearInterval(zzz)');
+                            refresh_objects_on_map();
+                        }
+                    }
+                }, tmt);
+
+            }
+
+
+        }
+
+
+
+
+        // let reqcnt = 0;
+        // let loadcnt = 0;
+
+        // let all_loaded = false;
+        // function set_all_loaded(lev) {
+        //     all_loaded = lev;
+        // }
+
+
+        // var i = 1;
+        // var delta = 300;
+
+
+        //Налаштування...
+
+
+
+
+        function toggle_super() {
+            if (div = document.querySelector('#superpanel')) {
+                if (div.style.width.includes('40'))
+                    div.style.width = '150px';
+                else
+                    div.style.width = '40px';
+            }
+        }
+
+        let lpsw = 0;
+        let suppandef_length = 0;
+        leftpanClick = (e) => {
+            e.stopPropagation();
+            var div = e.currentTarget;
+            if (lpsw == 0) {
+                div.style.background = 'rgb(230,230,230)';
+                var spanel = document.getElementById('superpanel');
+                suppandef_length = spanel.style.width;
+                spanel.style.width = '0px';
+                lpsw = 1;
+            } else {
+                var spanel = document.getElementById('superpanel');
+                spanel.style.width = suppandef_length;
+                lpsw = 0;
+                div.style.background = 'rgb(50,50,50)';
+            }
+
+        }
+
+
+        function FsClick(e) {
+            e.stopPropagation();
+            var div = e.currentTarget;
+
+            var isfs = getGlobalProp('--root-fullscreenmode');
+            fscr = isfs;
+
+            // if (fscr == true) 
+            {
+                // play();
+                // fscr = false
+                // if (mode == true) {
+                var doc = window.document;
+                var docEl = doc.documentElement;
+                // div.defaultValue = "Back";
+                var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen;
+                var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen;
+                // try {
+                //     cancelFullScreen.call(doc);
+                // } catch (eee) {}
+                if (!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement) {
+                    requestFullScreen.call(docEl);
+                    // fullscreen3(docEl);
+
+                    div.style.background = 'rgb(230,230,230)';
+                    // div.defaultValue = "Back";
+                } else {
+                    cancelFullScreen.call(doc);
+                    div.style.background = 'rgb(50,50,50)';
+                    // div.innerText = "Full Screen";
+                    // div.defaultValue = "FullScr";
+                }
+            }
+
+
+
+            // if (parseInt(isfs) == 0)
+            //     setGlobalProp('--root-fullscreenmode', 1);
+            // else
+            //     setGlobalProp('--root-fullscreenmode', 0);
+
+        }
+
+
+        //Ищем правильный метод
+        function fullscreen3(element) {
+            if (element.requestFullScreen) {
+                element.requestFullScreen();
+            } else if (element.mozRequestFullScreen) {
+                element.mozRequestFullScreen();
+            } else if (element.webkitRequestFullScreen) {
+                element.webkitRequestFullScreen();
+            }
+        }
+
+
+
+
+        /*  ----------------------  FULL SCREEN  event -----------------------------
+        It might be less elegant, but more robust, to listen to the full screen event, then perhaps add an is-fullscreen class to the body so you can write your rule like this:
+
+        body.is-fullscreen .content { padding...
+
+        For example:
+
+        document.addEventListener('fullscreenchange', function() {
+          document.body.classList.toggle('is-fullscreen', document.fullscreenEnabled);
+        });
+
+        This event has vendor-prefixed versions, so make sure you're using the one(s) you need.
+        */
+        let fscr = true;
+        toggleFullScreen = (div, mode) => {
+            if (fscr == true) {
+                // play();
+                // fscr = false
+                // if (mode == true) {
+                var doc = window.document;
+                var docEl = doc.documentElement;
+                div.defaultValue = "Back";
+                var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen;
+                var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen;
+                // try {
+                //     cancelFullScreen.call(doc);
+                // } catch (eee) {}
+                if (!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement) {
+                    requestFullScreen.call(docEl);
+                    div.defaultValue = "Back";
+                } else {
+                    cancelFullScreen.call(doc);
+                    // div.innerText = "Full Screen";
+                    div.defaultValue = "FullScr";
+                }
+            }
+        }
+
+
+        // var tofs = setInterval(() => {
+        //     var isfs = getGlobalProp('--root-fullscreenmode');
+        //     if (parseInt(isfs) == 0) {
+        //         // document.getElementById('anim').dispatchEvent(new Event('click'));
+        //         fullscreen3(document.documentElement);
+
+        //     } else
+        //         clearInterval(tofs);
+        //     // document.getElementById('anim').dispatchEvent(new Event('click'));
+        // }, 250);
+
+        function on_off_superpanel(e) {
+            e.stopPropagation();
+            var disp = getelemProp('#superpanel', 'display');
+            if (disp == 'none') {
+                setelemProp('#superpanel', 'display', 'block');
+                document.getElementById('leftside').innerText = 'Бокова панель: On'
+            } else {
+                setelemProp('#superpanel', 'display', 'none');
+                document.getElementById('leftside').innerText = 'Бокова панель: Off'
+            }
+        }
+    </script>
+
+
+
+</head>
+
+<style>
+    .version {
+        display: flex;
+        /* padding-top: 2px; */
+        line-height: 24px;
+    }
+
+    .version div {
+        margin-right: 10px;
+    }
+
+    .logotyp {
+        background: rgba(203, 238, 222, 0.719);
+        /* background-image: url("../../img/norma_ok4.png"); */
+        background-image: url("img/orion.png");
+        background-repeat: no-repeat;
+        background-position: 0px 2px;
+        background-size: 95% 85%;
+        /* border: 1px solid red; */
+        width: 90px;
+        height: 26px
+    }
+
+    .logotyp2 {
+        /* background: rgba(149, 158, 154, 0.719); */
+        /* background: rgba(203, 238, 222, 0.719); */
+        /* background-image: url("../../img/norma_ok4.png"); */
+        /* margin-top: -5px; */
+        background-image: url("img/orion.png");
+        background-repeat: no-repeat;
+        background-position: 1px 4px;
+        /* background-size: contain; */
+        background-size: 95%;
+        /* border: 1px solid red; */
+        /* width: 60px; */
+        /* height: 36px; */
+    }
+</style>
+
+<body>
+    <div id=myloader class='myloader'>
+        <div class='version'>
+            <!-- <div class=logotyp></div> -->
+            <div style='white-space: nowrap; padding-left: 10px; font-size: 17px;'>V0.8.3su </div>
+        </div>
+        <!-- <div style='white-space: nowrap; padding-right: 10px;'>login: <span class=user1> </span> </div> -->
+        <!-- <div class='username' style='white-space: nowrap; padding-right: 10px;'> <span class=user1> </span> </div> -->
+
+        <div class='username'>
+            <div class=uimg></div>
+            <span></span>
+        </div>
+
+    </div>
+
+    <div class='my_upcontrol'>
+        <!-- <div class=poshukw style='width:180px;'> Пошук! -->
+        <!-- <input type="text" name="my_login" placeholder="Пошук" aria-label="my_Login" autocomplete="nickname" required class='poshukw '> -->
+        <!-- <input type="ggg" name="my_login" placeholder="Пошук" aria-label="my_Login" autocomplete="nickname" class='poshukw '> -->
+        <!-- </div> -->
+        <!-- <div class=alldivcentered> O--</div> -->
+        <!-- <input type="checkbox" name="login" placeholder="Пошук" aria-label="Login" autocomplete="nickname" required class='chkb '> -->
+        <!-- <div class=alldiv onclick='on_on() '> A</div> -->
+        <!-- <div style='margin-right: 20px;' class=alldivcentered onclick='toMaxZoom()'>Z</div> -->
+        <!-- <div class=alldivcentered onclick='toggle_bdv() '> C</div> -->
+        <!-- <div class=alldivcentered onclick='toggle_flextable() '> D</div> -->
+        <div id='eee' class=alldivcentered onclick='toggle_footer() '> E </div>
+
+        <div title="Аварійні" id=alarmonly class=alldivcentered onclick='toggle_alarmonly()'> </div>
+        <div title="Обрив зв'язку" id=tmonly class=alldivcentered onclick='toggle_tmonly()'></div>
+        <div title="У нормі" id=normonly class=alldivcentered onclick='force_all()'>&#10003; </div>
+        <!-- <div class=alldivcentered onclick='toggle_footer() '> Інфо</div> -->
+        <div title="Тип вузлів" id='choosetype' class=alldivcentered onclick='choose_types() '> Всі </div>
+    </div>
+    <div style='display:flex; '>
+
+        <!-- <div style='display:flex; width:100%'> -->
+        <div id=superpanel onclick="toggle_super()" style='width:40px; text-align: center; display:none;'>
+            <!-- <div class='abcd' onclick=" setTimeout( ()=>  {document.getElementById('anim').dispatchEvent(new Event('click'));},2000);"> |||| </div> -->
+            <div class='abcd'> |||| </div>
+
+            <!-- <div class='abcd'> К <span style='padding-left: 20px;'>  карта</span> </div> -->
+            <div class='abcd'> А <span style='padding-left: 20px;'> важливе</span> </div>
+            <div class='abcd'></div>
+            <div style=' height: 50vh; overflow-x: hidden;  overflow-y: auto ;'>
+
+                <div class='abcd'> B <span style='padding-left: 20px;'> опції</span> </div>
+                <div class='abcd'> C <span style='padding-left: 20px;'> зі</span> </div>
+                <div class='abcd'> D <span style='padding-left: 20px;'> скролом</span> </div>
+
+                <!-- <div class='abcd'> ^ <span style='padding-left: 20px;'>  </span> </div>
+                <div class='abcd'> v <span style='padding-left: 20px;'>  </span> </div> -->
+                <div class='abcd'> ... <span style='padding-left: 20px;'>ще щось</span> </div>
+
+
+
+            </div>
+
+        </div>
+        <div style='width:100%; '>
+            <div class=instead-of-map>
+                <!-- <div> Сесія завершена. <br> Повернутись до ідентифікації</div> -->
+                <div> Сесія завершена. <br></div>
+                <div id=okbutton class='okbutton' onclick="gotoLogin(event)"> Повернутись до ідентифікації</div>
+            </div>
+
+            <div id="map" class=divformap> </div>
+        </div>
+    </div>
+
+    <div class=flexfooter>
+        <div style='display:flex;'>
+            <div id=_textbox class='textclass'>Підтверджені аварії</div>
+
+            <div id=_textbox1 class='textclass1'>Загальна кількість пристроїв </div>
+            <div id=_textbox2 class='textclass2'>Останні 2 записи у базі даних по блоках:</div>
+            <div style='width:50%; height:100%; '>
+                <div id=_textbox class='fbutton' onclick="saveLatLng(event)">Зберегти Lat/Lng</div>
+            </div>
+
+        </div>
+        <div style='display:flex;'>
+            <div id=textbox class='textclass'></div>
+            <div id=textbox1 class='textclass1'></div>
+            <div id=textbox2 class='textclass2'></div>
+        </div>
+    </div>
+    <div class=flextable>
+        <div id=fl_table1 class='textclass2'></div>
+    </div>
+
+    <div id='anim' class=nalasht>
+        <div class=fheader>
+            <div class=f1 onclick='tologin(event)'>Вихід</div>
+            <div class=f2>Тема:
+                <span class=f2span onclick="fliptheme(event)"> Темна</span>
+            </div>
+        </div>
+        <!-- <h3 class=hh3> Меню</h3> -->
+        <!-- <div class='leftpan-switch' onclick="leftpanClick(event) "> -->
+        <!-- <b style='padding-left: 40px;'>LeftTab</b> </div> -->
+        <!-- <div class='leftpan-switch' onclick="FsClick(event) "> <b style='padding-left: 40px;'>FullScr</b> </div> -->
+        <!-- <div>hhhhh</div> -->
+        <div class=flexcont>
+            <div>
+                <b class=subheader>Меню:</b>
+                <div id=menucontainer>
+                    <div class='swtab'> Карта</div>
+                    <!-- <div style='display:flex; line-height: 20px;'> -->
+                    <!-- <div class='swtab' onclick="openPageAlarms(event)"> Дані СКЗ</div> -->
+                    <div class='swtab' onclick="openPageUniversal(event)"> Дані ГРП</div>
+                    <div class='swtab' onclick="openPageUniversal(event)"> Архів</div>
+
+                    <!-- <div id=leftside class='swtab' onclick="on_off_superpanel(event)"> Бокова панель: <span> Off </span>    </div> -->
+                    <!-- <div id=sw555 class='swtab' onclick='choose_types(event)'>Відображати вузли: Всі </div> -->
+                </div>
+            </div>
+
+            <div>
+                <!-- <b id=mytabs style=' width:50px;' class="subheader f2span" onclick="fliptabsnodes(event)">Доступні вузли
+                </b> -->
+                <b id=mytabs style=' width:50px;' class="subheader f2span" onclick='choose_types(event)'>Доступні
+                    вузли
+                </b>
+                <div id=tabcontainer>
+                    <!-- <div class='swtab'> дані оновлюються...</div> -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <style type="text/css">
+
+    </style>
+
+
+    <script type="text/javascript">
+    </script>
+
+</body>
+<a id=toskz2 href="https://orion.com.ua" class="secondary"></a>
+
+</html>

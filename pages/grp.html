@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title> Дані вузла </title>
+    <!-- <link rel="icon" href="data:;base64,="> -->
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="../css/nalasht.css">
+    <link rel="stylesheet" href="../css/_root.css">
+    <link rel="stylesheet" href="./grp.css">
+    <script src="../mylib/compmin.js" type="text/javascript" defer></script>
+    <script src="./grp.js" type="text/javascript" defer></script>
+    <!-- <style>
+        @import "../css/nalasht.css";
+    </style> -->
+</head>
+
+<body>
+    <p class='header' style='height: 15px;'></p>
+    <div class=acontainer>
+
+        <div id=a1>a1 </div>
+        <div id=a2></div>
+        <!-- <div id=a3></div> -->
+        <div id=a4>a4</div>
+    </div>
+
+    <!-- <div id=msg class=aln>Ьуііфпу</div> -->
+    <div id=paramcont class=paramcont>
+        <!-- <div id=paramlabel class=paramlabel>Параметри</div> -->
+        <div id=htable class=h-table></div>
+    </div>
+    <div style='display:flex; margin-left: 1vw;margin-right: 1vw; margin-top: 8px;'>
+        <div id=ftable class=aln1></div>
+        <div id=atable class=aln1></div>
+        <div id=btable class=aln1></div>
+    </div>
+    <!-- <input id='itp' type="select" ttttt class=''> -->
+
+    <!-- <select id=firstsel class="myselect" onchange="mySelectHandler(this)">     -->
+    <!-- <select id=itp onchange="mySelectHandler(this)">     -->
+    <select id=itp class="mysel" style='border:1px solid black;' onchange="selhandler(this)">    
+        <option class=seloption>• Поточні дані </option>
+        <!-- <option class=seloption>• За годину </option> -->
+        <!-- <option class=seloption>• За добу</option> -->
+        <!-- <option class=seloption>• За тиждень </option> -->
+        <!-- <option class=seloption>• За місяць </option> -->
+        <!-- <option class=seloption>• Інтервал </option> -->
+        <option class=seloption>• 4 останні записи</option>
+        <option class=seloption>• 32 останні записи</option>
+        <option class=seloption>• 64 останніх записів</option>
+        <option class=seloption>• 128 останніх записів</option>
+        <!-- <option class=seloption>• Інтервал </option> -->
+    </select>
+
+
+    <div id='anim' class=nalasht>
+        <div class=fheader>
+            <div class=f1>Налаштування</div>
+            <div class=f2>Тема:
+                <span class=f2span onclick="fliptheme(event)">  Темна</span></div>
+        </div>
+        <!-- <h3 class=hh3> Меню</h3> -->
+        <!-- <div class='leftpan-switch' onclick="leftpanClick(event) "> -->
+        <!-- <b style='padding-left: 40px;'>LeftTab</b> </div> -->
+        <!-- <div class='leftpan-switch' onclick="FsClick(event) "> <b style='padding-left: 40px;'>FullScr</b> </div> -->
+        <!-- <div>hhhhh</div> -->
+        <div class=flexcont>
+            <div> <span class=subheader>Меню:</span>
+                <div class='swtab' onclick="openPageUniversal(event)"> Карта</div>
+                <div class='swtab' onclick="openPageUniversal(event)"> Дані</div>
+            </div>
+
+            <div id=tabcontainer>
+                <span id=mytabs class="subheader f2span" onclick="fliptabsnodes(event)">Вкладки:</span>
+                <div class=' swtab '> дані оновлюються...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --------------   nal theme ---------
+        function getelemProp(elem, prop) {
+            var item = document.querySelector(elem);
+            var itemStyles = getComputedStyle(item, null);
+
+            // var bbb = root.style.getPropertyValue(prop);
+            return itemStyles.getPropertyValue(prop);
+        }
+
+        function setelemProp(elem, prop, val) {
+            var item = document.querySelector(elem);
+            item.style.setProperty(prop, val);
+        }
+
+        function fliptheme(e) {
+            e.stopPropagation();
+
+            var name = '.nalasht';
+
+            var dark = getelemProp(name, '--dark');
+            var ukraine = getelemProp(name, '--ukraine');
+            var current = getelemProp(name, '--back');
+            if (current == dark) {
+                setelemProp(name, '--back', ukraine);
+                document.querySelector('.f2span').innerText = 'Україна';
+                localStorage.setItem('naltheme', '--ukraine');
+            } else {
+                setelemProp(name, '--back', dark);
+                document.querySelector('.f2span').innerText = 'Темна';
+                localStorage.setItem('naltheme', '--dark');
+            }
+        }
+
+        function setnaltheme(theme) {
+            var item = document.querySelector('.nalasht');
+            var itemStyles = getComputedStyle(item, null);
+            var color = itemStyles.getPropertyValue(theme);
+
+            var ispan = document.querySelector('.f2span');
+
+            item.style.setProperty('--back', color);
+            if (theme.includes('--ukraine')) {
+                document.querySelector('.f2span').innerText = 'Україна';
+            } else
+                document.querySelector('.f2span').innerText = 'Темна';
+        }
+
+        var naltheme = null;
+        try {
+            naltheme = localStorage.getItem('naltheme');
+
+        } finally {
+            if (naltheme) {
+                setnaltheme(naltheme);
+            }
+        }
+
+
+
+        // --------------   tabs/ nodes ---------
+        function fliptabsnodes(e) {
+            e.stopPropagation();
+            var div = e.currentTarget;
+
+            if (div.innerText.includes('Активні вкладки')) {
+                div.innerText = "Доступні вузли:";
+                localStorage.setItem('tabsnodes', 'nodes');
+            } else {
+                div.innerText = 'Активні вкладки:';
+                localStorage.setItem('tabsnodes', 'tabs');
+            }
+        }
+
+        function settabsnodes(text) {
+            var item = document.querySelector('#mytabs');
+            // var itemStyles = getComputedStyle(item, null);
+            // var color = itemStyles.getPropertyValue(text);
+
+            // item.innerText = text;
+            item.innerText = text == 'tabs' ? 'Активні вкладки:' : "Доступні вузли:";
+        }
+        // var ispan = document.querySelector('.f2span');
+
+        // item.style.setProperty('tabsnodes', color);
+
+        var tabsnodes = null;
+        try {
+            tabsnodes = localStorage.getItem('tabsnodes');
+
+        } finally {
+            if (tabsnodes) {
+                settabsnodes(tabsnodes);
+            }
+        }
+
+        // -------------------  высота экрана 
+        // setInterval(() => {
+        //     if (document.documentElement) {
+        //         //clientHeight - высота окна доступная, соотв/ @media min-height
+        //         var h2 = document.documentElement.clientHeight; //scrolleight
+        //         var h = document.body.offsetHeight;
+        //         var dv = document.querySelector('.f1');
+        //         dv.innerText = h + " " + h2;
+        //     }
+        // }, 300);
+    </script>
+
+</body>
+
+</html>
