@@ -1,7 +1,6 @@
 // import { _get_wshost } from "./_.js";
 // import { HostEndpoint } from "./_.js";
-
-let HostEndpoint = "sof.onserver.space:50730";
+let HostEndpoint = "sofia.onserver.space:50730";
 
 // let yyy789 = _get_wshost();
 
