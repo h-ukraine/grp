@@ -6,20 +6,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     <title>Логін • Дозор-С</title>
     <link rel="icon" href="data:,">
-
     <!-- <script type="module" src="./js/a5.js" async></script> -->
     <script>
         console.log('start:  ' + performance.now());
         let browserSendTime;
         let browserSend_ms;
         worker = new Worker("js/wsworker.js", { type: 'module' });
+        // let url = location.hostname;
+
+        // var url = new URL("http://192.168.1.4/js/wsworker.js");
+        // worker = new Worker(url);
+        // window.addEventListener('load',
+        //     () => {
+
+        //         function loadJS(FILE_URL, async = true) {
+        //             let scriptEle = document.createElement("script");
+
+        //             scriptEle.setAttribute("src", FILE_URL);
+        //             scriptEle.setAttribute("type", "text/javascript");
+        //             scriptEle.setAttribute("async", async);
+
+        //             document.body.appendChild(scriptEle);
+
+        //             // success event
+        //             scriptEle.addEventListener("load", (fff = scriptEle) => {
+        //                 console.log("File loaded");
+        //                 var ttt567 = fff;
+        //                 var rrr = ttt567;
+
+
+
+        //             });
+        //             // error event
+        //             scriptEle.addEventListener("error", (ev) => {
+        //                 console.log("Error on loading file", ev);
+        //             });
+        //         }
+        //         loadJS("http://ck.onserver.space/js/wsworker.js", true);
+
+        //     });
+
+
+
+
+        //
+        //
+
+        // worker = new Worker("https://github.com/h-ukraine/grp/tree/master/js/wsworker.js");
         // worker = new Worker("js/wsworker.js");
         // wrk2 = new Worker("js/wswrk2.js");
+
+
+
+
     </script>
 
     <link rel="stylesheet" href="css/picomin.css">
     <link rel="stylesheet" href="css/myscreen.css">
     <link rel="stylesheet" href="css/custom.css">
+    <!-- <link rel="stylesheet" href="http://ck.onserver.space/css/custom.css"> -->
     <link rel="stylesheet" href="css/conta.css">
 
     <script src="js/minimal-theme-switcher.js" type="text/javascript"></script>
