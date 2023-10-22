@@ -22,7 +22,9 @@ var CmdType = {
     GetNodeParams: 10,
     GetUserParams: 11,
     GetDataArchive: 12,
-    GetUsers: 13
+    GetUsers: 13,
+    //
+    SaveUsers: 14
 }
 
 
@@ -65,6 +67,12 @@ function CmdTypeToString(fff) {
             break;
         case CmdType.GetDataArchive:
             text = 'GetDataArchive';
+            break;
+        case CmdType.GetUsers:
+            text = 'GetUsers';
+            break;
+        case CmdType.SaveUsers:
+            text = 'SaveUsers';
             break;
     }
 
@@ -558,6 +566,9 @@ bc.onmessage = function (ev) {
                 var ttt = 222;
             }
             else if (ev.data.ObjectType == CmdType.GetUsers) {
+                var ttt = 222;
+            }
+            else if (ev.data.ObjectType == CmdType.SaveUsers) {
                 var ttt = 222;
             }
 

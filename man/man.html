@@ -34,7 +34,9 @@
             GetNodeParams: 10,
             GetUserParams: 11,
             GetDataArchive: 12,
-            GetUsers: 13
+            GetUsers: 13,
+            //
+            SaveUsers: 14
         }
 
         function dispose(evt) {
@@ -158,7 +160,7 @@
 
 
         <form class=container_d></form>
-        <div class=goback> Зберегти </div>
+        <div class=goback onclick="onsave_choosen_devices()"> Зберегти обрані прилади </div>
         <div class=goback onclick='returntoprev(event) '> - Повернутись</div>
     </div>
 

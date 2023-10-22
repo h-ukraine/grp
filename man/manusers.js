@@ -141,6 +141,7 @@ function divselected(evt) {
 
 
 function downhandler(evt) {
+  focusedout = null;
   down_start = Date.now();
   butpressed = document;
   console.log('downhandler');
@@ -302,7 +303,7 @@ function add_new_row() {
     for (i = 1; i < utbl.colCount; i++) {
       if (i == 2)
         row.replaceChild(get_passw_input('*'), row.children[i]);
-      else if (i < 4) {
+      else if (i <= 4) {
         row.children[i].replaceWith(get_legacy_input(''));
       }
       icell = utbl.cell(rnlast, i);
@@ -378,6 +379,7 @@ function uphandler(evt) {
   }
 
   // (+)
+  let icurr = evt.currentTarget;
   if (evt.currentTarget == utbl.cell(0, 0)) {
     let y = 0;
 
@@ -480,8 +482,83 @@ function uphandler(evt) {
 
 }
 
+
+function onsave_choosen_devices() {
+  let rrr = utbl;
+
+
+
+
+}
+
+
+
 function onsave_users() {
   cellfocusedout = null;
+
+  let iuserlist = [];
+
+  // for( auto i = 0; i< )
+  utbl.rows.forEach(row => {
+
+    if (row == utbl.rows[0]) { }
+
+    else {
+      //row.children.forEach(icell => icell.style.opacity = '1');
+      // let rrrr = row.children[1];
+      // let _name = row.children[1].value;
+      // let _placeh = row.children[1].placeholder;
+
+      // let ddddd = row.children[2];
+
+      let id = row.children[0].innerText;
+
+      if (id.includes('?'))
+        id = 0;
+
+      let login = row.children[1].value;
+
+      let r2 = row.children[2];
+      let psw = r2.value.length ? r2.value : r2.placeholder;
+
+
+      let iobj = {
+        Id: id,
+        login: login,
+        passw: psw,
+        name: row.children[3].value,
+        lastname: row.children[4].value
+      }
+      iuserlist.push(iobj);
+    }
+
+  });
+
+  // iuserlist.shift(iuserlist[0]);
+
+
+  var cmdobj = {
+    type: '_wsocket',
+    caller: 'manusersjs',
+    ObjectType: CmdType.SaveUsers,
+    userlist: iuserlist,
+    custlist: custlist,
+    // id: Id, //myid,
+    // description: mydescription,
+    newcount: 1, //wcnt,
+    // sertif: sert.sertif
+
+    one: iuserlist[0]
+
+  }
+
+  browserSendTime = new Date();
+  browserSend_ms = performance.now();
+  // send_ms_flag = true;
+  bc.postMessage(cmdobj);
+  console.log('----------------------- onsave_users()');
+
+
 
 }
 

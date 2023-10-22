@@ -105,7 +105,7 @@ function askUsers() {
 
     browserSendTime = new Date();
     browserSend_ms = performance.now();
-    send_ms_flag = true;
+    // send_ms_flag = true;
     bc.postMessage(cmdobj);
     console.log('----------------------- ask_users()');
     // }
