@@ -121,7 +121,9 @@ function devices(mode = 'devices') {
 
     if (current_devices_mode == 'devices')
         _devs();
-    else _user_devs();
+    else {
+        _user_devs();
+    }
 
 
 }
@@ -460,7 +462,8 @@ function gendivs_from_array() {
                 let opacity = '0.3';
 
                 if (userobj) {
-                    if ((userobj.devstr == null) || /*userobj.devstr.includes*/ dev_ids.includes(x.Id)) {
+                    if ((userobj.devstr == null) || userobj.devstr.includes(x.Identifier)) {
+                        // if ((userobj.devstr == null) || /*userobj.devstr.includes*/ dev_ids.includes(x.Id)) {
                         symb = '✔';
                         opacity = '1';
                     }

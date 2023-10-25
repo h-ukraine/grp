@@ -484,8 +484,72 @@ function uphandler(evt) {
 
 
 function onsave_choosen_devices() {
-  let rrr = utbl;
+  let devtext = '';
 
+  let rrr = utbl;
+  if (div = document.querySelector('.container_d')) {
+    let cont = div.children;
+
+    cont.forEach(x => {
+
+      if (x.accessKey == 'devinside') {
+        let ck = x.children[0].innerText;
+        let id = x.children[1].innerText;
+        // let adr = x.children[2].innerText;
+
+        if (ck.includes('✔')) {
+          let text = id;
+          let ind = text.indexOf('#');
+          if (ind >= 0) {
+            let text2 = text.slice(ind + 1, 100);
+            if (devtext.length > 0)
+              devtext += ',';
+
+            devtext += text2;
+          }
+        }
+        let rrr = 0;
+      }
+    });
+
+    if (devtext.length > 0)
+    // if (array.includes(',')) 
+    {
+
+      let userlogin = '';
+      if (usertabl)
+        userlogin = usertabl.cell(0, 0).innerText;
+
+
+      var cmdobj = {
+        type: '_wsocket',
+        caller: 'manusersjs',
+        ObjectType: CmdType.SaveUserDevices,
+        text: devtext,
+        login: userlogin,
+        // userlist: iuserlist,
+        // custlist: custlist,
+        // id: Id, //myid,
+        // description: mydescription,
+        newcount: 1, //wcnt,
+        // sertif: sert.sertif
+
+        // one: iuserlist[0]
+
+      }
+
+      browserSendTime = new Date();
+      browserSend_ms = performance.now();
+      // send_ms_flag = true;
+      bc.postMessage(cmdobj);
+      console.log('----------------------- onsave_users()');
+
+
+    }
+
+
+
+  }
 
 
 

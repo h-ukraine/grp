@@ -24,7 +24,8 @@ var CmdType = {
     GetDataArchive: 12,
     GetUsers: 13,
     //
-    SaveUsers: 14
+    SaveUsers: 14,
+    SaveUserDevices: 15
 }
 
 
@@ -73,6 +74,9 @@ function CmdTypeToString(fff) {
             break;
         case CmdType.SaveUsers:
             text = 'SaveUsers';
+            break;
+        case CmdType.SaveUserDevices:
+            text = 'SaveUserDevices';
             break;
     }
 
