@@ -62,7 +62,8 @@ function limitbyuser(devs) {
         let uo = userobj;
         if (userobj.devstr != null) {
             var dev_ids = parse_devlist(userobj.devstr); //devlist; //userobj.customs.devlist;
-            var devlist2 = devs.Where(x => dev_ids.includes(x.Id.toString()));
+            // var devlist2 = devs.Where(x => dev_ids.includes(x.Id.toString()));
+            var devlist2 = devs.Where(x => dev_ids.includes(x.Identifier));
 
             // var devlist2 = devlist.Where(x => devlist.includes(x.Id.toString()));
             devlist = devlist2;
