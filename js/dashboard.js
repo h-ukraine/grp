@@ -88,6 +88,7 @@ function openPageUniversal(e) {
                 path += '?map=force&pw="uca9iaug1efqflqeg6iviyVUfyv3kYtgvVyfTdttu685t8p97t"';
                 var ewin = window.open(path);
                 localStorage.setItem('admchoose', '');
+                localStorage.removeItem('objectnavigation');
             }
             break;
 
