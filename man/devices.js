@@ -50,7 +50,35 @@ function _______________________________________limitbyuser_old_working(devs) {
 }
 
 
+
+
 function limitbyuser(devs) {
+
+
+    if (devs.length > 0) {
+        var b = 0;
+
+
+        let uo = userobj;
+        if (userobj.devstr != null) {
+            var dev_ids = parse_devlist(userobj.devstr); //devlist; //userobj.customs.devlist;
+            var devlist2 = devs.Where(x => dev_ids.includes(x.Id.toString()));
+
+            // var devlist2 = devlist.Where(x => devlist.includes(x.Id.toString()));
+            devlist = devlist2;
+            devs = devlist2;
+
+            let finish = -1;
+        }
+
+
+
+    }
+    return devs;
+}
+
+
+function l_i_m_i_tby__u__ser(devs) {
 
     if (devs.length > 0) {
         var b = 0;
