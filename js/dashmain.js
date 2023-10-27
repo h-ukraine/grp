@@ -311,6 +311,7 @@ bc.onmessage = function (ev) {
         if (lastDevicesObject && lastgrpdata && lastuserparams) {
 
             let devs = lastDevicesObject.arrdev.Where(x => x.binarytype == 64);
+            let devs2 = [];
 
 
 
@@ -330,7 +331,28 @@ bc.onmessage = function (ev) {
 
                         var nmbs = new Uint32Array(spl);
                         // devs = devs.Where(x => lastuserparams.customs.devlist.includes(x.Id));
-                        devs = devs.Where(x => nmbs.includes(x.Id));
+                        devs2 = devs.Where(x => nmbs.includes(parseInt(x.Identifier)));
+
+                        // for (m = 0; m < devs.length; m++) {
+
+                        //     let Id = devs[m].Id;
+                        //     let Identifier = devs[m].Identifier;
+
+                        //     for (k = 0; k < nmbs.length; k++) {
+                        //         if (nmbs[k] == Identifier) {
+                        //             devs2.push(devs[m]);
+                        //             break;
+
+                        //         }
+                        //     }
+
+
+
+                        // }
+
+
+                        let mmm = x.Id;
+                        // devs2 = devs.Where(x => nmbs.indexOf(mmm) >= 0);
                     }
             } catch (r) {
                 let cv = r;
