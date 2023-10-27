@@ -52,6 +52,7 @@
     border-bottom: 1px solid grey;
     border-image: linear-gradient(to right, rgba(41, 41, 47, 0.99), rgb(231, 231, 214));
     border-image-slice: 1;
+    display:none
 }
 
 .swtab:hover {

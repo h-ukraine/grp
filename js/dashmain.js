@@ -74,6 +74,7 @@ window.onload = function () {
     // onready();
     // console.log("  #_onready passed:  " + myperf()); //+ new Date().getMilliseconds().toFixed(2));
 
+
     if (bc) {
         var tmp = localStorage.getItem('tmppw');
         var obj;
@@ -92,6 +93,28 @@ window.onload = function () {
                 type: 'totalid',
                 totalid: obj.totalid
             }));
+
+
+            //
+            let isadm = false;
+            if (obj.customs.priority < 6)
+                isadm = true;
+            let mcont = document.getElementById('menucontainer');
+            if (mcont) {
+                for (i = 0; i < mcont.childElementCount; i++) {
+                    let ich = mcont.children[i];
+
+                    if ((i == (mcont.childElementCount - 1)) && !isadm) { }
+                    else
+                        ich.style.display = 'block';
+
+                }
+
+
+
+
+
+            }
 
         }
     }
