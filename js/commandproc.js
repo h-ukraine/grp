@@ -327,21 +327,21 @@ function set_lastskzdata() {
 
 
 //------------- 1st way  ---   extending Array
-Array.prototype.Add = function(element) {
+Array.prototype.Add = function (element) {
     this.push(element);
 };
 
-Array.prototype.Where = function(args) {
+Array.prototype.Where = function (args) {
     return this.filter(args);
 };
 
 if (!Array.prototype.Select)
-    Array.prototype.Select = function(args) {
+    Array.prototype.Select = function (args) {
         return this.map(args);
     };
 
 if (!Array.prototype.Last) {
-    Array.prototype.Last = function() {
+    Array.prototype.Last = function () {
         return this[this.length - 1];
     };
 };
@@ -504,7 +504,8 @@ function limitbyuser(devs) {
 
                         //   var dev_ids = parse_devlist(str);
 
-                        var devlist2 = devs.Where(x => dev_ids.includes(x.Id.toString()));
+                        // var devlist2 = devs.Where(x => dev_ids.includes(x.Id.toString()));
+                        var devlist2 = devs.Where(x => dev_ids.includes(x.Identifier));
 
                         // var devlist2 = devlist.Where(x => devlist.includes(x.Id.toString()));
                         devlist = devlist2;
@@ -1120,7 +1121,7 @@ function wrapCmd(cmdobj) {
 
                 break;
 
-                // div.innerText = submsg;
+            // div.innerText = submsg;
         }
 
 
@@ -1179,7 +1180,7 @@ function openPageUniversal(e) {
                 var ewin = window.open('../index2.html?map=force');
                 break;
             }
-            // case 'Аварії':
+        // case 'Аварії':
         case 'Дані':
             {
 
