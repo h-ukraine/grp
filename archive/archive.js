@@ -7,13 +7,13 @@ function myblur() {
 
     dd.forEach(x => {
 
-            if (x.dtbox) {
-                var dtbox = x.dtbox;
-                x.dtbox.cancelBlur = 0;
-                x.dtbox.visible = false;
-                x.inputElem.blur();
-            }
+        if (x.dtbox) {
+            var dtbox = x.dtbox;
+            x.dtbox.cancelBlur = 0;
+            x.dtbox.visible = false;
+            x.inputElem.blur();
         }
+    }
 
     );
 
@@ -307,7 +307,8 @@ function limitbyuser(devs) {
 
                     //   var dev_ids = parse_devlist(str);
 
-                    var devlist2 = devs.Where(x => dev_ids.includes(x.Id.toString()));
+                    // var devlist2 = devs.Where(x => dev_ids.includes(x.Id.toString()));
+                    var devlist2 = devs.Where(x => dev_ids.includes(x.Identifier));
 
                     // var devlist2 = devlist.Where(x => devlist.includes(x.Id.toString()));
                     devlist = devlist2;
@@ -420,171 +421,166 @@ function deepEqual(obj1, obj2) {
 
 var xcnt = 0;
 
-bc.onmessage = function(ev) {
+bc.onmessage = function (ev) {
 
 
-        if (ev.data.type) {
-            if (ev.data.type == 'sync1000') {
-                ////// document.getElementById('a4').style.background = (_vvv[(_vcnt++) & 3]);
-                // document.querySelector('.header').style.background = (_vvv[(_vcnt++) & 3]);
+    if (ev.data.type) {
+        if (ev.data.type == 'sync1000') {
+            ////// document.getElementById('a4').style.background = (_vvv[(_vcnt++) & 3]);
+            // document.querySelector('.header').style.background = (_vvv[(_vcnt++) & 3]);
+        }
+
+    } else {
+
+        // try {
+        if (ev.data) {
+
+            if (ev.data.includes('archive=close()') || ev.data.includes('all=close()')) {
+                // if (ev.data.includes(mydescription)) {
+                // if (ev.data.includes('archive')) {
+                document.documentElement.style.display = 'none';
+                window.top.close();
+                // }
             }
 
-        } else {
+            if (!document.hidden) {
+                // console.log("открыта");
+            } else {
+                // console.log("закрыта");
+                return;
+            }
+            if (isJSON(ev.data)) {
+                var obj = JSON.parse(ev.data);
+                if (obj.type == "answer")
+                    switch (obj.ObjectType) {
+                        //
+                        case CmdType.GetUserParams:
+                            {
+                                var zdummy = obj;
+                                console.log("--received: CmdType.GetUserParams");
 
-            // try {
-            if (ev.data) {
-
-                if (ev.data.includes('archive=close()') || ev.data.includes('all=close()')) {
-                    // if (ev.data.includes(mydescription)) {
-                    // if (ev.data.includes('archive')) {
-                    document.documentElement.style.display = 'none';
-                    window.top.close();
-                    // }
-                }
-
-                if (!document.hidden) {
-                    // console.log("открыта");
-                } else {
-                    // console.log("закрыта");
-                    return;
-                }
-                if (isJSON(ev.data)) {
-                    var obj = JSON.parse(ev.data);
-                    if (obj.type == "answer")
-                        switch (obj.ObjectType) {
-                            //
-                            case CmdType.GetUserParams:
-                                {
-                                    var zdummy = obj;
-                                    console.log("--received: CmdType.GetUserParams");
-
-                                    ucustoms = obj.customs;
+                                ucustoms = obj.customs;
 
 
 
+
+                            }
+                            break;
+
+                        case CmdType.GetDevices:
+                            if (obj.arrdev.length == 0) {
+                                var dummy = 7;
+
+
+                            } else {
+
+                                lastsavedDevicesObject = obj;
+                                last_arrdev = obj.arrdev.Where(x => x.binarytype == 0x40);
+                                // var mydev = obj.arrdev.Where(x => x.Id == Id);
+
+                                // var dev = mydev[0];
+
+                                // myid = dev.Id;
+                                mydescription = 'Архів'; // dev.description;
+                                document.title = mydescription;
+
+                                if (a1 = document.getElementById('a1')) {
+                                    // a1.innerHTML = "<div>inv# " + dev.inventory_name + ',' +
+                                    // var _name = dev.description == 'надо_редактировать' ? dev.description + '_id' + Id : dev.description;
+                                    // a1.innerHTML = "<div >" + dev.inventory_name + ',' +
+                                    //     "<span style='font-size:20px;padding-left:20px;color:white;'>" + _name + "</span></div>";
+
+                                    // var bbb = dev.inventory_name.length > 0 ? "<span style=padding-left:10px;>" + dev.inventory_name + "</span>" : '';
+
+                                    // a1.innerHTML = "<div>" + "<span style='font-size:20px;padding-left:0px; text-align:left; margin-left:0px; color:white;'>" + _name + "</span>"
+                                    //     + bbb + "</div>";
+                                    a1.innerText = mydescription;
+                                    // a1.style.letterSpacing = '0.6em';
+                                    a1.style.textAlign = 'center';
+                                    // a1.style.color = 'rgba(225,225,220,0.999)'; //    bluewhite; //  'rgba(255,70,0,0.98)';
+                                    // a1.style.color = 'rgba(225,185,120,0.999)'; //    bluewhite; //  'rgba(255,70,0,0.98)';
+                                    a1.style.fontSize = '24px';
+                                    // a1.style.background = 'blue';
 
                                 }
-                                break;
 
-                            case CmdType.GetDevices:
-                                if (obj.arrdev.length == 0) {
-                                    var dummy = 7;
-
-
-                                } else {
-
-                                    lastsavedDevicesObject = obj;
-                                    last_arrdev = obj.arrdev.Where(x => x.binarytype == 0x40);
-                                    // var mydev = obj.arrdev.Where(x => x.Id == Id);
-
-                                    // var dev = mydev[0];
-
-                                    // myid = dev.Id;
-                                    mydescription = 'Архів'; // dev.description;
-                                    document.title = mydescription;
-
-                                    if (a1 = document.getElementById('a1')) {
-                                        // a1.innerHTML = "<div>inv# " + dev.inventory_name + ',' +
-                                        // var _name = dev.description == 'надо_редактировать' ? dev.description + '_id' + Id : dev.description;
-                                        // a1.innerHTML = "<div >" + dev.inventory_name + ',' +
-                                        //     "<span style='font-size:20px;padding-left:20px;color:white;'>" + _name + "</span></div>";
-
-                                        // var bbb = dev.inventory_name.length > 0 ? "<span style=padding-left:10px;>" + dev.inventory_name + "</span>" : '';
-
-                                        // a1.innerHTML = "<div>" + "<span style='font-size:20px;padding-left:0px; text-align:left; margin-left:0px; color:white;'>" + _name + "</span>"
-                                        //     + bbb + "</div>";
-                                        a1.innerText = mydescription;
-                                        // a1.style.letterSpacing = '0.6em';
-                                        a1.style.textAlign = 'center';
-                                        // a1.style.color = 'rgba(225,225,220,0.999)'; //    bluewhite; //  'rgba(255,70,0,0.98)';
-                                        // a1.style.color = 'rgba(225,185,120,0.999)'; //    bluewhite; //  'rgba(255,70,0,0.98)';
-                                        a1.style.fontSize = '24px';
-                                        // a1.style.background = 'blue';
-
-                                    }
-
-                                    if (a4 = document.getElementById('a4')) {
-                                        a4.innerText = '';
-                                        a4.innerText = 'Aварії відсутні'; //    dev.address ? dev.address : 'Id = ' + dev.Id;
-                                        a4.style.color = 'forestgreen';
-                                        a4.style.display = 'none';
-                                    }
-
-
-
-                                    refresh_tabcontainer();
-                                    if (lastsavedDevicesObject) {
-                                        // if (lastsavedDevicesObject.arrdev.find(x => x.Id == Id))
-                                        // init_tblfirst_tbleft();
-                                    }
+                                if (a4 = document.getElementById('a4')) {
+                                    a4.innerText = '';
+                                    a4.innerText = 'Aварії відсутні'; //    dev.address ? dev.address : 'Id = ' + dev.Id;
+                                    a4.style.color = 'forestgreen';
+                                    a4.style.display = 'none';
                                 }
 
-                                break;
-
-                            case CmdType.GetDataArchive:
-
-                                var cnt = obj.count;
 
 
-                                // if (obj.arrgrp == null) {
-                                amnt = document.querySelector('.amntinfo');
-                                if (amnt) {
-                                    // amnt.innerText = /*'Записів: ' + */ obj.count;
-                                    var sss = obj.count;
-                                    if (obj.tmlist.length > 0)
+                                refresh_tabcontainer();
+                                if (lastsavedDevicesObject) {
+                                    // if (lastsavedDevicesObject.arrdev.find(x => x.Id == Id))
+                                    // init_tblfirst_tbleft();
+                                }
+                            }
+
+                            break;
+
+                        case CmdType.GetDataArchive:
+
+                            var cnt = obj.count;
+
+
+                            // if (obj.arrgrp == null) {
+                            amnt = document.querySelector('.amntinfo');
+                            if (amnt) {
+                                // amnt.innerText = /*'Записів: ' + */ obj.count;
+                                var sss = obj.count;
+                                if (obj.tmlist.length > 0)
                                     // sss += ' + ' + obj.tmlist.length;
-                                        sss = obj.count + 1;
-                                    amnt.children[0].innerText = sss; //obj.count;
+                                    sss = obj.count + 1;
+                                amnt.children[0].innerText = sss; //obj.count;
 
-                                    // var count = parseInt(obj.count);
-                                    // if (count == 0)
-                                    //     amnt.style.opacity = '0';
-                                    amnt.style.opacity = '1';
-                                }
-
-
-                                if (d1 = document.querySelector('.d1'))
-                                    if (dc1 = document.querySelector('.dc1')) {
-                                        for (var i = 0; i < d1.childElementCount; i++) {
-                                            var descr = d1.children[i].innerText;
-                                            var Yellow = 'rgba(200,200,20,0.85)';
-                                            var fff = obj.cntlist.Where(x => x.description == descr);
-                                            if (fff.length > 0) {
-                                                var names = obj.tmlist.Select(x => x.description);
-                                                // var sss = '';
-                                                // if ((obj.amode == 3) && (names.includes(descr))) {
-                                                //     sss = 'x ';
-                                                // }
-                                                // dc1.children[i].innerText = sss + fff[0].count;
-                                                dc1.children[i].style.background = '';
-
-                                                dc1.children[i].innerHTML = fff[0].count;
-                                                if ((obj.amode == 3) && (names.includes(descr))) {
-                                                    // dc1.children[i].style.background = Yellow;
-                                                }
-
-                                                var count = parseInt(fff[0].count);
-                                                dc1.children[i].style.opacity = '1';
+                                // var count = parseInt(obj.count);
+                                // if (count == 0)
+                                //     amnt.style.opacity = '0';
+                                amnt.style.opacity = '1';
+                            }
 
 
+                            if (d1 = document.querySelector('.d1'))
+                                if (dc1 = document.querySelector('.dc1')) {
+                                    for (var i = 0; i < d1.childElementCount; i++) {
+                                        var descr = d1.children[i].innerText;
+                                        var Yellow = 'rgba(200,200,20,0.85)';
+                                        var fff = obj.cntlist.Where(x => x.description == descr);
+                                        if (fff.length > 0) {
+                                            var names = obj.tmlist.Select(x => x.description);
+                                            // var sss = '';
+                                            // if ((obj.amode == 3) && (names.includes(descr))) {
+                                            //     sss = 'x ';
+                                            // }
+                                            // dc1.children[i].innerText = sss + fff[0].count;
+                                            dc1.children[i].style.background = '';
 
-                                            } else {
-                                                var names = obj.tmlist.Select(x => x.description);
-                                                if ((obj.amode == 3) && (names.includes(descr))) {
-                                                    dc1.children[i].innerText = 'оффлайн'; // "зв'язок";
-                                                    dc1.children[i].style.opacity = '1';
-                                                    // dc1.children[i].style.background = 'grey';
-
-                                                } else {
-                                                    dc1.children[i].innerText = 0;
-                                                    dc1.children[i].style.opacity = '0';
-                                                    dc1.children[i].style.background = '';
-                                                }
-
+                                            dc1.children[i].innerHTML = fff[0].count;
+                                            if ((obj.amode == 3) && (names.includes(descr))) {
+                                                // dc1.children[i].style.background = Yellow;
                                             }
 
+                                            var count = parseInt(fff[0].count);
+                                            dc1.children[i].style.opacity = '1';
 
 
+
+                                        } else {
+                                            var names = obj.tmlist.Select(x => x.description);
+                                            if ((obj.amode == 3) && (names.includes(descr))) {
+                                                dc1.children[i].innerText = 'оффлайн'; // "зв'язок";
+                                                dc1.children[i].style.opacity = '1';
+                                                // dc1.children[i].style.background = 'grey';
+
+                                            } else {
+                                                dc1.children[i].innerText = 0;
+                                                dc1.children[i].style.opacity = '0';
+                                                dc1.children[i].style.background = '';
+                                            }
 
                                         }
 
@@ -596,82 +592,87 @@ bc.onmessage = function(ev) {
 
 
 
-                                    // }
-                                if (obj.arrgrp != null) {
-                                    // var archtable = new arctable('#arch', 5, 1, obj);
-                                    if (archtable)
-                                        archtable.refresh(obj);
-
-
                                 }
 
 
-                                var n = 0;
 
-                                break;
 
-                            case CmdType.GetLastSkzData:
+                            // }
+                            if (obj.arrgrp != null) {
+                                // var archtable = new arctable('#arch', 5, 1, obj);
+                                if (archtable)
+                                    archtable.refresh(obj);
 
-                                // var _t1 = performance.now();
-                                // console.log('tmpgrp.js: before fillskz() t=' + myperf());
-                                // fillskz(obj);
+
+                            }
+
+
+                            var n = 0;
+
+                            break;
+
+                        case CmdType.GetLastSkzData:
+
+                            // var _t1 = performance.now();
+                            // console.log('tmpgrp.js: before fillskz() t=' + myperf());
+                            // fillskz(obj);
+                            // console.log('   ==> msg_len = ' + ev.data.length);
+                            // console.log('tmpgrp.js:  after fillskz() t=' + myperf());
+                            break;
+
+                        case CmdType.GetLastGrpData:
+
+                            last_objgrp = obj;
+                            // _fillarchive(last_objgrp);
+                            // archtable.fill(last_objgrp);
+
+                            break;
+
+                        case CmdType.GetNodeData:
+
+                            if (false) {
+                                var _t1 = performance.now();
+                                // console.log('tmpgrp.js: before fillgrp() t=' + myperf());
+                                // if (dev)
+                                // if (lastsavedDevicesObject)
+                                if (obj.devlist.length > 0) {
+                                    if (obj.arrgrp.Where(x => x.device_id == Id).length > 0)
+                                        fillgrp(obj);
+                                }
                                 // console.log('   ==> msg_len = ' + ev.data.length);
-                                // console.log('tmpgrp.js:  after fillskz() t=' + myperf());
-                                break;
-
-                            case CmdType.GetLastGrpData:
-
-                                last_objgrp = obj;
-                                // _fillarchive(last_objgrp);
-                                // archtable.fill(last_objgrp);
-
-                                break;
-
-                            case CmdType.GetNodeData:
-
-                                if (false) {
-                                    var _t1 = performance.now();
-                                    // console.log('tmpgrp.js: before fillgrp() t=' + myperf());
-                                    // if (dev)
-                                    // if (lastsavedDevicesObject)
-                                    if (obj.devlist.length > 0) {
-                                        if (obj.arrgrp.Where(x => x.device_id == Id).length > 0)
-                                            fillgrp(obj);
-                                    }
-                                    // console.log('   ==> msg_len = ' + ev.data.length);
-                                    // console.log('tmpgrp.js:  after fillgrp() t=' + myperf());
-                                    if (send_ms_flag) {
-                                        send_ms_flag = false;
-                                        console.log('________' + (performance.now() - browserSend_ms));
-                                    }
+                                // console.log('tmpgrp.js:  after fillgrp() t=' + myperf());
+                                if (send_ms_flag) {
+                                    send_ms_flag = false;
+                                    console.log('________' + (performance.now() - browserSend_ms));
                                 }
-                                break;
+                            }
+                            break;
 
-                            default:
-
-
-
-                                break;
-
-                        }
+                        default:
 
 
-                }
+
+                            break;
+
+                    }
 
 
             }
-            // } catch (se) {
-            //     console.log('ОШИБКА! - bc.onmessage')
-            //     var d = 0;
-            // }
+
+
         }
-
-        // console.log(ev);
-        // document.getElementById('a4').style.background = (_vvv[(_vcnt++) & 3]); //ev.data;
-
+        // } catch (se) {
+        //     console.log('ОШИБКА! - bc.onmessage')
+        //     var d = 0;
+        // }
     }
-    // bc.postMessage('This is a test message.');
-    // bc.close();
+
+    // console.log(ev);
+    // document.getElementById('a4').style.background = (_vvv[(_vcnt++) & 3]); //ev.data;
+
+}
+// bc.postMessage('This is a test message.');
+// bc.close();
 
 
 

@@ -406,7 +406,7 @@ function fill_menu() {
         if (str)
             if (str.length > 0) {
                 var dev_ids = parse_devlist(str);
-                var devlist2 = devlist.Where(x => dev_ids.includes(x.Id.toString()));
+                var devlist2 = limitbyuser(devlist); //         devlist.Where(x => dev_ids.includes(x.Id.toString()));
                 devlist = devlist2;
             }
 
@@ -515,7 +515,7 @@ function fill_menu() {
 
 
 
-DateFromlocaleString = function(str) {
+DateFromlocaleString = function (str) {
     // It's pretty simple to convert your date string to a format that will give the expected result ('yyyy/mm/dd' or 'yyyy-mm-dd'):
     // var time2 = new Date(pk1.value.substring(0, 10).split('.').reverse().join('-') + 'T' + pk1.value.slice(12, 30));
     return new Date(str.slice(0, 10).split('.').reverse().join('-') + 'T' + str.slice(12, 30));
@@ -860,13 +860,13 @@ function askamount() {
         div.style.opacity = '0.3';
     }
     if (dv = document.querySelector('.dc1'))
-    // dv.style.opacity = '0.4';
+        // dv.style.opacity = '0.4';
         dv.children.forEach(x => {
-        // x.innerText = '';
-        // if (x.innerText != 0)
-        x.style.opacity = '0';
+            // x.innerText = '';
+            // if (x.innerText != 0)
+            x.style.opacity = '0';
 
-    });
+        });
 
     var obj = prepare_DataArchiveQuery(0);
     var parcount = 0;
