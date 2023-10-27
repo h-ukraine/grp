@@ -302,7 +302,8 @@ function limitbyuser(devs) {
 
                         //   var dev_ids = parse_devlist(str);
 
-                        var devlist2 = devs.Where(x => dev_ids.includes(x.Id.toString()));
+                        // var devlist2 = devs.Where(x => dev_ids.includes(x.Id.toString()));
+                        var devlist2 = devs.Where(x => dev_ids.includes(x.Identifier));
 
                         // var devlist2 = devlist.Where(x => devlist.includes(x.Id.toString()));
                         devlist = devlist2;
@@ -782,7 +783,8 @@ function init_tblfirst_tbleft(firsttime = false) {
                 if (sert.customs)
                     if (sert.customs.devlist) {
                         if (sert.customs.devlist.length > 0)
-                            devs = devs.Where(x => sert.customs.devlist.includes(x.Id));
+                            // devs = devs.Where(x => sert.customs.devlist.includes(x.Id));
+                            devs = limitbyuser(devs);
 
                     }
 
