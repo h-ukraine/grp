@@ -99,22 +99,40 @@ window.onload = function () {
             let isadm = false;
             if (obj.customs.priority < 6)
                 isadm = true;
-            let mcont = document.getElementById('menucontainer');
-            if (mcont) {
-                for (i = 0; i < mcont.childElementCount; i++) {
-                    let ich = mcont.children[i];
 
-                    if ((i == (mcont.childElementCount - 1)) && !isadm) { }
-                    else
-                        ich.style.display = 'block';
+
+            // <div class='swtab' onclick="openPageUniversal(event)"> Адміністрування</div>
+            if (isadm) {
+                let mcont = document.getElementById('menucontainer');
+                if (mcont) {
+
+                    let adm = document.createElement('div');
+                    adm.className = 'swtab';
+                    adm.innerText = 'Адміністрування';
+                    adm.addEventListener('click', openPageUniversal);
+                    mcont.appendChild(adm);
 
                 }
 
 
-
-
-
             }
+
+            // let mcont = document.getElementById('menucontainer');
+            // if (mcont) {
+            //     for (i = 0; i < mcont.childElementCount; i++) {
+            //         let ich = mcont.children[i];
+
+            //         if ((i == (mcont.childElementCount - 1)) && !isadm) { }
+            //         else
+            //             ich.style.display = 'block';
+
+            //     }
+
+
+            // }
+
+
+
 
         }
     }

@@ -1,7 +1,8 @@
 // import { _get_wshost } from "./_.js";
 // import { HostEndpoint } from "./_.js";
 
-let HostEndpoint = "sof.onserver.space:50730";
+// let HostEndpoint = "sof.onserver.space:50730";
+let HostEndpoint = "192.168.1.4:50730";
 
 // let yyy789 = _get_wshost();
 
@@ -155,10 +156,12 @@ function wsConnect() {
     // wstarg = "ws://" + "192.168.1.4:50730" + '/chat=gena';
     // wstarg = "ws://" + "79.100.217.232:50730" + '/chat=gena';
     // wstarg = "ws://" + _get_wshost() + '/chat=gena'; //"ws://" + "sofia.onserver.space:50730" + '/chat=gena';
+    //
+    //
+    //
     wstarg = "ws://" + HostEndpoint + '/chat=gena'; //"ws://" + "sofia.onserver.space:50730" + '/chat=gena';
-
-
-
+    //
+    //
     // wstarg = "ws://" + "31.131.18.107:50730" + '/chat=gena'; // route to 192.168.0.133:50700
     // wstarg = "ws://" + "myvps.onserver.site:50730" + '/chat=gena'; // route to 192.168.0.133:50700
 
