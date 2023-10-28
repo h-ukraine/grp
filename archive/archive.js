@@ -307,8 +307,8 @@ function limitbyuser(devs) {
 
                     //   var dev_ids = parse_devlist(str);
 
-                    // var devlist2 = devs.Where(x => dev_ids.includes(x.Id.toString()));
-                    var devlist2 = devs.Where(x => dev_ids.includes(x.Identifier));
+                    var devlist2 = devs.Where(x => dev_ids.includes(x.Id.toString()));
+                    // var devlist2 = devs.Where(x => dev_ids.includes(x.Identifier));
 
                     // var devlist2 = devlist.Where(x => devlist.includes(x.Id.toString()));
                     devlist = devlist2;

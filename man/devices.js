@@ -60,10 +60,10 @@ function limitbyuser(devs) {
 
 
         let uo = userobj;
-        if (userobj.devstr != null) {
+        if ((userobj.devstr != null) && (userobj.devstr.length > 0)) {
             var dev_ids = parse_devlist(userobj.devstr); //devlist; //userobj.customs.devlist;
-            // var devlist2 = devs.Where(x => dev_ids.includes(x.Id.toString()));
-            var devlist2 = devs.Where(x => dev_ids.includes(x.Identifier));
+            var devlist2 = devs.Where(x => dev_ids.includes(x.Id.toString()));
+            // var devlist2 = devs.Where(x => dev_ids.includes(x.Identifier));
 
             // var devlist2 = devlist.Where(x => devlist.includes(x.Id.toString()));
             devlist = devlist2;
@@ -462,19 +462,32 @@ function gendivs_from_array() {
 
             let uob = userobj;
             let ul = userlist;
-            let cl = custlist;
+            // let cl = custlist;
             let dev_ids = [];
+            let all_ids = null;
             if (userobj != null) {
                 let dvstr = userobj.devstr;
 
                 if (dvstr != null) {
-                    dev_ids = parse_devlist(userobj.devstr);
-                    for (i = 0; i < dev_ids.length; i++) {
-                        dev_ids[i] = parseInt(dev_ids[i]);
 
+                    all_ids = userobj.custlist.Select(x => x.Id);
+
+
+                    let str_ids = parse_devlist(userobj.devstr);
+                    for (i = 0; i < str_ids.length; i++) {
+                        dev_ids.push(parseInt(str_ids[i]));
                     }
+
+                    // dev_ids = parse_devlist(userobj.devstr);
+                    // for (i = 0; i < dev_ids.length; i++) {
+                    //     dev_ids[i] = parseInt(dev_ids[i]);
+
+                    // }
                 }
             }
+
+
+
 
 
             devarray.forEach(x => {
@@ -491,8 +504,8 @@ function gendivs_from_array() {
                 let opacity = '0.3';
 
                 if (userobj) {
-                    if ((userobj.devstr == null) || userobj.devstr.includes(x.Identifier)) {
-                        // if ((userobj.devstr == null) || /*userobj.devstr.includes*/ dev_ids.includes(x.Id)) {
+                    // if ((userobj.devstr == null) || userobj.devstr.includes(x.Identifier)) {
+                    if ((userobj.devstr == null) || (userobj.devstr.length == 0) || /*userobj.devstr.includes*/ dev_ids.includes(x.Id)) {
                         symb = '✔';
                         opacity = '1';
                     }
@@ -514,7 +527,8 @@ function gendivs_from_array() {
                 div.style.opacity = opacity;
                 div.innerHTML = `<span class=checkspan  onclick=spanclick(event) >${symb}</span>` +
 
-                    '<span style="color:rgb(150,150,140); white-space:pre;padding-right:8px;">    #' + x.Identifier + '</span>' + x.name
+                    // '<span style="color:rgb(150,150,140); white-space:pre;padding-right:8px;">    #' + x.Identifier + '</span>' + x.name
+                    '<span style="color:rgb(150,150,140); white-space:pre;padding-right:8px;">    #' + x.Id + '</span>' + x.name
                     + ' <span style="color:rgb(90,200,210);">' + x.address + '</span>';
                 cont.appendChild(div);
             });

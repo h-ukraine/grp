@@ -294,7 +294,7 @@ function limitbyuser(devs) {
             var nnn = JSON.parse(tmppw);
             if (nnn) {
                 var eee = nnn.customs.devlist;
-                if (eee != null)
+                if ((eee != null) && (eee.length > 0))
                     if (eee.length > 0) {
                         var dev_ids = parse_devlist(eee); //devlist; //userobj.customs.devlist;
 
@@ -302,8 +302,8 @@ function limitbyuser(devs) {
 
                         //   var dev_ids = parse_devlist(str);
 
-                        // var devlist2 = devs.Where(x => dev_ids.includes(x.Id.toString()));
-                        var devlist2 = devs.Where(x => dev_ids.includes(x.Identifier));
+                        var devlist2 = devs.Where(x => dev_ids.includes(x.Id.toString()));
+                        // var devlist2 = devs.Where(x => dev_ids.includes(x.Identifier));
 
                         // var devlist2 = devlist.Where(x => devlist.includes(x.Id.toString()));
                         devlist = devlist2;

@@ -371,8 +371,8 @@ function wrapvidgets(cmdobj) {
 
 
                     var nmbs = new Uint32Array(spl);
-                    // devs = devs.Where(x => lastuserparams.customs.devlist.includes(x.Id));
-                    devs = devs.Where(x => nmbs.includes(parseInt(x.Identifier)));
+                    devs = devs.Where(x => lastuserparams.customs.devlist.includes(x.Id));
+                    // devs = devs.Where(x => nmbs.includes(parseInt(x.Identifier)));
 
                     // for (m = 0; m < devs.length; m++) {
 
