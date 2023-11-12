@@ -371,7 +371,8 @@ function wrapvidgets(cmdobj) {
 
 
                     var nmbs = new Uint32Array(spl);
-                    devs = devs.Where(x => lastuserparams.customs.devlist.includes(x.Id));
+                    devs = devs.Where(x => nmbs.includes(x.Id));
+                    // devs = devs.Where(x => lastuserparams.customs.devlist.includes(x.Id));
                     // devs = devs.Where(x => nmbs.includes(parseInt(x.Identifier)));
 
                     // for (m = 0; m < devs.length; m++) {
@@ -417,9 +418,11 @@ function wrapvidgets(cmdobj) {
         var lastmcutime; // = Date.now();
 
         devs.forEach(x => {
+
             var grp = lastgrpdata.arrgrp.Where(y => y.device_id == x.Id).Last();
             if (!grp) {
                 var b = 98;
+                offline++;
             } else {
                 var now = Date.now(); //.getTime();
 

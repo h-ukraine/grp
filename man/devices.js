@@ -442,7 +442,8 @@ function gendivs_from_array() {
         cont.appendChild(div);
 
         // add dev buttons
-        if (!isMobile()) {
+        if (true) {
+            // if (!isMobile()) {
 
             setelemProp('.devclassplus', 'min-width', '500px');
             setelemProp('.devclassplus', 'height', '40px');
@@ -540,7 +541,7 @@ function gendivs_from_array() {
                 div.accessKey = 'devinside'
                 // div.innerHTML = x.name + '<span style="color:rgb(150,150,140); white-space:pre;">    #' + x.Identifier + '</span>'
                 // + ' <br></><span style="color:rgb(90,200,210);">' + x.address + '</span>';
-                div.innerHTML = '<span style="color:rgb(150,150,140); white-space:pre;padding-right:8px;">    #' + x.Identifier + '</span>' + x.name
+                div.innerHTML = '<span style="color:rgb(150,150,140); white-space:pre;padding-right:8px;">    #' + x.Id + '</span>' + x.name
                     + ' <span style="color:rgb(90,200,210);padding-left:4px;">' + x.address + '</span>';
                 cont.appendChild(div);
             });
