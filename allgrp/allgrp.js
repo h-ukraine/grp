@@ -337,7 +337,7 @@ function refresh_tabcontainer() {
         // var children = div.children;
         for (i = 0; i < div.childElementCount;) {
             // if (!descriptions.includes(div.children[i].innerText)) {
-            if (!descriptions.includes(div.children[i].innerText)) {
+            if (!descriptions.includes(div.children[i].children[0].innerText)) {
                 div.removeChild(div.children[i]);
             } else
                 i++;
@@ -353,12 +353,11 @@ function refresh_tabcontainer() {
             var tyyyuuh = 0;
         }
 
-        var array = Array.from(div.children).Select(x => x.innerText);
+        var array = Array.from(div.children).Select(x => x.children[0].innerText);
         for (i = 0; i < devs.length; i++) {
             var idescription = devs[i].description === "надо_редактировать" ? devs[i].description + '_id=' + devs[i].Id : devs[i].description;
             // if (!array.includes(devs[i].description)) {
             if (!array.includes(idescription)) {
-
 
                 var cv = document.createElement('div');
                 cv.className = 'swtab';
@@ -366,11 +365,39 @@ function refresh_tabcontainer() {
 
                 // cv.innerText = devs[i].description != 'надо_редактировать' ?
                 //     devs[i].description : devs[i].description + '_id=' + devs[i].Id;
-                cv.innerText = idescription;
+                // cv.innerText = idescription;// + " ____ " + devs[i].address;
+                // cv.innerHTML = "<div class='swtab' > 7777" + "<span>  8888 </span>" + "</div>    ";
+
+
+
+
+                // cv.style.textAlign = 'left';
 
                 // cv.innerHTML = "<div class='swtab' onclick='openPageUniversal()>" + devs[i].description + "</div>"
+
+
+                let rrr = document.createElement('span');
+                // rrr.style.height = '32px';
+                rrr.innerText = idescription;
+
+                cv.appendChild(rrr);
+                // cv.style.textAlign = 'left';
+
+                cv.style.display = 'flex';
+
+                let kkk = document.createElement('span');
+                // kkk.style.textAlign = 'center';
+                // kkk.style.height = '20px';
+                kkk.innerText = devs[i].address;
+                kkk.style.paddingLeft = '20px';
+                kkk.style.color = 'rgb(180,220,220)';
+                kkk.style.fontStyle = 'oblique';
+                kkk.style.fontSize = '15px';
+                kkk.style.fontWeight = '500';
+                cv.appendChild(kkk);
+
                 div.appendChild(cv);
-                cv.addEventListener('click', openPageUniversal);
+                rrr.addEventListener('click', openPageUniversal);
             }
 
         }
