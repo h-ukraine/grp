@@ -11,7 +11,9 @@
         console.log('start:  ' + performance.now());
         let browserSendTime;
         let browserSend_ms;
-        worker = new Worker("js/wsworker.js", { type: 'module' });
+
+        var ttt = location.host;
+        worker = new Worker("http://" + ttt + "js/wsworker.js", { type: 'module' });
         // let url = location.hostname;
 
         // var url = new URL("http://192.168.1.4/js/wsworker.js");
