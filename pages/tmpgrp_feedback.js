@@ -348,11 +348,48 @@ function refresh_tabcontainer() {
 
                 // cv.innerText = devs[i].description != 'надо_редактировать' ?
                 //     devs[i].description : devs[i].description + '_id=' + devs[i].Id;
-                cv.innerText = idescription;
+                // cv.innerText = idescription;
 
                 // cv.innerHTML = "<div class='swtab' onclick='openPageUniversal()>" + devs[i].description + "</div>"
+
+
+
+
+
+
+                let rrr = document.createElement('span');
+                // rrr.style.height = '32px';
+                rrr.innerText = idescription;
+
+                cv.appendChild(rrr);
+                // cv.style.textAlign = 'left';
+
+                cv.style.display = 'flex';
+
+                let kkk = document.createElement('span');
+                // kkk.style.textAlign = 'center';
+                // kkk.style.height = '20px';
+                kkk.innerText = devs[i].address;
+                kkk.style.paddingLeft = '20px';
+                kkk.style.color = 'rgb(180,220,220)';
+                kkk.style.fontStyle = 'oblique';
+                kkk.style.fontSize = '15px';
+                kkk.style.fontWeight = '500';
+                cv.appendChild(kkk);
+
+
+
+
+
+
+
+
+
+
+
+
                 div.appendChild(cv);
-                cv.addEventListener('click', openPageUniversal);
+                rrr.addEventListener('click', openPageUniversal);
             }
 
         }
@@ -901,6 +938,57 @@ function fillgrp_params_feedback(obj) {
 
 var vissav = -1;
 
+let refreshed_arrdev = null;
+
+function fill_page_header(obj) {
+
+    if (lastsavedDevicesObject != null) {
+        // lastsavedDevicesObject = obj;
+        // last_arrdev = obj.arrdev;
+        var mydev = lastsavedDevicesObject.arrdev.Where(x => x.Id == Id);  // obj.arrdev.Where(x => x.Id == Id);
+
+        var dev = mydev[0];
+        if (dev) {
+            if (a1 = document.getElementById('a1')) {
+                // a1.innerHTML = "<div>inv# " + dev.inventory_name + ',' +
+                var _name = dev.description == 'надо_редактировать' ? dev.description + '_id' + Id : dev.description;
+                // a1.innerHTML = "<div >" + dev.inventory_name + ',' +
+                //     "<span style='font-size:20px;padding-left:20px;color:white;'>" + _name + "</span></div>";
+                var bbb = '';
+                // if (dev.inventory_name)
+                //     bbb = dev.inventory_name.length > 0 ? "<span style=padding-left:10px;>" + dev.inventory_name + "</span>" : '';
+                // if (dev.Identifier)
+                //     bbb = "<span style='padding-left:10px; font-size:18px;'>" + '  #' + dev.Identifier + "</span>"
+                if (dev.Id)
+                    bbb = "<span style='padding-left:10px; font-size:18px;'>" + '  #' + dev.Id + "</span>"
+
+                a1.innerHTML = "<div style='font-size:16px;'>" + "<span style='font-size:19px;padding-left:0px; text-align:left; margin-left:0px; color:white;'>" + _name + "</span>" +
+                    bbb + "</div>";
+
+
+            }
+            if (a4 = document.getElementById('a4'))
+                a4.innerText = dev.address ? dev.address : 'Id = ' + dev.Id;
+            myid = dev.Id;
+            mydescription = dev.description;
+            document.title = mydescription;
+
+            if (obj.arrdev)
+                if (obj.arrdev.length > 0)
+                    if ((refreshed_arrdev == null) || !deepEqual(obj.arrdev, refreshed_arrdev)) {
+                        refreshed_arrdev = obj.arrdev;
+                        refresh_tabcontainer();
+                    }
+            if (lastsavedDevicesObject)
+                if (lastsavedDevicesObject.arrdev.find(x => x.Id == Id))
+                    init_tblfirst_tbleft();
+        }
+    }
+
+
+}
+
+
 
 function fillgrp(obj) {
     if (!obj)
@@ -909,8 +997,22 @@ function fillgrp(obj) {
 
     var bbb = obj.devlist.find(x => x.Id == Id);
     if (bbb) {
-        lastsavedDevicesObject = new Object();
-        lastsavedDevicesObject.arrdev = obj.devlist;
+        if (obj.devlist)
+            if (obj.devlist.length > 0) {
+
+
+                let need_refresh = true;
+                if (lastsavedDevicesObject)
+                    if (deepEqual(lastsavedDevicesObject.arrdev, obj.devlist))
+                        need_refresh = false;
+
+
+
+                lastsavedDevicesObject = new Object();
+                lastsavedDevicesObject.arrdev = obj.devlist;
+                if (need_refresh)
+                    refresh_tabcontainer();
+            }
         init_tblfirst_tbleft();
     }
 
@@ -1180,6 +1282,22 @@ bc.onmessage = function (ev) {
             // document.querySelector('.header').style.background = (_vvv[(_vcnt++) & 3]);
         }
 
+        switch (ev.data.type) {
+
+            case 'wsopened':
+                {
+                    isWsOpened = true;
+                    console.log('---------main2: wsopened! ' + performance.now().toFixed(1));
+                    console.log('---------main2: wsopened! ' + myperf());
+
+                }
+                break;
+
+
+
+
+        }
+
     } else {
 
         try {
@@ -1213,40 +1331,55 @@ bc.onmessage = function (ev) {
                                 break;
 
                             case CmdType.GetDevices:
-                                lastsavedDevicesObject = obj;
-                                last_arrdev = obj.arrdev;
-                                var mydev = obj.arrdev.Where(x => x.Id == Id);
 
-                                var dev = mydev[0];
-                                if (dev) {
-                                    if (a1 = document.getElementById('a1')) {
-                                        // a1.innerHTML = "<div>inv# " + dev.inventory_name + ',' +
-                                        var _name = dev.description == 'надо_редактировать' ? dev.description + '_id' + Id : dev.description;
-                                        // a1.innerHTML = "<div >" + dev.inventory_name + ',' +
-                                        //     "<span style='font-size:20px;padding-left:20px;color:white;'>" + _name + "</span></div>";
-                                        var bbb = '';
-                                        // if (dev.inventory_name)
-                                        //     bbb = dev.inventory_name.length > 0 ? "<span style=padding-left:10px;>" + dev.inventory_name + "</span>" : '';
-                                        if (dev.Identifier)
-                                            bbb = "<span style='padding-left:10px; font-size:18px;'>" + '  #' + dev.Identifier + "</span>"
+                                if (obj.arrdev.length > 0) {
+                                    let dummy = -1;
+                                    lastsavedDevicesObject = obj;
+                                    last_arrdev = obj.arrdev;
 
-                                        a1.innerHTML = "<div style='font-size:16px;'>" + "<span style='font-size:19px;padding-left:0px; text-align:left; margin-left:0px; color:white;'>" + _name + "</span>" +
-                                            bbb + "</div>";
-
-
-                                    }
-                                    if (a4 = document.getElementById('a4'))
-                                        a4.innerText = dev.address ? dev.address : 'Id = ' + dev.Id;
-                                    myid = dev.Id;
-                                    mydescription = dev.description;
-                                    document.title = mydescription;
-
-
-                                    refresh_tabcontainer();
-                                    if (lastsavedDevicesObject)
-                                        if (lastsavedDevicesObject.arrdev.find(x => x.Id == Id))
-                                            init_tblfirst_tbleft();
                                 }
+
+
+                                fill_page_header(obj);
+
+                                // else if (lastsavedDevicesObject != null) {
+                                //     // lastsavedDevicesObject = obj;
+                                //     // last_arrdev = obj.arrdev;
+                                //     var mydev = lastsavedDevicesObject.arrdev.Where(x => x.Id == Id);  // obj.arrdev.Where(x => x.Id == Id);
+
+                                //     var dev = mydev[0];
+                                //     if (dev) {
+                                //         if (a1 = document.getElementById('a1')) {
+                                //             // a1.innerHTML = "<div>inv# " + dev.inventory_name + ',' +
+                                //             var _name = dev.description == 'надо_редактировать' ? dev.description + '_id' + Id : dev.description;
+                                //             // a1.innerHTML = "<div >" + dev.inventory_name + ',' +
+                                //             //     "<span style='font-size:20px;padding-left:20px;color:white;'>" + _name + "</span></div>";
+                                //             var bbb = '';
+                                //             // if (dev.inventory_name)
+                                //             //     bbb = dev.inventory_name.length > 0 ? "<span style=padding-left:10px;>" + dev.inventory_name + "</span>" : '';
+                                //             // if (dev.Identifier)
+                                //             //     bbb = "<span style='padding-left:10px; font-size:18px;'>" + '  #' + dev.Identifier + "</span>"
+                                //             if (dev.Id)
+                                //                 bbb = "<span style='padding-left:10px; font-size:18px;'>" + '  #' + dev.Id + "</span>"
+
+                                //             a1.innerHTML = "<div style='font-size:16px;'>" + "<span style='font-size:19px;padding-left:0px; text-align:left; margin-left:0px; color:white;'>" + _name + "</span>" +
+                                //                 bbb + "</div>";
+
+
+                                //         }
+                                //         if (a4 = document.getElementById('a4'))
+                                //             a4.innerText = dev.address ? dev.address : 'Id = ' + dev.Id;
+                                //         myid = dev.Id;
+                                //         mydescription = dev.description;
+                                //         document.title = mydescription;
+
+
+                                //         // refresh_tabcontainer();
+                                //         if (lastsavedDevicesObject)
+                                //             if (lastsavedDevicesObject.arrdev.find(x => x.Id == Id))
+                                //                 init_tblfirst_tbleft();
+                                //     }
+                                // }
                                 break;
 
 
@@ -1276,6 +1409,38 @@ bc.onmessage = function (ev) {
                                     console.log('________' + (performance.now() - browserSend_ms));
                                 }
                                 break;
+
+
+                            case CmdType.GetLastGrpData:
+
+
+                                var nowdevs = obj.devlist;
+
+                                if (last_arrdev == null) {
+                                    let dummy = -3;
+                                }
+
+                                // if (nowdevs != null)
+                                //     if (!deepEqual(nowdevs, last_arrdev))
+                                //         last_arrdev = nowdevs;
+
+                                if ((lastsavedDevicesObject == null) || (!deepEqual(lastsavedDevicesObject.arrdev, nowdevs))) {
+
+                                    if (obj.devlist != null) {
+                                        if (obj.devlist.length > 0) {
+                                            fillgrp(obj);
+                                            fill_page_header(obj);
+
+                                            if (lastsavedDevicesObject != null)
+                                                refresh_tabcontainer();
+
+                                        }
+                                    }
+
+                                }
+
+                                break;
+
 
                             default:
 
@@ -2154,6 +2319,21 @@ function nalasht_handler() {
 
 nalasht_handler();
 
+function _isMobile() {
+    return window.navigator.userAgent.includes('Mobile');
+}
+
+if (_isMobile()) {
+    let back = document.getElementById('backtomenu');
+    if (back) {
+        back.innerText = '< На головну';
+        back.addEventListener('click', () => {
+            setTimeout(() => { ewin = window.open('../dashboard.html', '_self'); }
+                , 200);
+        });
+    }
+}
+
 
 
 function openPageUniversal(e) {
@@ -2176,7 +2356,10 @@ function openPageUniversal(e) {
                 // window.name = 'ttt';
                 // var ewin = window.open(path, 'mapwindow');
                 // var etmp = window.open(location.href);
-                var ewin = window.open(path); //, '_self'); //, 'mapwindow');
+                if (_isMobile())
+                    var ewin = window.open(path, '_self'); //, '_self'); //, 'mapwindow');
+                else
+                    var ewin = window.open(path); //, '_self'); //, 'mapwindow');
                 // ewin.blur();
                 // ewin.focus();
                 // window.close();
@@ -2204,7 +2387,10 @@ function openPageUniversal(e) {
 
                 // }, 600);
                 bc.postMessage('allgrp=close()');
-                ewin = window.open('../allgrp/allgrp.html');
+                if (_isMobile())
+                    ewin = window.open('../allgrp/allgrp.html', '_self');
+                else
+                    ewin = window.open('../allgrp/allgrp.html');
                 break;
             }
         case 'Архів':
@@ -2223,7 +2409,10 @@ function openPageUniversal(e) {
 
                 ////
                 bc.postMessage('archive=close()');
-                ewin = window.open('../archive/archive.html');
+                if (_isMobile())
+                    ewin = window.open('../archive/archive.html', '_self');
+                else
+                    ewin = window.open('../archive/archive.html');
 
                 break;
             }
@@ -2245,7 +2434,8 @@ function openPageUniversal(e) {
                     }
                 }
             } else {
-                var vvv = last_arrdev.Where(x => x.description.trim() == div.innerText);
+                // var vvv = last_arrdev.Where(x => x.description.trim() == div.innerText);
+                var vvv = lastsavedDevicesObject.arrdev.Where(x => x.description.trim() == div.innerText);
 
                 if (vvv && vvv.length > 0)
                     vvv = vvv[0];
@@ -2253,9 +2443,14 @@ function openPageUniversal(e) {
                     vvv = null;
 
                 if (vvv) {
-                    if (vvv.description.trim() != mydescription.trim()) {
+                    if (vvv.description.trim() != ((' ' + mydescription).trim())) {
                         bc.postMessage(div.innerText + '=close()');
-                        ewin = window.open('../pages/tmpgrp.html?device_Id=' + vvv.Id + '&pw="uca9iaug1efqflqeg6iviyVUfyv3kYtgvVyfTdttu685t8p97t"');
+
+                        let path = '../pages/tmpgrp.html?device_Id=' + vvv.Id + '&pw="uca9iaug1efqflqeg6iviyVUfyv3kYtgvVyfTdttu685t8p97t"';
+                        if (_isMobile())
+                            ewin = window.open(path, '_self');
+                        else
+                            ewin = window.open(path);
                     }
                 }
             }
@@ -2315,3 +2510,7 @@ function showmode(event) {
 
 
 }
+
+
+
+

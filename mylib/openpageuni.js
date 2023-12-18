@@ -1,4 +1,13 @@
-
+if (_isMobile()) {
+    let back = document.getElementById('backtomenu');
+    if (back) {
+        back.innerText = '< На головну';
+        back.addEventListener('click', () => {
+            setTimeout(() => { ewin = window.open('../dashboard.html', '_self'); }
+                , 200);
+        });
+    }
+}
 
 
 
@@ -8,8 +17,6 @@ function openPageUniversal(e) {
     });
     bc.postMessage(tmaxobj);
     var div = e.currentTarget;
-
-
 
     switch (div.innerText) {
         case 'Карта':
@@ -24,7 +31,10 @@ function openPageUniversal(e) {
                 // window.name = 'ttt';
                 // var ewin = window.open(path, 'mapwindow');
                 // var etmp = window.open(location.href);
-                var ewin = window.open(path); //, '_self'); //, 'mapwindow');
+                if (_isMobile())
+                    var ewin = window.open(path, '_self'); //, '_self'); //, 'mapwindow');
+                else
+                    var ewin = window.open(path); //, '_self'); //, 'mapwindow');
                 // ewin.blur();
                 // ewin.focus();
                 // window.close();
@@ -43,7 +53,10 @@ function openPageUniversal(e) {
         case 'Дані ГРП':
             {
                 bc.postMessage('allgrp=close()');
-                ewin = window.open('../allgrp/allgrp.html');
+                if (_isMobile())
+                    ewin = window.open('../allgrp/allgrp.html', '_self');
+                else
+                    ewin = window.open('../allgrp/allgrp.html');
 
                 break;
             }
@@ -86,7 +99,8 @@ function openPageUniversal(e) {
                     }
                 }
             } else {
-                var vvv = last_arrdev.Where(x => x.description.trim() == div.innerText);
+                // var vvv = last_arrdev.Where(x => x.description.trim() == div.innerText);
+                var vvv = last_objgrp.devlist.Where(x => x.description.trim() == div.innerText);
 
                 if (vvv && vvv.length > 0)
                     vvv = vvv[0];
@@ -96,7 +110,12 @@ function openPageUniversal(e) {
                 if (vvv) {
                     if (vvv.description.trim() != mydescription.trim()) {
                         bc.postMessage(div.innerText + '=close()');
-                        ewin = window.open('../pages/tmpgrp.html?device_Id=' + vvv.Id + '&pw="uca9iaug1efqflqeg6iviyVUfyv3kYtgvVyfTdttu685t8p97t"');
+
+                        let path = '../pages/tmpgrp.html?device_Id=' + vvv.Id + '&pw="uca9iaug1efqflqeg6iviyVUfyv3kYtgvVyfTdttu685t8p97t"';
+                        if (_isMobile())
+                            ewin = window.open(path, '_self');
+                        else
+                            ewin = window.open(path);
                     }
                 }
             }

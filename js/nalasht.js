@@ -145,3 +145,80 @@ try {
 //         dv.innerText = h + " " + h2;
 //     }
 // }, 300);
+
+
+// ----------------------------------------------
+// let worker = null;
+
+// var answDevices = [];
+// let isWsOpened = false;
+
+// var tmt = 150;
+
+
+
+
+// if (window.navigator.userAgent.includes('Mobile')) {
+//     tmt = 200;
+
+//     if (div = document.querySelector('.f1')) {
+//         div.innerText = div.innerText.substring(div.innerText.indexOf('V'));
+//         div.style.display = 'none';
+//     }
+//     if (tema = document.querySelector('.f2'))
+//         tema.innerHTML = tema.innerHTML.replace('Тема:', '');
+// }
+
+// let yyy = isMobile();
+
+// if (isMobile()) {
+//     worker = new Worker("../js/wsworker.js");
+
+//     if (true) {
+//         var zzz = setInterval(() => {
+
+//             if (isWsOpened) {
+
+//                 var tmp = localStorage.getItem('tmppw');
+//                 var sert = '';
+//                 if (isJSON(tmp)) {
+//                     sert = JSON.parse(tmp);
+//                 }
+//                 bc.postMessage(new Object({
+//                     type: 'wsopenack',
+//                     totalid: sert.totalid ? sert.totalid : -1
+//                 }));
+
+
+
+//                 if (answDevices.length == 0) {
+//                     var cmdobj = {
+//                         ObjectType: CmdType.GetDevices,
+//                         devnumbers: [],
+//                         sertif: sert.sertif
+//                     }
+
+//                     // sendCmd(cmdobj);
+//                     cmdobj.type = "_wsocket";
+//                     cmdobj.caller = "main";
+//                     browserSendTime = new Date();
+//                     browserSend_ms = performance.now(); //    new Date().getTime();
+//                     bc.postMessage(cmdobj);
+//                 }
+
+
+//                 // if (answDevices.length > 0) // &&
+//                 // (devchk.skzrecs.length > 0))
+//                 {
+//                     clearInterval(zzz);
+//                     // console.log('------clearInterval(zzz)');
+//                     // refresh_objects_on_map();
+//                 }
+
+
+
+//             }
+//         }, tmt);
+
+//     }
+// }

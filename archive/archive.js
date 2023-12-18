@@ -303,16 +303,28 @@ function limitbyuser(devs) {
                     if (eee.length > 0)
                         var dev_ids = parse_devlist(eee);
 
+                    if (dev_ids) {
+                        var nmbs = []; //new Uint32Array();   // var nmbs = new Uint32Array(spl);
+                        for (i = 0; i < dev_ids.length; i++) {
 
+                            var nmb = parseInt(dev_ids[i]);
 
-                    //   var dev_ids = parse_devlist(str);
+                            if (!isNaN(nmb))
+                                nmbs.push(nmb);
+                        }
 
-                    var devlist2 = devs.Where(x => dev_ids.includes(x.Id.toString()));
-                    // var devlist2 = devs.Where(x => dev_ids.includes(x.Identifier));
+                        if (nmbs.length > 0)
+                            devs = devs.Where(x => nmbs.includes(x.Id));
+                    }
 
-                    // var devlist2 = devlist.Where(x => devlist.includes(x.Id.toString()));
-                    devlist = devlist2;
-                    devs = devlist2;
+                    // //   var dev_ids = parse_devlist(str);
+
+                    // var devlist2 = devs.Where(x => dev_ids.includes(x.Id.toString()));
+                    // // var devlist2 = devs.Where(x => dev_ids.includes(x.Identifier));
+
+                    // // var devlist2 = devlist.Where(x => devlist.includes(x.Id.toString()));
+                    // devlist = devlist2;
+                    // devs = devlist2;
 
                 }
             }
@@ -338,11 +350,13 @@ var chtypemode = 1;
 let lastsavedDevicesObject = null;
 
 function refresh_tabcontainer() {
-    var devs = lastsavedDevicesObject.arrdev;
+    if (!last_objgrp)
+        return;
+    var devs = last_objgrp.devlist; // lastsavedDevicesObject.arrdev;
     if (chtypemode == 1)
-        devs = lastsavedDevicesObject.arrdev.Where(x => x.binarytype == 0x40);
+        devs = devs.Where(x => x.binarytype == 0x40);
     else if (chtypemode == 2)
-        devs = lastsavedDevicesObject.arrdev.Where(x => x.binarytype == 0x42);
+        devs = devs.Where(x => x.binarytype == 0x42);
 
     devs = limitbyuser(devs);
 
@@ -383,11 +397,32 @@ function refresh_tabcontainer() {
 
                 // cv.innerText = devs[i].description != 'надо_редактировать' ?
                 //     devs[i].description : devs[i].description + '_id=' + devs[i].Id;
-                cv.innerText = idescription;
+                // cv.innerText = idescription;
 
                 // cv.innerHTML = "<div class='swtab' onclick='openPageUniversal()>" + devs[i].description + "</div>"
+                let rrr = document.createElement('span');
+                // rrr.style.height = '32px';
+                rrr.innerText = idescription;
+
+                cv.appendChild(rrr);
+                // cv.style.textAlign = 'left';
+
+                cv.style.display = 'flex';
+
+                let kkk = document.createElement('span');
+                // kkk.style.textAlign = 'center';
+                // kkk.style.height = '20px';
+                kkk.innerText = devs[i].address;
+                kkk.style.paddingLeft = '20px';
+                kkk.style.color = 'rgb(180,220,220)';
+                kkk.style.fontStyle = 'oblique';
+                kkk.style.fontSize = '15px';
+                kkk.style.fontWeight = '500';
+                cv.appendChild(kkk);
+
+
                 div.appendChild(cv);
-                cv.addEventListener('click', openPageUniversal);
+                rrr.addEventListener('click', openPageUniversal);
             }
 
         }
@@ -430,7 +465,31 @@ bc.onmessage = function (ev) {
             // document.querySelector('.header').style.background = (_vvv[(_vcnt++) & 3]);
         }
 
-    } else {
+        switch (ev.data.type) {
+
+            case 'wsopened':
+                {
+                    isWsOpened = true;
+                    console.log('---------main2: wsopened! ' + performance.now().toFixed(1));
+                    console.log('---------main2: wsopened! ' + myperf());
+
+                }
+                break;
+
+
+
+
+        }
+
+    }
+
+
+
+
+
+
+
+    else {
 
         // try {
         if (ev.data) {
@@ -468,11 +527,14 @@ bc.onmessage = function (ev) {
                             break;
 
                         case CmdType.GetDevices:
-                            if (obj.arrdev.length == 0) {
-                                var dummy = 7;
+                            // if (obj.arrdev.length == 0) {
+                            //     var dummy = 7;
 
 
-                            } else {
+                            // } else 
+
+
+                            {
 
                                 lastsavedDevicesObject = obj;
                                 last_arrdev = obj.arrdev.Where(x => x.binarytype == 0x40);
@@ -513,7 +575,10 @@ bc.onmessage = function (ev) {
 
 
 
-                                refresh_tabcontainer();
+                                if (obj.arrdev.length > 0) {
+                                    // if (!deepEqual())
+                                    refresh_tabcontainer();
+                                }
                                 if (lastsavedDevicesObject) {
                                     // if (lastsavedDevicesObject.arrdev.find(x => x.Id == Id))
                                     // init_tblfirst_tbleft();
@@ -622,7 +687,19 @@ bc.onmessage = function (ev) {
 
                         case CmdType.GetLastGrpData:
 
-                            last_objgrp = obj;
+                            if (last_objgrp)
+                                if (obj.devlist)
+                                    if (!deepEqual(last_objgrp.devlist, obj.devlist)) {
+                                        last_objgrp = obj;
+                                        refresh_tabcontainer();
+                                    }
+
+                            if (obj.devlist)
+                                last_objgrp = obj;
+
+                            // if (last_objgrp)
+                            //     last_arrdev = last_objgrp.devlist;
+
                             // _fillarchive(last_objgrp);
                             // archtable.fill(last_objgrp);
 

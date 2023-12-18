@@ -109,7 +109,7 @@
         <!-- <div>hhhhh</div> -->
         <div class=flexcont>
             <div>
-                <b class=subheader>Меню:</b>
+                <b id=backtomenu class=subheader>Меню:</b>
                 <div id=menucontainer>
                     <div class='swtab' onclick="openPageUniversal(event)"> Карта</div>
                     <div class='swtab' onclick="openPageUniversal(event)"> Дані ГРП</div>
@@ -127,6 +127,140 @@
     </div>
 
     <script>
+
+        let isWsOpened = false;
+
+
+        function _isMobile() {
+            return window.navigator.userAgent.includes('Mobile');
+        }
+
+        if (_isMobile())
+            worker = new Worker("../js/wsworker.js");
+
+
+
+
+
+
+        var tmt = 150;
+        if (navigator.userAgent.includes('Mobile'))
+            tmt = 200;
+
+        if (true) {
+            var zzz = setInterval(() => {
+                // if (devchk.answDevices.length == 0)
+                //     askSkzData();
+                if (isWsOpened) {
+                    // devchk.checkdevices();
+
+
+                    var tmp = localStorage.getItem('tmppw');
+                    var sert = '';
+                    if (isJSON(tmp)) {
+                        sert = JSON.parse(tmp);
+                    }
+                    bc.postMessage(new Object({
+                        type: 'wsopenack',
+                        totalid: sert.totalid ? sert.totalid : -1
+                    }));
+
+                    let lorp = last_objgrp;
+                    if (lastsavedDevicesObject != null) {
+                        clearInterval(zzz);
+
+                    }
+
+
+                    if (true) {
+
+                        // if (devchk.grprecs.length == 0) {
+                        if (last_objgrp == null) {
+                            console.log('ask');
+                            // askGrpData();
+                            // askSkzData();
+
+
+                        }
+
+
+                        // if (devchk.answDevices.length == 0) {
+                        //     var cmdobj = {
+                        //         ObjectType: CmdType.GetDevices,
+                        //         devnumbers: [],
+                        //         sertif: sert.sertif
+                        //     }
+
+                        //     // sendCmd(cmdobj);
+                        //     cmdobj.type = "_wsocket";
+                        //     cmdobj.caller = "main";
+                        //     browserSendTime = new Date();
+                        //     browserSend_ms = performance.now(); //    new Date().getTime();
+                        //     bc.postMessage(cmdobj);
+                        // }
+
+
+
+
+
+                        // if ((devchk.answDevices.length > 0) &&
+                        //     (devchk.skzrecs.length > 0)) {
+                        //     clearInterval(zzz);
+                        //     console.log('------clearInterval(zzz)');
+                        //     refresh_objects_on_map();
+                        // }
+
+
+                    }
+
+
+                }
+            }, tmt);
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         // --------------   nal theme ---------
         function getelemProp(elem, prop) {
             var item = document.querySelector(elem);

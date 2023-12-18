@@ -54,6 +54,9 @@ function gotoTab(evt) {
     }
 }
 
+function _isMobile() {
+    return window.navigator.userAgent.includes('Mobile');
+}
 
 function on_on(Id) {
     var dev = devchk.answDevices.filter(x => x.Id == Id)[0];
@@ -91,8 +94,13 @@ function on_on(Id) {
     // sessionStorage.setItem('alarm_tmp_params_' + dev.Id, JSON.stringify(params));
 
     // setTimeout(() => {
-    if (dev.binarytype == 0x40)
-        ewin = window.open('./pages/tmpgrp.html?device_Id=' + dev.Id + '&pw="uca9iaug1efqflqeg6iviyVUfyv3kYtgvVyfTdttu685t8p97t"');
+    if (dev.binarytype == 0x40) {
+        let path = './pages/tmpgrp.html?device_Id=' + dev.Id + '&pw="uca9iaug1efqflqeg6iviyVUfyv3kYtgvVyfTdttu685t8p97t"';
+        if (_isMobile())
+            ewin = window.open(path, '_self');
+        else
+            ewin = window.open(path);
+    }
     if (dev.binarytype == 0x42)
         ewin = window.open('./pages/tmp.html?device_Id=' + dev.Id + '&pw="uca9iaug1efqflqeg6iviyVUfyv3kYtgvVyfTdttu685t8p97t"');
 
@@ -261,20 +269,20 @@ function showtypemode(mode) {
     if (divchmode) {
         switch (chtypemode) {
             default:
-                case 0:
+            case 0:
                 divchmode.innerText = 'Всі';
-            break;
+                break;
             case 1:
-                    divchmode.innerText = 'ГРП';
+                divchmode.innerText = 'ГРП';
                 break;
             case 2:
-                    divchmode.innerText = 'СКЗ';
+                divchmode.innerText = 'СКЗ';
                 break;
 
 
         }
         if (target = document.querySelector('#mytabs')) //         ('#sw555'))
-        // target.innerText = 'Відображати вузли: ' + divchmode.innerText;
+            // target.innerText = 'Відображати вузли: ' + divchmode.innerText;
             target.innerText = 'Доступні вузли:' + divchmode.innerText;
     }
 }
@@ -747,7 +755,7 @@ function refreshInMasterClusterGroup(cluster, marker) {
                     if (tdev.binarytype != 0x40) {
 
 
-                        cluster.eachLayer(function(layer) {
+                        cluster.eachLayer(function (layer) {
                             if (layer.options.title == marker.options.title) {
                                 cluster.removeLayer(layer);
                             }
@@ -770,7 +778,7 @@ function refreshInMasterClusterGroup(cluster, marker) {
                     if (tdev.binarytype != 0x42) {
 
 
-                        cluster.eachLayer(function(layer) {
+                        cluster.eachLayer(function (layer) {
                             if (layer.options.title == marker.options.title) {
                                 cluster.removeLayer(layer);
                             }
@@ -794,7 +802,7 @@ function refreshInMasterClusterGroup(cluster, marker) {
     var _exists = false;
 
 
-    cluster.eachLayer(function(layer) {
+    cluster.eachLayer(function (layer) {
         if (layer.options.title == marker.options.title) {
             _exists = true;
             if (aonly && (marker.options.alarmstatus != 'alarm')) {
@@ -850,7 +858,7 @@ var markers = L.markerClusterGroup({
 
     clsname: 'mytransparent',
 
-    iconCreateFunction: function(cluster) {
+    iconCreateFunction: function (cluster) {
         // return new L.DivIcon({
         //     html: '<div><span>' + cluster.getChildCount() + '</span></div>',
         //     className: 'myalarm',
@@ -897,7 +905,7 @@ var markers = L.markerClusterGroup({
 // var markers2 = L.markerClusterGroup();
 var markers2 = L.markerClusterGroup({
     disableClusteringAtZoom: 17,
-    iconCreateFunction: function(cluster) {
+    iconCreateFunction: function (cluster) {
 
         var tt =
             new L.DivIcon({
@@ -915,7 +923,7 @@ var markers2 = L.markerClusterGroup({
 
 var markers3 = L.markerClusterGroup({
     disableClusteringAtZoom: 17,
-    iconCreateFunction: function(cluster) {
+    iconCreateFunction: function (cluster) {
         return L.divIcon({
             html: '<div style="text-align:center;">' + cluster.getChildCount() + '</div>',
             // html: '<b>' + cluster.getChildCount() + '</b>',
@@ -936,7 +944,7 @@ var LeafIcon = L.Icon.extend({
         iconAnchor: [22, 94],
         shadowAnchor: [4, 62],
         popupAnchor: [-3, -76]
-            // myparam: 0
+        // myparam: 0
     }
 });
 
@@ -983,9 +991,9 @@ var alarmIcon = new _cpuIcon({
 let map = null;
 ///////
 var tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 18,
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Points &copy 2012 LINZ'
-    }),
+    maxZoom: 18,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Points &copy 2012 LINZ'
+}),
     // latlng = L.latLng(50.0, 30.42);
     latlng = L.latLng(50.0, 36.25);
 
@@ -1017,7 +1025,7 @@ function FindMarkerByTitle(imarker, clustergroup) {
 
 
     var _exists = false;
-    clustergroup.eachLayer(function(layer) {
+    clustergroup.eachLayer(function (layer) {
 
         // if (layer.name==name) {
         if (layer.options.title == imarker.options.title) {
@@ -1331,18 +1339,18 @@ function refresh_objects_on_map(forcerefresh = false) {
 
             icon: L.divIcon({
 
-                    // html: '<b-dv style="display:' + bdv_vis_mode + ';">' + dev.description + '</b-dv>',
-                    html: '<b-dv style="display:' + bdv_vis_mode + ';">' + 1 + '</b-dv>',
-                    // html: '<b-dv ">' + dev.inventory_name + '</b-dv>',
-                    // html: '<b>' + cluster.getChildCount() + '</b>',
-                    iconSize: hasalarms && !hastimeout ? new L.Point(30, 30) : new L.Point(36, 36),
-                    className: devclassname, //     dev.name == '1' ? 'myround_grey' : 'myround_transparent',
-                    myparam: 0
+                // html: '<b-dv style="display:' + bdv_vis_mode + ';">' + dev.description + '</b-dv>',
+                html: '<b-dv style="display:' + bdv_vis_mode + ';">' + 1 + '</b-dv>',
+                // html: '<b-dv ">' + dev.inventory_name + '</b-dv>',
+                // html: '<b>' + cluster.getChildCount() + '</b>',
+                iconSize: hasalarms && !hastimeout ? new L.Point(30, 30) : new L.Point(36, 36),
+                className: devclassname, //     dev.name == '1' ? 'myround_grey' : 'myround_transparent',
+                myparam: 0
 
-                })
-                // icon: alarmIcon
-                // icon: i < 50 ? cpuIcon : i < 70 ? redIcon : alarmIcon
-                // pane: 'mark2'
+            })
+            // icon: alarmIcon
+            // icon: i < 50 ? cpuIcon : i < 70 ? redIcon : alarmIcon
+            // pane: 'mark2'
 
         });
 
@@ -1420,7 +1428,8 @@ function refresh_objects_on_map(forcerefresh = false) {
 
 
             marker0.bindPopup('<div style="display:inline-block; font-weight:700; font-size:15px;color:black;user-select:none;">' +
-                dev.description + ' #' + dev.Identifier + '<span style="padding-left:10px;">' +
+                // dev.description + ' #' + dev.Identifier + '<span style="padding-left:10px;">' +
+                dev.description + ' #' + dev.Id + '<span style="padding-left:10px;">' +
                 '<b style="font-size:15px; font-weight:500;">' + (dev.inventory_name ? dev.inventory_name : '') + // 'Inv# ???') + '</b></div>' +
                 '</span>' +
                 // '<a href="https://orion.com.ua" class="marker-popup" style="color:black;" >' + dev.description + '</a></div>' +
@@ -1436,8 +1445,8 @@ function refresh_objects_on_map(forcerefresh = false) {
                 '<a >' + last_grpalarms + '</a>' + "</div>" +
                 "</div>", {
 
-                    maxWidth: 500,
-                });
+                maxWidth: 500,
+            });
         }
 
         // var invname = dev.inventory_name;
@@ -1457,8 +1466,8 @@ function refresh_objects_on_map(forcerefresh = false) {
                 '<a>' + last_alarms + '</a>' + "</div>" +
                 "</div>", {
 
-                    maxWidth: 500,
-                });
+                maxWidth: 500,
+            });
 
 
 
@@ -1636,7 +1645,7 @@ function refresh_objects_on_map(forcerefresh = false) {
 
 
             var _exists = false;
-            markers.eachLayer(function(layer) {
+            markers.eachLayer(function (layer) {
 
                 // if (layer.name==name) {
                 if (layer.options.title == marker0.options.title) {
@@ -1824,7 +1833,7 @@ function init_myorion() {
             // istyle: null,
         },
 
-        createMapdiv: function() {
+        createMapdiv: function () {
             var vdiv = L.DomUtil.create('div');
             vdiv.innerText = this.options.text; //'+';
             // vdiv.style.border = '1px solid  rgb(90,90,90)';
@@ -1847,7 +1856,7 @@ function init_myorion() {
         },
 
 
-        onAdd: function(map) {
+        onAdd: function (map) {
             var container = this.createMapdiv();
             // container = this.tune(container);
             this.nnn = container;
@@ -1941,7 +1950,7 @@ function init_myorion() {
             position: 'topleft',
             istyle: null
         },
-        onAdd: function(map) {
+        onAdd: function (map) {
             // create the control container with a particular class name
             var container = L.DomUtil.create('div', 'my-custom-control');
 
@@ -2057,7 +2066,7 @@ function init_myorion() {
     // L.control.watermark({ position: 'bottomleft' }).addTo(map);
 
     var prevZoom = map.getZoom();
-    map.on('zoomend', function(e) {
+    map.on('zoomend', function (e) {
         // debugger;
         var currZoom = map.getZoom();
         var diff = prevZoom - currZoom;
@@ -2164,7 +2173,7 @@ function setwatermark(_map, pos) {
     if (true) {
         L.Control.Watermark = L.Control.extend({
             // position: 'topleft',
-            onAdd: function(mymap) {
+            onAdd: function (mymap) {
                 var img = L.DomUtil.create('img'); //('img');
 
                 // img.src = '../../docs/images/logo.png';
@@ -2262,7 +2271,7 @@ function setwatermark(_map, pos) {
                     console.log("Меня отпустили!");
                     img.style.opacity = '0.65';
                 }); // img.onselect = () => {};
-                img.onselectstart = function() {
+                img.onselectstart = function () {
                     return false;
                 };
                 img.setAttribute('unselectable', 'on');
@@ -2275,12 +2284,12 @@ function setwatermark(_map, pos) {
                 return img;
             },
 
-            onRemove: function(mymap) {
+            onRemove: function (mymap) {
                 // Nothing to do here
             }
         });
 
-        L.control.watermark = function(opts) {
+        L.control.watermark = function (opts) {
             return new L.Control.Watermark(opts);
         }
 

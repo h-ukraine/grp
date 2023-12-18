@@ -1,13 +1,18 @@
 ﻿const bc = new BroadcastChannel('test_channel');
 
-
+function isMobile() {
+    return window.navigator.userAgent.includes('Mobile');
+}
 
 function openPageUniversal(e) {
     var tmaxobj = new Object({
         type: "tmax=300"
     });
+
     // bc.postMessage(tmaxobj);
     var div = e.currentTarget;
+
+
 
 
 
@@ -32,7 +37,16 @@ function openPageUniversal(e) {
                 // window.name = 'ttt';
                 // var ewin = window.open(path, 'mapwindow');
                 // var etmp = window.open(location.href);
-                var ewin = window.open(path); //, '_self'); //, 'mapwindow');
+
+
+
+                // var ewin = window.open(path); //, '_self'); //, 'mapwindow');
+
+                if (isMobile())
+                    var ewin = window.open(path, '_self');
+                else
+                    var ewin = window.open(path);
+
                 // ewin.blur();
                 // ewin.focus();
                 // window.close();
@@ -53,8 +67,12 @@ function openPageUniversal(e) {
                 bc.postMessage('allgrp=close()');
                 var path = 'allgrp/allgrp.html';
                 path += '?map=force&pw="uca9iaug1efqflqeg6iviyVUfyv3kYtgvVyfTdttu685t8p97t"';
-                var ewin = window.open(path);
-                // ewin = window.open('../allgrp/allgrp.html');
+
+                if (isMobile())
+                    var ewin = window.open(path, window.name);
+                else
+                    var ewin = window.open(path);
+
 
                 break;
             }
@@ -66,7 +84,19 @@ function openPageUniversal(e) {
                 bc.postMessage('archive=close()');
                 var path = 'archive/archive.html';
                 path += '?map=force&pw="uca9iaug1efqflqeg6iviyVUfyv3kYtgvVyfTdttu685t8p97t"';
-                var ewin = window.open(path);
+                // var ewin = window.open(path);
+
+
+                if (isMobile()) {
+                    // var ewin = window.open(path, window.name);
+                    var ewin = window.open(path, '_self');
+                }
+                else
+                    var ewin = window.open(path);
+
+
+
+
                 // ewin = window.open('allgrp/allgrp.html');
 
 

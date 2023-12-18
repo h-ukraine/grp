@@ -500,16 +500,27 @@ function limitbyuser(devs) {
                     if (eee.length > 0) {
                         var dev_ids = parse_devlist(eee);
 
+                        var nmbs = []; //new Uint32Array();   // var nmbs = new Uint32Array(spl);
+                        for (i = 0; i < dev_ids.length; i++) {
+
+                            var nmb = parseInt(dev_ids[i]);
+
+                            if (!isNaN(nmb))
+                                nmbs.push(nmb);
+                        }
+
+                        if (nmbs.length > 0)
+                            devs = devs.Where(x => nmbs.includes(x.Id));
 
 
-                        //   var dev_ids = parse_devlist(str);
+                        // //   var dev_ids = parse_devlist(str);
 
-                        var devlist2 = devs.Where(x => dev_ids.includes(x.Id.toString()));
-                        // var devlist2 = devs.Where(x => dev_ids.includes(x.Identifier));
+                        // var devlist2 = devs.Where(x => dev_ids.includes(x.Id.toString()));
+                        // // var devlist2 = devs.Where(x => dev_ids.includes(x.Identifier));
 
-                        // var devlist2 = devlist.Where(x => devlist.includes(x.Id.toString()));
-                        devlist = devlist2;
-                        devs = devlist2;
+                        // // var devlist2 = devlist.Where(x => devlist.includes(x.Id.toString()));
+                        // devlist = devlist2;
+                        // devs = devlist2;
 
                     }
             }
@@ -575,11 +586,59 @@ function refresh_tabcontainer() {
 
                 // cv.innerText = devs[i].description != 'надо_редактировать' ?
                 //     devs[i].description : devs[i].description + '_id=' + devs[i].Id;
-                cv.innerText = idescription;
+                // cv.innerText = idescription;
+
+
+
+
+
+
+
+
+
 
                 // cv.innerHTML = "<div class='swtab' onclick='openPageUniversal()>" + devs[i].description + "</div>"
+
+
+
+
+                let rrr = document.createElement('span');
+                // rrr.style.height = '32px';
+                rrr.innerText = idescription;
+
+                cv.appendChild(rrr);
+                // cv.style.textAlign = 'left';
+
+                cv.style.display = 'flex';
+
+                let kkk = document.createElement('span');
+                // kkk.style.textAlign = 'center';
+                // kkk.style.height = '20px';
+                kkk.innerText = devs[i].address;
+                kkk.style.paddingLeft = '20px';
+                kkk.style.color = 'rgb(180,220,220)';
+                kkk.style.fontStyle = 'oblique';
+                kkk.style.fontSize = '15px';
+                kkk.style.fontWeight = '500';
+                cv.appendChild(kkk);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 div.appendChild(cv);
-                cv.addEventListener('click', openPageUniversal);
+                rrr.addEventListener('click', openPageUniversal);
             }
 
         }
@@ -845,7 +904,8 @@ function wrapCmd(cmdobj) {
                     // }
 
                     refresh_objects_on_map(_force);
-                    refresh_tabcontainer();
+                    if (_force)
+                        refresh_tabcontainer();
                 }
                 break;
 
@@ -1155,7 +1215,16 @@ function wrapCmd(cmdobj) {
 
 
 
-
+if (_isMobile()) {
+    let back = document.getElementById('backtomenu');
+    if (back) {
+        back.innerText = '< На головну';
+        back.addEventListener('click', () => {
+            setTimeout(() => { ewin = window.open('../dashboard.html', '_self'); }
+                , 200);
+        });
+    }
+}
 
 
 
@@ -1185,13 +1254,19 @@ function openPageUniversal(e) {
             {
 
                 bc.postMessage('alarms=close()');
-                ewin = window.open('pagealarms/alarms.html');
+                if (_isMobile())
+                    ewin = window.open('pagealarms/alarms.html', '_self');
+                else
+                    ewin = window.open('pagealarms/alarms.html');
                 break;
             }
         case 'Дані ГРП':
             {
                 bc.postMessage('allgrp=close()');
-                ewin = window.open('allgrp/allgrp.html');
+                if (_isMobile())
+                    ewin = window.open('allgrp/allgrp.html', '_self');
+                else
+                    ewin = window.open('allgrp/allgrp.html');
 
                 // e.stopPropagation();
                 // e.currentTarget.innerText = 'Сторінка у розробці';
@@ -1220,7 +1295,10 @@ function openPageUniversal(e) {
                 // }, 600);
 
                 bc.postMessage('archive=close()');
-                ewin = window.open('archive/archive.html');
+                if (_isMobile())
+                    ewin = window.open('archive/archive.html', '_self');
+                else
+                    ewin = window.open('archive/archive.html');
                 break;
             }
         default:
@@ -1257,8 +1335,13 @@ function openPageUniversal(e) {
                         var devs = devchk.answDevices.Where(x => x.Id == id);
                         if (devs.length > 0) {
                             dev = devs[0];
-                            if (dev.binarytype == 0x40)
-                                ewin = window.open('./pages/tmpgrp.html?device_Id=' + dev.Id + '&pw="uca9iaug1efqflqeg6iviyVUfyv3kYtgvVyfTdttu685t8p97t"');
+                            if (dev.binarytype == 0x40) {
+                                let path = './pages/tmpgrp.html?device_Id=' + dev.Id + '&pw="uca9iaug1efqflqeg6iviyVUfyv3kYtgvVyfTdttu685t8p97t"';
+                                if (_isMobile())
+                                    ewin = window.open(path, '_self');
+                                else
+                                    ewin = window.open(path);
+                            }
                             if (dev.binarytype == 0x42)
                                 ewin = window.open('./pages/tmp.html?device_Id=' + dev.Id + '&pw="uca9iaug1efqflqeg6iviyVUfyv3kYtgvVyfTdttu685t8p97t"');
 
@@ -1315,8 +1398,15 @@ function openPageUniversal(e) {
                     bc.postMessage(vvv.description + '=close()');
 
                     var dev = vvv;
-                    if (dev.binarytype == 0x40)
-                        ewin = window.open('./pages/tmpgrp.html?device_Id=' + dev.Id + '&pw="uca9iaug1efqflqeg6iviyVUfyv3kYtgvVyfTdttu685t8p97t"');
+                    if (dev.binarytype == 0x40) {
+
+                        let thepath = './pages/tmpgrp.html?device_Id=' + dev.Id + '&pw="uca9iaug1efqflqeg6iviyVUfyv3kYtgvVyfTdttu685t8p97t"';
+                        if (_isMobile())
+                            ewin = window.open(thepath, '_self');
+                        else
+                            ewin = window.open(thepath);
+
+                    }
                     if (dev.binarytype == 0x42)
                         ewin = window.open('./pages/tmp.html?device_Id=' + dev.Id + '&pw="uca9iaug1efqflqeg6iviyVUfyv3kYtgvVyfTdttu685t8p97t"');
 

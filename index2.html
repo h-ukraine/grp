@@ -80,6 +80,12 @@
     </script>
 
     <script>
+
+
+        function _isMobile() {
+            return window.navigator.userAgent.includes('Mobile');
+        }
+
         function loadScript(src, callback) {
             var head = document.getElementsByTagName('head')[0],
                 script = document.createElement('script');
@@ -208,9 +214,13 @@
 
             // devchk.checkdevices();
 
+            if (_isMobile())
+                worker = new Worker("../js/wsworker.js");
+
+
             var tmt = 150;
             if (navigator.userAgent.includes('Mobile'))
-                tmt = 200;
+                tmt = 400;
 
             if (true) {
                 var zzz = setInterval(() => {
@@ -231,7 +241,7 @@
                         }));
 
 
-                        if (devchk.skzrecs.length == 0) {
+                        if (devchk.grprecs.length == 0) {
                             console.log('ask');
                             askGrpData();
                             askSkzData();
@@ -258,7 +268,7 @@
 
 
                         if ((devchk.answDevices.length > 0) &&
-                            (devchk.skzrecs.length > 0)) {
+                            (devchk.grprecs.length > 0)) {
                             clearInterval(zzz);
                             console.log('------clearInterval(zzz)');
                             refresh_objects_on_map();
@@ -592,7 +602,7 @@
         <!-- <div>hhhhh</div> -->
         <div class=flexcont>
             <div>
-                <b class=subheader>Меню:</b>
+                <b id=backtomenu class=subheader>Меню:</b>
                 <div id=menucontainer>
                     <div class='swtab'> Карта</div>
                     <!-- <div style='display:flex; line-height: 20px;'> -->

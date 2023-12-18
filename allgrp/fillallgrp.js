@@ -400,7 +400,7 @@ async function _fillallgrp(obj) {
                             var cname = icell.className;
                             // istyle.className = '';
 
-                            istyle.minWidth = (description_maxlen * 10).toString() + 'px'; ///            90px';
+                            istyle.minWidth = (description_maxlen * 11).toString() + 'px'; ///            90px';
                             istyle.letterSpacing = '-0.03em';
                             // icell.style.width = '190px';
                             // istyle.paddingLeft = _firstpadddingleft;
@@ -432,6 +432,7 @@ async function _fillallgrp(obj) {
                                 icell.style.color = 'rgb(240,240,240)'; //!nodehavetimeout ? 'rgb(240,240,240)' : 'rgba(240,240,240,0.6)';
                                 icell.style.background = '';
                                 icell.style.borderRadius = '0px';
+                                // istyle.fontSize = '10px';
 
                             } else if ((k == 1) && showAdr) {
                                 icell.style.fontSize = '13px';
@@ -443,7 +444,7 @@ async function _fillallgrp(obj) {
                                 icell.style.overflow = 'hidden';
                                 icell.style.whiteSpace = 'nowrap';
                                 icell.style.textOverflow = "ellipsis"
-                                    // icell.style.marginRight = '10px';
+                                // icell.style.marginRight = '10px';
 
 
                             } else if (k == (showAdr == 0 ? 1 : 2)) {
@@ -468,7 +469,8 @@ async function _fillallgrp(obj) {
                                 icell.style.background = '';
                                 icell.style.color = showAdr == 0 ? 'rgb(30,200,200)' : 'rgba(130,220,220,0.999)';
                                 icell.style.fontWeight = '500';
-                                icell.style.fontSize = '16px';
+                                icell.style.fontSize = isMobile() ? '15px' : '16px';
+                                let dummy = -1;
 
                             } else if (k == (tbl.rowCount - 1)) {
                                 icell.innerText = xgrp.csq_level;
@@ -476,7 +478,7 @@ async function _fillallgrp(obj) {
 
                             } else {
                                 var res = tbl_getvalue(grow.bit, xgrp, dev);
-                                if (typeof(res) === 'object') {
+                                if (typeof (res) === 'object') {
                                     if (res.notactive == true) {
                                         // not used device input
 

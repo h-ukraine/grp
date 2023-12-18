@@ -30,108 +30,108 @@ function setmode(diff) {
         // switch_to_subpage(mode);
 
     } else
-    if (mode == 4) {
-        {
-            // init_myorion();
-            // window.dispatchEvent(new Event('resize'));
-            if (first_mode4) {
-                first_mode4 = false;
-                // toMaxZoom();
+        if (mode == 4) {
+            {
+                // init_myorion();
+                // window.dispatchEvent(new Event('resize'));
+                if (first_mode4) {
+                    first_mode4 = false;
+                    // toMaxZoom();
+                }
             }
-        }
 
 
-    } else if (mode == 3) {
-        window.dispatchEvent(new Event('resize'));
-        // var pg1 = document.querySelector('.subpage1');
+        } else if (mode == 3) {
+            window.dispatchEvent(new Event('resize'));
+            // var pg1 = document.querySelector('.subpage1');
 
-        // pg1.style.display = 'none';
-        // var pg2 = document.querySelector('.subpage2').style.display = '';
-        // switch_to_subpage(mode);
+            // pg1.style.display = 'none';
+            // var pg2 = document.querySelector('.subpage2').style.display = '';
+            // switch_to_subpage(mode);
 
-    } else if (mode == 2) {
-        // var pg1 = document.querySelector('.subpage1');
+        } else if (mode == 2) {
+            // var pg1 = document.querySelector('.subpage1');
 
-        // pg1.style.display = 'none';
-        // var pg2 = document.querySelector('.subpage2').style.display = '';
-        // switch_to_subpage(mode);
+            // pg1.style.display = 'none';
+            // var pg2 = document.querySelector('.subpage2').style.display = '';
+            // switch_to_subpage(mode);
 
-    } else if (mode == 1) {
-        // switch_to_subpage(mode);
-        // evt.preventDefault();
-        // var a = "http://onserver.site:49020/data/select.html";
+        } else if (mode == 1) {
+            // switch_to_subpage(mode);
+            // evt.preventDefault();
+            // var a = "http://onserver.site:49020/data/select.html";
 
-        // var a = window.location.origin + '/data/select.html';
-        // window.location.href = a;
+            // var a = window.location.origin + '/data/select.html';
+            // window.location.href = a;
 
-        // window.location.replace(a);
-        // var c = document.getElementsByClassName('container');
-        // c[0].children[0].style.display = 'none';
+            // window.location.replace(a);
+            // var c = document.getElementsByClassName('container');
+            // c[0].children[0].style.display = 'none';
 
-        var div = document.getElementById('maindiv');
-        div.style.display = 'none';
-
-        var element = document.getElementById('mainmain');
-        element.classList.remove("container");
-
-        var p = document.getElementsByClassName('mypage1');
-        var maincont = p[0];
-        p[0].style.display = 'block';
-
-        var p = document.getElementsByClassName('leftright');
-        if (p) {
-            var lr = p[0];
-            if (lr)
-                lr.style.display = 'flex';
-        }
-
-
-
-
-        // maincont.style.background = 'linear-gradient(to bottom, black 1% , rgba(250,0,0,0.4), black 80%)';
-        // maincont.style.background = 'linear-gradient(to bottom, black 1% , rgba(220,0,0,0.2), black 80%)';
-        maincont.style.border = '1px solid black';
-        maincont.style.borderRadius = '10px';
-
-        // setstyle.display('endfooter', 'none');
-        if (div = document.getElementById('endfooter'))
+            var div = document.getElementById('maindiv');
             div.style.display = 'none';
 
-    } else if (mode == 0) {
-        if (div = document.getElementById('maindiv'))
-            div.style.display = '';
-        if (element = document.getElementById('mainmain'))
-            element.classList.add("container");
+            var element = document.getElementById('mainmain');
+            element.classList.remove("container");
 
-        if (p = document.getElementsByClassName('mypage1')) {
+            var p = document.getElementsByClassName('mypage1');
             var maincont = p[0];
-            p[0].style.display = 'none';
-        }
+            p[0].style.display = 'block';
 
-        // setstyle.display('endfooter', 'block');
-        if (div = document.getElementById('endfooter'))
-            div.style.display = 'block';
-    } else if (mode < 0) {
-        var div = document.getElementById('maindiv');
-        div.style.display = 'none';
+            var p = document.getElementsByClassName('leftright');
+            if (p) {
+                var lr = p[0];
+                if (lr)
+                    lr.style.display = 'flex';
+            }
 
-        var element = document.getElementById('mainmain');
-        element.classList.remove("container");
 
-        var p = document.getElementsByClassName('mypage1');
-        p[0].style.display = 'block';
 
-        var p = document.getElementsByClassName('leftright');
-        if (p) {
-            var lr = p[0];
-            if (lr)
-                lr.style.display = 'flex';
-        }
 
-        // setstyle.display('endfooter', 'none');
-        if (div = document.getElementById('endfooter'))
+            // maincont.style.background = 'linear-gradient(to bottom, black 1% , rgba(250,0,0,0.4), black 80%)';
+            // maincont.style.background = 'linear-gradient(to bottom, black 1% , rgba(220,0,0,0.2), black 80%)';
+            maincont.style.border = '1px solid black';
+            maincont.style.borderRadius = '10px';
+
+            // setstyle.display('endfooter', 'none');
+            if (div = document.getElementById('endfooter'))
+                div.style.display = 'none';
+
+        } else if (mode == 0) {
+            if (div = document.getElementById('maindiv'))
+                div.style.display = '';
+            if (element = document.getElementById('mainmain'))
+                element.classList.add("container");
+
+            if (p = document.getElementsByClassName('mypage1')) {
+                var maincont = p[0];
+                p[0].style.display = 'none';
+            }
+
+            // setstyle.display('endfooter', 'block');
+            if (div = document.getElementById('endfooter'))
+                div.style.display = 'block';
+        } else if (mode < 0) {
+            var div = document.getElementById('maindiv');
             div.style.display = 'none';
-    }
+
+            var element = document.getElementById('mainmain');
+            element.classList.remove("container");
+
+            var p = document.getElementsByClassName('mypage1');
+            p[0].style.display = 'block';
+
+            var p = document.getElementsByClassName('leftright');
+            if (p) {
+                var lr = p[0];
+                if (lr)
+                    lr.style.display = 'flex';
+            }
+
+            // setstyle.display('endfooter', 'none');
+            if (div = document.getElementById('endfooter'))
+                div.style.display = 'none';
+        }
 }
 
 function come_in(evt) {
@@ -179,7 +179,7 @@ function come_in(evt) {
 //*************************/ BROADCASTING AND WORKER
 
 const bc = new BroadcastChannel('test_channel');
-bc.onmessage = function(ev) {
+bc.onmessage = function (ev) {
 
     msg = ev.data;
     var proba = null
@@ -225,9 +225,10 @@ bc.onmessage = function(ev) {
                 var path = 'dashboard.html';
                 // var path = 'index2.html';
                 path += '?map=force&pw="uca9iaug1efqflqeg6iviyVUfyv3kYtgvVyfTdttu685t8p97t"';
-                window.name = 'log234';
+                window.name = '335';
                 ewin = window.open(path, window.name);
                 // ewin = window.open(path, '_blank');
+                // ewin = window.open(path);
 
 
                 // if (confirm('Вы действительно хотите закрыть страницу?')) {

@@ -92,7 +92,92 @@ function myperf() {
 }
 
 
-//----------------------------------------------
+// ----------------------------------------------
+// let worker = null;
+
+var answDevices = [];
+let isWsOpened = false;
+
+var tmt = 150;
+// if (window.navigator.userAgent.includes('Mobile')) {
+//     tmt = 200;
+
+//     if (div = document.querySelector('.f1')) {
+//         div.innerText = div.innerText.substring(div.innerText.indexOf('V'));
+//         div.style.display = 'none';
+//     }
+//     if (tema = document.querySelector('.f2'))
+//         tema.innerHTML = tema.innerHTML.replace('Тема:', '');
+// }
+
+
+
+if (isMobile()) {
+    worker = new Worker("../js/wsworker.js");
+
+    if (true) {
+        var zzz = setInterval(() => {
+
+            if (isWsOpened) {
+
+                var tmp = localStorage.getItem('tmppw');
+                var sert = '';
+                if (isJSON(tmp)) {
+                    sert = JSON.parse(tmp);
+                }
+                bc.postMessage(new Object({
+                    type: 'wsopenack',
+                    totalid: sert.totalid ? sert.totalid : -1
+                }));
+
+
+
+                if (answDevices.length == 0) {
+                    var cmdobj = {
+                        ObjectType: CmdType.GetDevices,
+                        devnumbers: [],
+                        sertif: sert.sertif
+                    }
+
+                    // sendCmd(cmdobj);
+                    cmdobj.type = "_wsocket";
+                    cmdobj.caller = "main";
+                    browserSendTime = new Date();
+                    browserSend_ms = performance.now(); //    new Date().getTime();
+                    bc.postMessage(cmdobj);
+                }
+
+
+                // if (answDevices.length > 0) // &&
+                // (devchk.skzrecs.length > 0)) 
+                {
+                    clearInterval(zzz);
+                    // console.log('------clearInterval(zzz)');
+                    // refresh_objects_on_map();
+                }
+
+
+
+            }
+        }, tmt);
+
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 let ucustoms;
 
 _vvv = ['red', 'green', 'yellow', 'blue'];
@@ -300,14 +385,38 @@ function limitbyuser(devs) {
 
 
 
-                        //   var dev_ids = parse_devlist(str);
 
-                        var devlist2 = devs.Where(x => dev_ids.includes(x.Id.toString()));
-                        // var devlist2 = devs.Where(x => dev_ids.includes(x.Identifier));
+                        var nmbs = []; //new Uint32Array();   // var nmbs = new Uint32Array(spl);
+                        for (i = 0; i < dev_ids.length; i++) {
 
-                        // var devlist2 = devlist.Where(x => devlist.includes(x.Id.toString()));
-                        devlist = devlist2;
-                        devs = devlist2;
+                            var nmb = parseInt(dev_ids[i]);
+
+                            if (!isNaN(nmb))
+                                nmbs.push(nmb);
+                        }
+
+                        if (nmbs.length > 0)
+                            devs = devs.Where(x => nmbs.includes(x.Id));
+
+
+
+
+
+
+
+
+
+                        /*
+                     
+                                             //   var dev_ids = parse_devlist(str);
+                     
+                                             var devlist2 = devs.Where(x => dev_ids.includes(x.Id.toString()));
+                                             // var devlist2 = devs.Where(x => dev_ids.includes(x.Identifier));
+                     
+                                             // var devlist2 = devlist.Where(x => devlist.includes(x.Id.toString()));
+                                             devlist = devlist2;
+                                             devs = devlist2;
+                                             */
 
                     }
             }
@@ -464,6 +573,99 @@ bc.onmessage = function (ev) {
             ////// document.getElementById('a4').style.background = (_vvv[(_vcnt++) & 3]);
             // document.querySelector('.header').style.background = (_vvv[(_vcnt++) & 3]);
         }
+
+        if (ev.data.type == 'wsopened') {
+            isWsOpened = true;
+            // console.log('---------main2: wsopened! ' + performance.now().toFixed(1));
+            // console.log('---------main2: wsopened! ' + myperf());
+
+        }
+
+
+        if (ev.data.type == 'answer') {
+
+
+            if ((msg.caller == 'main') || (msg.ObjectType == CmdType.GetUserParams)) {
+
+                var cmdobj = msg;
+
+                switch (msg.ObjectType) {
+
+
+
+                    case CmdType.GetUserParams:
+                        {
+                            lastuserparams = cmdobj
+                            mmm = msg;
+                            mmm = null;
+
+                        }
+                        break;
+                    case CmdType.GetLastGrpData:
+                        {
+                            if (cmdobj.arrgrp.length > 0)
+                                lastgrpdata = cmdobj;
+                            mmm = msg;
+                            mmm = null;
+
+                        }
+                        break;
+
+                    case CmdType.GetDevices:
+                        // var tm_ms = performance.now(); //   new Date().getTime();
+                        // var diff_ms = tm_ms - browserSend_ms;
+
+                        var recs = cmdobj.arrdev;
+                        if (recs.length > 0) {
+
+                            lastDevicesObject = cmdobj;
+
+                            var _force = false;
+                            if (recs.length > 0) {
+                                var p1 = performance.now();
+                                if (!deepEqual(answDevices, recs)) {
+                                    var p2 = performance.now();
+                                    console.log(" -- devices changed !!  t= " + (p2 - p1).toFixed(3));
+                                    _force = true;
+                                }
+
+                            }
+
+                            answDevices = recs;
+
+                        }
+                        break;
+
+
+
+                    // wrapCmd(msg);
+
+
+                }
+                wrapvidgets(cmdobj);
+
+
+
+
+                // case 'nodedata':
+                //     {
+                //         wrapNodeData(msg);
+                //         break;
+                //     }
+                // case 'alarm':
+                //     {
+                //         wrapAlarmData(msg);
+                //         break;
+                //     }
+
+
+
+            }
+        }
+
+
+
+
 
     } else {
 
@@ -658,6 +860,10 @@ var ttt = isJSON(srch);
 // .replace(',', '}{"')
 
 
+function isMobile() {
+    return window.navigator.userAgent.includes('Mobile');
+}
+
 //  Размеры таблиц...
 var _firstminwidth = '185px';
 var _firstpadddingleft = '6px';
@@ -667,6 +873,10 @@ var _fontsize = '17px';
 var _lineheight = '22px';
 
 
+if (isMobile()) {
+    _fontsize = '16px';
+}
+// _fontsize = '10px';
 
 console.log('allgrp.js: before tables=' + myperf());
 
@@ -1561,6 +1771,18 @@ nalasht_handler();
 
 
 
+if (isMobile()) {
+    let back = document.getElementById('backtomenu');
+    if (back) {
+        back.innerText = '< На головну';
+        back.addEventListener('click', () => {
+            setTimeout(() => { ewin = window.open('../dashboard.html', '_self'); }
+                , 200);
+        });
+    }
+}
+
+
 function openPageUniversal(e) {
     var tmaxobj = new Object({
         type: "tmax=300"
@@ -1581,7 +1803,10 @@ function openPageUniversal(e) {
                 // window.name = 'ttt';
                 // var ewin = window.open(path, 'mapwindow');
                 // var etmp = window.open(location.href);
-                var ewin = window.open(path); //, '_self'); //, 'mapwindow');
+                if (isMobile())
+                    var ewin = window.open(path, '_self'); //, 'mapwindow');
+                else
+                    var ewin = window.open(path, '_self'); //, 'mapwindow');
                 // ewin.blur();
                 // ewin.focus();
                 // window.close();
@@ -1633,7 +1858,10 @@ function openPageUniversal(e) {
                 // }, 600);
 
                 bc.postMessage('archive=close()');
-                ewin = window.open('../archive/archive.html');
+                if (isMobile())
+                    ewin = window.open('../archive/archive.html', '_self');
+                else
+                    ewin = window.open('../archive/archive.html');
                 break;
             }
 
@@ -1665,7 +1893,14 @@ function openPageUniversal(e) {
                 if (vvv) {
                     if (vvv.description.trim() != mydescription.trim()) {
                         bc.postMessage(div.innerText + '=close()');
-                        ewin = window.open('../pages/tmpgrp.html?device_Id=' + vvv.Id + '&pw="uca9iaug1efqflqeg6iviyVUfyv3kYtgvVyfTdttu685t8p97t"');
+
+                        let _path = '../pages/tmpgrp.html?device_Id=' + vvv.Id + '&pw="uca9iaug1efqflqeg6iviyVUfyv3kYtgvVyfTdttu685t8p97t"';
+                        if (isMobile())
+                            ewin = window.open(_path, '_self');
+                        else
+                            ewin = window.open(_path);
+
+                        // ewin = window.open('../pages/tmpgrp.html?device_Id=' + vvv.Id + '&pw="uca9iaug1efqflqeg6iviyVUfyv3kYtgvVyfTdttu685t8p97t"');
                     }
                 }
             }

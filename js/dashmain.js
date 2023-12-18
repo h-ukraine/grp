@@ -369,9 +369,17 @@ function wrapvidgets(cmdobj) {
                         for (i = 0; i < spl.length; i++)
                             spl[i] = spl[i].trim();
 
+                    var nmbs = [];  //    new Uint32Array();   // var nmbs = new Uint32Array(spl);
+                    for (i = 0; i < spl.length; i++) {
 
-                    var nmbs = new Uint32Array(spl);
-                    devs = devs.Where(x => nmbs.includes(x.Id));
+                        var nmb = parseInt(spl[i]);
+
+                        if (!isNaN(nmb))
+                            nmbs.push(nmb); //          push(nmb);
+                    }
+
+                    if (nmbs.length > 0)
+                        devs = devs.Where(x => nmbs.includes(x.Id));
                     // devs = devs.Where(x => lastuserparams.customs.devlist.includes(x.Id));
                     // devs = devs.Where(x => nmbs.includes(parseInt(x.Identifier)));
 
