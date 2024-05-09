@@ -10,9 +10,10 @@
     <link rel="icon" href="data:,">
     <link rel="stylesheet" href="../css/nalasht.css">
     <link rel="stylesheet" href="../css/root.css">
-    <link rel="stylesheet" href="./tmpgrp.css">
+    <link rel="stylesheet" href="../pages/tmpgrp.css">
+    <link rel="stylesheet" href="../setup/devsetup.css">
     <script src="../mylib/compmin.js" type="text/javascript" defer></script>
-    <script src="./tmpgrp_feedback.js" type="text/javascript" defer></script>
+    <script src="../setup/devgrp_feedback.js" type="text/javascript" defer></script>
     <!-- <style>
         @import "../css/nalasht.css";
     </style> -->
@@ -33,7 +34,9 @@
     <p class='header' style='height: 15px;'>HEADER</p>
     <div class=acontainer>
         <div id=led class=led> </div>
+
         <div>
+
             <div class=acontflex>
                 <div id=a1>a1 </div>
                 <!-- <div id=a2 class=a2class onclick='showmode(event)'>ффф </div> -->
@@ -51,6 +54,14 @@
         </div>
     </div>
 
+
+    <div id=firstdiv>
+        <div> Користувач:</div>
+        <select id=user_name class="mysel" style='display: block; border:1px solid black;' onchange="selperiod(this)">
+            <!-- <option class=seloption>• user1 </option>
+            <option class=seloption>• user5 </option> -->
+        </select>
+    </div>
     <div id=paramcont class=paramcont>
         <!-- <div id=paramlabel class=paramlabel>Параметри</div> -->
         <div id=htable class=h-table></div>
