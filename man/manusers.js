@@ -423,24 +423,48 @@ function uphandler(evt) {
 
         let opacity = parseFloat(curr.style.opacity);
 
-        if (opacity > 0.95)
-          arr.forEach(x => {
-            if (x == curr) {
-              row = x.parentNode;
+        if (opacity > 0.95) {
 
-              userobj = {
-                login: row.children[1].value,
-                password: row.children[2].value,
-                name: row.children[3].value,
-                lastname: row.children[4].value,
-                custlist: custlist
-              };
 
-              if ((userobj != null) && (dltbl == null)) {
-                sessionStorage.setItem('userobj', JSON.stringify(userobj));
-              }
-            }
-          });
+          let row = curr.parentNode;
+
+          userobj = {
+            login: row.children[1].value,
+            password: row.children[2].value,
+            name: row.children[3].value,
+            lastname: row.children[4].value,
+            custlist: custlist
+          };
+
+          if ((userobj != null) && (dltbl == null)) {
+            sessionStorage.setItem('userobj', JSON.stringify(userobj));
+          }
+
+
+
+
+
+
+          // arr.forEach(x => {
+
+          //   let parnode = curr.parentNode;
+          //   if (x == curr) {
+          //     row = x.parentNode;
+
+          //     userobj = {
+          //       login: row.children[1].value,
+          //       password: row.children[2].value,
+          //       name: row.children[3].value,
+          //       lastname: row.children[4].value,
+          //       custlist: custlist
+          //     };
+
+          //     if ((userobj != null) && (dltbl == null)) {
+          //       sessionStorage.setItem('userobj', JSON.stringify(userobj));
+          //     }
+          //   }
+          // });
+        }
 
         if (dltbl == null) {
 
@@ -542,7 +566,7 @@ function onsave_choosen_devices() {
       browserSend_ms = performance.now();
       // send_ms_flag = true;
       bc.postMessage(cmdobj);
-      console.log('----------------------- onsave_users()');
+      console.log('----------------------- onsave_choosen_devices()');
 
 
     }
@@ -741,7 +765,7 @@ function gotusers() {
     document.addEventListener('mouseup', uphandler);
 
     if (utbl == null)
-      utbl = new jsTable('tableid', 1, 5 + 5, 'usertable');
+      utbl = new jsTable('tableid', 1, 5 + 5 - 2, 'usertable');
 
     // if (utbl != null)
     //   document.getElementById('usertable').removeChild(utbl.tabl);
@@ -789,11 +813,11 @@ function gotusers() {
         utbl.cell(r, 2).innerText = 'passw';
         utbl.cell(r, 3).innerText = 'name';
         utbl.cell(r, 4).innerText = 'lastname';
-        utbl.cell(r, 5).innerText = 'inp_adm';
-        utbl.cell(r, 6).innerText = 'bit_adm';
-        utbl.cell(r, 7).innerText = 'inp_usr';
-        utbl.cell(r, 8).innerText = 'bit_usr';
-        utbl.cell(r, 9).innerText = 'role';
+        utbl.cell(r, 5).innerText = 'прилади';
+        utbl.cell(r, 6).innerText = 'датчики';
+        // utbl.cell(r, 7).innerText = 'inp_usr';
+        // utbl.cell(r, 8).innerText = 'bit_usr';
+        utbl.cell(r, 7).innerText = 'role';
 
 
         utbl.row(0).children.forEach(x => {
@@ -816,12 +840,12 @@ function gotusers() {
 
 
       let rnmb = r + 1;
-      utbl.cell(rnmb, 0).addEventListener('click', uphandler);
-      utbl.cell(rnmb, 0).addEventListener('touchend', uphandler);
+      utbl.cell(rnmb, 5).addEventListener('click', uphandler);
+      utbl.cell(rnmb, 5).addEventListener('touchend', uphandler);
       utbl.cell(rnmb, 0).classList.add('hoverdiv');
       utbl.cell(rnmb, 0).innerText = item.Id;
-      utbl.cell(rnmb, 0).addEventListener('mousedown', downhandler);
-      utbl.cell(rnmb, 0).addEventListener('touchstart', divselected);
+      utbl.cell(rnmb, 5).addEventListener('mousedown', downhandler);
+      utbl.cell(rnmb, 5).addEventListener('touchstart', divselected);
       utbl.cell(rnmb, 0).style.paddingRight = '10px';
       // utbl.cell(rnmb, 0).style.color = 'cyan';
       utbl.cell(rnmb, 0).classList.add('textcyan');
@@ -833,7 +857,9 @@ function gotusers() {
       let rc = utbl.row(rnmb);
 
       let arr = [item.login, item.password, item.name, item.lastname,
-      cust.admin_inp_mask, cust.admin_bit_mask, cust.user_inp_mask, cust.user_bit_mask, cust.priority < 6 ? 'admin' : 'user'];
+        // cust.admin_inp_mask, cust.admin_bit_mask, cust.user_inp_mask, cust.user_bit_mask, 
+        '✔', '!',
+      cust.priority < 6 ? 'admin' : 'user'];
 
       for (i = 0; i < arr.length; i++) {
         if (i == 1)

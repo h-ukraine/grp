@@ -27,6 +27,12 @@ devinside_handler = (evt) => {
 
     id = id.replace('#', '').trim();
 
+
+
+    let parent1 = evt.currentTarget.parentNode;
+    let parent2 = parent1.parentNode;
+    let clist = parent2.classList;
+
     ewin = window.open('../setup/devsetup.html?device_Id=' + id + '&pw="uca9iaug1efqflqeg6iviyVUfyv3kYtgvVyfTdttu685t8p97t"', '_self');
     // else
     //     ewin = window.open('../setup/devsetup.html');
