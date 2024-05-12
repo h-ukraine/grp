@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../css/root.css">
     <link rel="stylesheet" href="../man/man.css">
     <script src="../tquery/LINQ.js" type="text/javascript"></script>
-    <script src="grprows.js" type="text/javascript" async></script>
+    <!-- <script src="grprows.js" type="text/javascript" async></script> -->
     <script src="man.js" type="text/javascript"></script>
     <script src="../mylib/compmin.js" type="text/javascript" defer></script>
     <link rel="stylesheet" href="../mylib/mystyles.css">
@@ -106,7 +106,7 @@
         <div id=user-container></div>
         <form class=head1>
 
-            <label for="dev-select" style='font-size:0.8em; line-height:24px;'>Вузли : </label>
+            <label for="dev-select" style='font-size:0.8em; line-height:24px;'>Прилади : </label>
 
             <select name="userdevs" id="dev-select" class="myselect" onchange="mySelectHandler(this)">
                 <option value=""> Доступні користувачу</option>
@@ -118,7 +118,7 @@
                 <option value="goldfish">Goldfish</option> -->
             </select>
 
-            <div id=directdevice class=directdev>Активні (всі в базі)</div>
+            <div id=directdevice class=directdev>Всі в базі</div>
 
             <label id='amount' style='padding-left:10px;'>...</label>
 
@@ -161,9 +161,10 @@
 
 
         <form class=container_d></form>
-        <div class=goback onclick="onsave_choosen_devices()"> Зберегти обрані прилади </div>
+        <div id=back0 class=goback onclick="onsave_choosen_devices()"> Зберегти обрані прилади </div>
         <div class=goback onclick='returntoprev(event) '> - Повернутись</div>
     </div>
+
 
 
     <div class='parameters ispage'>
@@ -174,7 +175,7 @@
         <div class=abutton> bbb</div>
         <div class=abutton> ccc</div>
         <div class=goback> Зберегти 3</div>
-        <div class=goback onclick='returntoprev(event) '> - Повернутись</div>
+        <div class=goback onclick='returntoprev(event)'> - Повернутись</div>
     </div>
 
     <div class='plusdevice subpage1 ispage'>
@@ -224,7 +225,7 @@
 
         <form class=container_c></form>
         <!-- <div class=goback onclick='todevices(event) '> - Повернутись</div> -->
-        <div class=goback onclick='returntoprev(event) '> - Повернутись</div>
+        <div class=goback onclick='returntoprev(event)'> - Повернутись</div>
     </div>
 
 

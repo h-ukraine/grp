@@ -170,7 +170,8 @@ function devices(mode = 'devices') {
 
     current_devices_mode = mode;
 
-    if (current_devices_mode == 'devices')
+    // if (current_devices_mode == 'devices')
+    if (current_devices_mode == 'devices') //==prev_activeclass
         _devs();
     else {
         _user_devs();
@@ -205,7 +206,34 @@ function _user_devs() {
 
 
 
+
+
 function _devs(uobj = null) {
+
+    if (uobj == null) {
+        //restore full devs
+
+    }
+    else {
+        let prty = 0;
+
+
+
+    }
+    let cont = document.querySelector('.container_d');
+    if (uobj != null) {
+        cont.style.background = '';
+        let fe = document.getElementById('back0');
+        fe.innerText = "Зберегти обрані прилади";
+        fe.style.display = 'block';
+    }
+
+    else {
+        cont.style.background = 'rgb(50,130,90,0.25)';
+        let fe = document.getElementById('back0');
+        fe.style.display = 'none';
+    }
+
 
     // let qwer = lastDevicesObject
     let tmp = setInterval((aobj = uobj) => {
@@ -290,7 +318,14 @@ function _devs(uobj = null) {
             // let amnt = document.getElementById('amount');
             // amnt.innerText = arr.length;
 
-            gendivs_from_array();
+
+            if (thepath.includes('users'))
+                gendivs_from_array('users');
+            else
+                gendivs_from_array();
+
+
+
             // if (userobj)
             //     set_user_container();
         }
@@ -394,27 +429,43 @@ function set_dev_amount(div) {
     let choosen = texts.Where(x => x.includes('✔')).length;
     let notchoosen = texts.Where(x => x.includes('...')).length;
 
-    if (amnt = document.getElementById('amount')) {
+    if (path = document.querySelector('.pathdiv'))
+        if (!path.innerText.includes('users')) {
+            if (amnt = document.getElementById('amount')) {
+                let am = Math.max(0, arr.length - 1);
+                amnt.innerText = am;
+            }
 
-        let select = document.getElementById('dev-select');
-        let ind = select.selectedIndex;
 
-        if (path = document.querySelector('.pathdiv'))
-            if (!path.innerText.includes('users'))
-                ind = 2;
 
-        switch (ind) {
-            case 0: amnt.innerText = choosen;
-                break;
-            case 1: amnt.innerText = notchoosen;
-                break;
-            case 2: amnt.innerText = choosen + ' (' + (texts.length - 1) + ')';
-                break;
 
 
         }
 
-    }
+
+        else {
+            if (amnt = document.getElementById('amount')) {
+
+                let select = document.getElementById('dev-select');
+                let ind = select.selectedIndex;
+
+                if (path = document.querySelector('.pathdiv'))
+                    if (!path.innerText.includes('users'))
+                        ind = 2;
+
+                switch (ind) {
+                    case 0: amnt.innerText = choosen;
+                        break;
+                    case 1: amnt.innerText = notchoosen;
+                        break;
+                    case 2: amnt.innerText = choosen + ' (' + (texts.length - 1) + ')';
+                        break;
+
+
+                }
+
+            }
+        }
 
 
 
@@ -444,32 +495,39 @@ function spanclick(evt) {
 
 
 
-function gendivs_from_array() {
+function gendivs_from_array(mode) {
     if (cont = document.querySelector('.container_d')) {
         let count = cont.childElementCount;
         while (cont.childElementCount > 0)
             cont.removeChild(cont.lastChild);
 
         // add  '+' button
-        var div = document.createElement('div');
-        div.accessKey = 'plusdevice'
-        div.className = 'devclassplus';
-        div.innerText = '+';
+        if (mode != 'users') {
+            var div = document.createElement('div');
+            div.accessKey = 'plusdevice'
+            div.className = 'devclassplus';
+            div.innerText = '+';
 
-        // div.style.fontSize = '16px';
-        // div.style.lineHeight = '48px';
-        // div.style.textAlign = 'center';
-        // div.style.paddingLeft = '5px';
-        // div.style.paddingRight = '5px';
-        cont.appendChild(div);
+            // div.style.fontSize = '16px';
+            // div.style.lineHeight = '48px';
+            // div.style.textAlign = 'center';
+            // div.style.paddingLeft = '5px';
+            // div.style.paddingRight = '5px';
+
+            cont.appendChild(div);
+            setelemProp('.devclassplus', 'min-width', '500px');
+            setelemProp('.devclassplus', 'height', '40px');
+            setelemProp('.devclassplus', 'margin-top', '5px');
+
+        }
 
         // add dev buttons
         if (true) {
             // if (!isMobile()) {
 
-            setelemProp('.devclassplus', 'min-width', '500px');
-            setelemProp('.devclassplus', 'height', '40px');
-            setelemProp('.devclassplus', 'margin-top', '5px');
+            // setelemProp('.devclassplus', 'min-width', '500px');
+            // setelemProp('.devclassplus', 'height', '40px');
+            // setelemProp('.devclassplus', 'margin-top', '5px');
             // div.style.marginTop = '5px';
 
 
@@ -548,7 +606,13 @@ function gendivs_from_array() {
                 }
 
                 div.style.opacity = opacity;
-                div.innerHTML = `<span class=checkspan  onclick=spanclick(event) >${symb}</span>` +
+
+                let check_header = `<span class=checkspan  onclick=spanclick(event) >${symb}</span>`;
+
+                if (mode != 'users')
+                    check_header = '';
+
+                div.innerHTML = check_header +
 
                     // '<span style="color:rgb(150,150,140); white-space:pre;padding-right:8px;">    #' + x.Identifier + '</span>' + x.name
                     '<span style="color:rgb(150,150,140); white-space:pre;padding-right:8px;">    #' + x.Id + '</span>' + x.name
@@ -568,9 +632,12 @@ function gendivs_from_array() {
                 cont.appendChild(div);
             });
 
-        Array.from(cont.children).forEach(x => {
-            x.addEventListener('click', devinside_handler);
-        });
+
+
+        if (mode != 'users')
+            Array.from(cont.children).forEach(x => {
+                x.addEventListener('click', devinside_handler);
+            });
 
 
         // while (cont.childElementCount > 0)

@@ -111,21 +111,40 @@ function askUsers() {
     // }
 }
 
+
+var visible_page = null;
+var activeclass = null
+
 function switchtopage(_classname) {
 
-    let pages_array = document.getElementsByClassName('ispage');
 
+    let prev_activeclass = activeclass;
+
+
+    let pages_array = document.getElementsByClassName('ispage');
+    // pages_array.forEach(page => {
+    //     if (!page.className.includes(_classname))
+    //         page.style.display = 'none';
+    // });
     pages_array.forEach(page => {
-        if (!page.className.includes(_classname))
+        if (page.className.includes(_classname)) {
+            page.style.display = 'block';
+            visible_page = page; //      pages_array.Where(x => x.style.display != 'none');
+            activeclass = page.className.replace('ispage', '').trim(); //          visible_page[0].className.replace('ispage', '').trim(); //.exclude('ispage'); //.Trim();
+
+        }
+        else
             page.style.display = 'none';
     });
+
+
 
     pages_array.forEach(page => {
         if (page.className.includes(_classname)) {
             page.style.display = 'block';
             setnavigation(_classname);
             if (_classname == 'devices')
-                devices();
+                devices(_classname);
             else if (_classname == 'users') {
                 askUsers();
 
@@ -153,6 +172,10 @@ function switchtopage(_classname) {
     //     else x.style.display = 'none'
     // });
 
+
+
+    // visible_page = pages_array.Where(x => x.style.display != 'none');
+    // activeclass = visible_page[0].className.replace('ispage', '').trim(); //.exclude('ispage'); //.Trim();
 }
 
 
@@ -206,6 +229,12 @@ function returntoprev(evt) {
     popnavigation();
     let navobj = getnavigation();
     let prev = navobj.current.pop();
+
+
+    let fe = document.getElementById('back0');
+    // fe.innerText = "Зберегти обрані прилади";
+    fe.style.display = 'block';
+
 
     // setnavigation(prev);
     // prev = navobj.current.slice(-1)[0];

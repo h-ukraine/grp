@@ -4,3 +4,50 @@
   margin-left: 12px;
   // width: 98vw;
 }
+
+
+
+.hoverdiv {
+  cursor: pointer;
+  //   padding-top: 20px;
+  padding-left: 10px;
+  // min-width: 200px;
+  // max-width: 300px;
+  // width: 30%;
+  // width: auto;
+  line-height: 50px;
+  // background: rgba(60, 65, 80, 0.5);
+  border-radius: 3px;
+  font-style: oblique;
+  font-weight: 500;
+
+}
+
+.hoverdiv:hover {
+  background: rgb(80, 90, 100);
+  color: white;
+}
+
+
+.goback {
+  @extend .hoverdiv;
+  // max-width: 180px;
+  min-width: 120px;
+  height: 50px;
+  font-size: 20px;
+
+  margin: 10px;
+  // background: none;
+  font-style: oblique;
+  // font-weight: 500;
+  // font-size: 18px;
+  // padding-top: 10px;
+  padding-left: 10px;
+  // padding-bottom: 10px;
+  line-height: 50px;
+  color: rgb(219, 219, 170);
+  // margin-bottom: 20px;
+  // // margin-left: 20px;
+  // min-width: 150px;
+  // width: 150px;
+}

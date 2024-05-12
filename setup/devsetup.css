@@ -2,3 +2,28 @@
   width: calc(-20px + 98vw);
   margin-left: 12px;
 }
+
+.hoverdiv, .goback {
+  cursor: pointer;
+  padding-left: 10px;
+  line-height: 50px;
+  border-radius: 3px;
+  font-style: oblique;
+  font-weight: 500;
+}
+
+.hoverdiv:hover, .goback:hover {
+  background: rgb(80, 90, 100);
+  color: white;
+}
+
+.goback {
+  min-width: 120px;
+  height: 50px;
+  font-size: 20px;
+  margin: 10px;
+  font-style: oblique;
+  padding-left: 10px;
+  line-height: 50px;
+  color: rgb(219, 219, 170);
+}

@@ -23,7 +23,9 @@ devinside_handler = (evt) => {
     // ewin = window.open('../setup/devsetup.html', '_self');
     // ewin = window.open('../pages/tmpgrp.html?device_Id=' + id + '&pw="uca9iaug1efqflqeg6iviyVUfyv3kYtgvVyfTdttu685t8p97t"');
 
-    id = evt.currentTarget.children[1].innerText;
+    let c_amount = evt.currentTarget.childElementCount;
+
+    id = evt.currentTarget.children[c_amount - 2].innerText;
 
     id = id.replace('#', '').trim();
 
