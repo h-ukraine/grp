@@ -503,6 +503,11 @@ function fillgrp_params_feedback(obj) {
                 // row.children[2].innerText = 'Адмін.';
                 // row.children[3].innerText = 'Корист.';
                 row.children[tbl.colCount - 3].innerText = 'Дані';
+
+                if ((lastmeasured != null) && (lastmeasured.length > 0))
+                    row.children[tbl.colCount - 3].innerHTML = 'Дані  ' +
+                        '<span style="padding-left:10px; color: rgb(100,200,200);">' + lastmeasured[0].mcu_datetime.replace('T', ' ') + '</span>';
+
                 row.children[tbl.colCount - 2].innerText = 'Поріг1';
                 row.children[tbl.colCount - 1].innerText = 'Поріг2';
 
@@ -2132,8 +2137,11 @@ window.onload = (() => {
     if (1) {
 
         var sel = document.getElementById('itp');
-        sel.selectedIndex = 6 - 1;
+        // sel.selectedIndex = 6 - 1;
+        sel.selectedIndex = 0;
         selhandler(sel);
+
+        //
         // selhandler(itp.currentTarget);
         // let element = document.getElementById(id);
         // itp.dispatchEvent(new Event('change', { 'bubbles': true }));
@@ -2181,9 +2189,9 @@ function selhandler(evt) {
     vismode = 0;
     var new_count = 1;
     switch (ind) {
-        case 0:
-            new_count = 1;
-            break;
+        // case 0:
+        //     new_count = 1;
+        //     break;
         case 1:
             new_count = 10;
             break;
@@ -2205,7 +2213,7 @@ function selhandler(evt) {
                 break;
             }
         case 5: // Налаштування параметрів або архів
-        case 6: // Налаштування параметрів або архів
+        case 0: // Налаштування параметрів або архів
             {
                 if (evt.options[ind].value.includes('Налаштування')) {
                     new_count = 5;

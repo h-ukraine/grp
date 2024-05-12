@@ -15,7 +15,7 @@
   // max-width: 300px;
   // width: 30%;
   // width: auto;
-  line-height: 50px;
+  // line-height: 70px;
   // background: rgba(60, 65, 80, 0.5);
   border-radius: 3px;
   font-style: oblique;
@@ -33,7 +33,7 @@
   @extend .hoverdiv;
   // max-width: 180px;
   min-width: 120px;
-  height: 50px;
+  height: 30px;
   font-size: 20px;
 
   margin: 10px;
@@ -44,10 +44,12 @@
   // padding-top: 10px;
   padding-left: 10px;
   // padding-bottom: 10px;
-  line-height: 50px;
+  line-height: 30px;
   color: rgb(219, 219, 170);
   // margin-bottom: 20px;
   // // margin-left: 20px;
   // min-width: 150px;
   // width: 150px;
+  // border: 1px solid white;
+
 }

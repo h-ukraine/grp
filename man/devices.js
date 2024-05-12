@@ -458,7 +458,10 @@ function set_dev_amount(div) {
                         break;
                     case 1: amnt.innerText = notchoosen;
                         break;
-                    case 2: amnt.innerText = choosen + ' (' + (texts.length - 1) + ')';
+                    case 2:
+                        let r = 4;
+                        r++;
+                        amnt.innerText = choosen + ' (' + (texts.length) + ')';
                         break;
 
 
