@@ -842,7 +842,7 @@ function gotusers() {
       let rnmb = r + 1;
       utbl.cell(rnmb, 5).addEventListener('click', uphandler);
       utbl.cell(rnmb, 5).addEventListener('touchend', uphandler);
-      utbl.cell(rnmb, 0).classList.add('hoverdiv');
+      // utbl.cell(rnmb, 0).classList.add('hoverdiv');
       utbl.cell(rnmb, 0).innerText = item.Id;
       utbl.cell(rnmb, 5).addEventListener('mousedown', downhandler);
       utbl.cell(rnmb, 5).addEventListener('touchstart', divselected);
@@ -875,15 +875,17 @@ function gotusers() {
           rc.children[i + 1].innerText = arr[i];
           // rc.children[i + 1].style.color = 'rgb(188, 201, 166)';
           rc.children[i + 1].classList.add('textcolor');
-          rc.children[i + 1].classList.add('hoverdiv');
+          if (i < (arr.length - 1))
+            rc.children[i + 1].classList.add('hoverdiv');
           rc.children[i + 1].style.textAlign = 'left';
 
         }
 
-
-        utbl.cell(rnmb, i + 1).addEventListener('mousedown', focused);
-        utbl.cell(rnmb, i + 1).addEventListener('focusin', focusin);
-        utbl.cell(rnmb, i + 1).addEventListener('focusout', focusout);
+        if (i < (arr.length - 1)) {
+          utbl.cell(rnmb, i + 1).addEventListener('mousedown', focused);
+          utbl.cell(rnmb, i + 1).addEventListener('focusin', focusin);
+          utbl.cell(rnmb, i + 1).addEventListener('focusout', focusout);
+        }
 
 
       }

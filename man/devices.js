@@ -620,7 +620,12 @@ function gendivs_from_array(mode) {
                     // '<span style="color:rgb(150,150,140); white-space:pre;padding-right:8px;">    #' + x.Identifier + '</span>' + x.name
                     '<span style="color:rgb(150,150,140); white-space:pre;padding-right:8px;">    #' + x.Id + '</span>' + x.name
                     + ' <span style="color:rgb(90,200,210);">' + x.address + '</span>';
+                let thepath = document.querySelector('.pathdiv').innerText;
+                if (!thepath.includes('users')) {
+                    div.classList.add('hoverdiv');
+                }
                 cont.appendChild(div);
+
             });
         }
         else
