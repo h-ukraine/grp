@@ -277,14 +277,14 @@ function add_new_row() {
 
 
 
-    for (i = 5; i < 10; i++) {
-      utbl.cell(rnlast, i).innerText = 65535;
-      if (i == 9) {
-        utbl.cell(rnlast, i).innerText = 'user';
-      }
-      utbl.cell(rnlast, i).style.textAlign = 'left';
-      utbl.cell(rnlast, i).classList.add('textcolor');
-    }
+    // for (i = 5; i < 10; i++) {
+    //   utbl.cell(rnlast, i).innerText = 65535;
+    //   if (i == 9) {
+    //     utbl.cell(rnlast, i).innerText = 'user';
+    //   }
+    //   utbl.cell(rnlast, i).style.textAlign = 'left';
+    //   utbl.cell(rnlast, i).classList.add('textcolor');
+    // }
     // utbl.cell(rnlast, i).innerText = 'user';
     //i=9  replace to select    [admin,user]
 
