@@ -5,7 +5,7 @@
 // let HostEndpoint = "ta.onserver.space:50730";   ///AZUR
 // let HostEndpoint = "79.100.219.171:50730";
 // let HostEndpoint = "sof.onserver.space:50730";
-let HostEndpoint =  "orion.onserver.site";    //"40.68.171.186:50730";
+let HostEndpoint =  "orion.onserver.site:50393";    //"40.68.171.186:50730";
 
 
 // let HostEndpoint = "192.168.1.20:50730";
@@ -165,7 +165,8 @@ function wsConnect() {
     //
     //
     //
-    wstarg = "ws://" + HostEndpoint + '/chat=gena'; //"ws://" + "sofia.onserver.space:50730" + '/chat=gena';
+    wstarg = "wss://" + HostEndpoint +  '/chat';
+    //wstarg = "ws://" + HostEndpoint + '/chat=gena'; //"ws://" + "sofia.onserver.space:50730" + '/chat=gena';
     //
     //
     // wstarg = "ws://" + "31.131.18.107:50730" + '/chat=gena'; // route to 192.168.0.133:50700
